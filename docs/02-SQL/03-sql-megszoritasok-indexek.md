@@ -10,18 +10,6 @@ Forrás: https://www.w3schools.com/
 
 ---
 
-## Tartalomjegyzék
-
-- [NOT NULL](#31-not-null)
-- [UNIQUE](#32-unique)
-- [PRIMARY KEY](#33-primary-key)
-- [FOREIGN KEY](#34-foreign-key)
-- [CHECK](#35-check)
-- [DEFAULT](#36-default)
-- [CREATE INDEX](#37-create-index)
-
----
-
 ## 3.1 NOT NULL
 
 ### Definíció

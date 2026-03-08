@@ -10,17 +10,6 @@ Forrás: https://www.w3schools.com/
 
 ---
 
-## Tartalomjegyzék
-
-- [SELECT utasítás](#51-select-utasítás)
-- [SELECT DISTINCT](#52-select-distinct)
-- [WHERE kulcsszó](#53-where-kulcsszó)
-- [WHERE operátorok](#54-a-where-kulcsszóval-használható-operátorok)
-- [AND, OR, NOT](#55-and-or-és-not-operátorok)
-- [ORDER BY](#56-order-by-kulcsszó)
-
----
-
 ## 5.1 SELECT utasítás
 
 ### Definíció

@@ -10,18 +10,6 @@ Forrás: https://www.w3schools.com/
 
 ---
 
-## Tartalomjegyzék
-
-- [CREATE DATABASE](#21-create-database)
-- [DROP DATABASE](#22-drop-database)
-- [BACKUP DATABASE](#23-backup-database)
-- [CREATE TABLE](#24-create-table)
-- [DROP TABLE](#25-drop-table)
-- [TRUNCATE TABLE](#26-truncate-table)
-- [ALTER TABLE](#27-alter-table)
-
----
-
 ## 2.1 CREATE DATABASE
 
 ### Definíció

@@ -10,16 +10,6 @@ Forrás: https://www.w3schools.com/
 
 ---
 
-## Tartalomjegyzék
-
-- [INSERT INTO](#41-insert-into)
-- [UPDATE](#42-update)
-- [DELETE](#43-delete)
-- [SELECT INTO](#44-select-into)
-- [INSERT INTO SELECT](#45-insert-into-select)
-
----
-
 ## 4.1 INSERT INTO
 
 ### Definíció

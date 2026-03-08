@@ -7,21 +7,6 @@ title: "Bevezetés az SQL-be és Alapvető Fogalmak"
 
 ---
 
-## Tartalomjegyzék
-
-- [Az SQL bemutatása](#11-az-sql-bemutatása)
-- [Az SQL utasítások logikai csoportosítása](#12-az-sql-utasítások-logikai-csoportosítása)
-- [Utasítások áttekintése](#13-utasítások-áttekintése-példákkal)
-- [Tranzakciókezelés](#14-tranzakciókezelés)
-- [ACID tulajdonságok](#15-acid-tulajdonságok)
-- [Relációs adatbázis fogalma](#16-relációs-adatbázis-fogalma)
-- [SQL szabványok fejlődése](#17-sql-szabványok-fejlődése)
-- [SQL dialektusok](#18-sql-dialektusok)
-- [SQL parancsok futtatása](#19-sql-parancsok-futtatása)
-- [Legfontosabb SQL parancsok](#110-néhány-a-legfontosabb-sql-parancsok-közül)
-
----
-
 ## 1.1 Az SQL bemutatása
 Az SQL (Structured Query Language) a relációs adatbázisok kezelésére szolgáló szabványos nyelv.  
 Deklaratív nyelv: megmondjuk **mit** szeretnénk, nem **hogyan**.
