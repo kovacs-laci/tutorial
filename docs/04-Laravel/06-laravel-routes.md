@@ -40,21 +40,19 @@ A `Route::resource` definíció az alábbi végpontokat hozza létre:
 
 | Verb | URI | Action | Route Name |
 |------|------|--------|------------|
-| GET | /counties | index | counties.index |
-| GET | /counties/create | create | counties.create |
-| POST | /counties | store | counties.store |
-| GET | /counties/{county} | show | counties.show |
-| GET | /counties/{county}/edit | edit | counties.edit |
-| PUT/PATCH | /counties/{county} | update | counties.update |
-| DELETE | /counties/{county} | destroy | counties.destroy |
+| GET | `/counties` | index | counties.index |
+| GET | `/counties/create` | create | counties.create |
+| POST | `/counties` | store | counties.store |
+| GET | `/counties/{{county}}` | show | counties.show |
+| GET | `/counties/{{county}}/edit` | edit | counties.edit |
+| PUT/PATCH | `/counties/{{county}}` | update | counties.update |
+| DELETE | `/counties/{{county}}` | destroy | counties.destroy |
 
 Ez a struktúra biztosítja a teljes **CRUD működést**.
 
 ---
 
 ## 3. Route-k manuális definiálása
-
-Ugyanezek a végpontok külön is létrehozhatók:
 
 ```php
 Route::get('/counties', [CountyController::class, 'index'])->name('counties.index');
@@ -113,7 +111,7 @@ Route::resource('counties', CountyController::class)
 Route::get('/counties/{county}', [CountyController::class, 'show']);
 ```
 
-Az `{county}` paraméter automatikusan betölti a `County` modellt.
+Az ``{county}`` paraméter automatikusan betölti a `County` modellt.
 
 ---
 
@@ -131,8 +129,6 @@ Ez különösen hasznos Blade sablonokban.
 
 ### Route Groups
 
-Prefix és közös beállítás:
-
 ```php
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('counties', CountyController::class);
@@ -143,14 +139,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 ---
 
 ### API Route-ok
-
-Az `routes/api.php` fájlban definiált route-ok:
-
-- automatikusan `api` prefixet kapnak
-- stateless módon működnek
-- JSON válaszokra épülnek
-
-Példa:
 
 ```php
 Route::apiResource('counties', CountyController::class);
