@@ -5,6 +5,7 @@ title: "Ismertető"
 ---
 
 Ezek a tananyagok az SQL Structured Query Language alapjaitól egészen a haladó lekérdezési és adatbázis-programozási technikákig terjedő tudásanyagot tartalmaznak.
+A bemutatott példák a Microsoft Northwind teszt adatbázisán működnek. Az adatbázis dumpja innen letölthető: [Northwind dump letöltése]( ../../static/files/install_northwind.sql )
 
 ---
 
