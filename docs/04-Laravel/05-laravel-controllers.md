@@ -56,36 +56,149 @@ A `--resource` kapcsoló automatikusan létrehozza az összes RESTful metódust 
 
 ---
 
-## 4. Példa létrehozott controllerre
+# CountyController – Listázási minták
 
-### `app/Http/Controllers/CountyController.php`
+Ebben a fejezetben bemutatjuk a `CountyController@index()` metódus különböző gyakran használt változatait Laravelben.
+
+A példák sorrendje az egyszerűtől halad a bonyolultabb, valós alkalmazási esetek felé.
+
+---
+
+## 1. Egyszerű listázás
 
 ```php
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Models\County;
-use Illuminate\Http\Request;
-
-class CountyController extends Controller
+public function index()
 {
-    public function index()
-    {
-        // A counties tábla minden sorát visszaadja
-        $counties = County::all();
-        
-        // Ha szükség van a kapcsolódó városokra is, akkor
-        // $counties = County::with('cities')->get();
-        // ahol a 'cities' annak a függvénynek a neve, ami a County modellben írja le az 1:N kapcsolatot:
-        // public function cities() 
-        // A with() használata csökkenti az adatbázis lekérdezések számát.
-        // Ez az úgynevezett eager loading
+    $counties = County::get();
 
-        return view('counties.index', compact('counties'));
-        // API esetén: return response()->json($counties);
+    return view('counties.index', compact('counties'));
+}
+```
+
+:::info
+Ez a leggyakoribb listázási forma: egyszerű lekérdezés.
+:::
+
+***
+
+## 2. Listázás kapcsolattal (Eager Loading)
+
+Ha a `County` modell rendelkezik `cities()` kapcsolattal (1:N), akkor a kapcsolódó városokat is előre be tudjuk tölteni.
+
+```php
+public function index()
+{
+    $counties = County::with('cities')->get();
+
+    return view('counties.index', compact('counties'));
+}
+```
+
+:::tip
+A `with()` használata drasztikusan csökkenti az adatbázis-lekérdezések számát, így gyorsabbá válik az alkalmazás.
+:::
+
+***
+
+## 3. Listázás szűréssel (megye neve alapján)
+
+A keresőmező neve: **`needle`**
+
+```php
+public function index(Request $request)
+{
+    $needle = $request->input('needle');
+
+    $query = County::query();
+
+    if ($needle) {
+        $query->where('name', 'like', "%{$needle}%");
     }
 
+    $counties = $query->get();
+
+    return view('counties.index', compact('counties', 'needle'));
+}
+```
+
+:::info
+A `where('name', 'like', ...)` alkalmas karakterlánc-alapú keresésekre (pl. részszó egyezés).
+:::
+
+***
+
+## 4. Listázás kapcsolattal és szűréssel
+
+Ebben a példában **mind a megyék nevét**, mind a hozzájuk tartozó **városok nevét** lehet keresni.
+
+```php
+public function index(Request $request)
+{
+    $needle = $request->input('needle');
+
+    $query = County::with('cities');
+
+    if ($needle) {
+        $query->where(function ($q) use ($needle) {
+            // Szűrés County.name mezőre
+            $q->where('name', 'like', "%{$needle}%")
+              // Szűrés City.name mezőre (kapcsolt táblában)
+              ->orWhereHas('cities', function ($cityQuery) use ($needle) {
+                  $cityQuery->where('name', 'like', "%{$needle}%");
+              });
+        });
+    }
+
+    $counties = $query->get();
+
+    return view('counties.index', compact('counties', 'needle'));
+}
+```
+
+:::tip
+A `whereHas()` kifejezetten arra való, hogy a **kapcsolódó táblák mezői** alapján szűrssünk.
+:::
+
+:::warning
+Ha a `cities` táblában is van `name` mező, és a `counties` táblában is van `name`, akkor **mindkét mezőt külön kell megcímezni**, ahogyan a fenti lekérdezés teszi.
+:::
+
+***
+
+## 5. Paginálás
+
+A paginálás minden fenti példában ugyanúgy működik:
+
+```php
+$query->get();
+```
+helyett
+
+```php
+$query->paginate(20);
+```
+
+:::info
+A Laravel automatikusan kezeli a lapozást, beszúrva:
+
+*   oldalszám
+*   `?page=` paraméter
+*   miközben megőrzi keresési paramétereket (`?needle=baranya`)
+    :::
+
+***
+
+# Összegzés
+
+Ezek a minták lefedik a leggyakoribb listázási feladatokat Laravelben:
+
+*   egyszerű lekérdezés
+*   kapcsolatok kezelése
+*   szűrés mezőre
+*   szűrés kapcsolt modell mezőre
+*   paginálás
+    
+```php
     public function create()
     {
         return view('counties.create');
