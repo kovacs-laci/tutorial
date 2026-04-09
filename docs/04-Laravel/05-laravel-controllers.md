@@ -156,7 +156,7 @@ public function index(Request $request)
 ```
 
 :::tip
-A `whereHas()` kifejezetten arra való, hogy a **kapcsolódó táblák mezői** alapján szűrssünk.
+A `whereHas()` kifejezetten arra való, hogy a **kapcsolódó táblák mezői** alapján szűrhessünk.
 :::
 
 :::warning
@@ -186,6 +186,51 @@ A Laravel automatikusan kezeli a lapozást, beszúrva:
 *   miközben megőrzi keresési paramétereket (`?needle=baranya`)
     :::
 
+Amennyiben lapozót használunk a megfelelő blade fájlban ott, ahol a lapozót meg szeretnénk jeleníteni, el kell helyezni:
+```bladehtml
+<div class="paginator">
+    {{ $counties->links() }}
+</div>
+```
+Abban az esetben, ha a listát kiválasztott oszlop szerint szeretnénk rendezni, a megfelelő controller index() metódusában ezt így tudjuk megoldani:
+
+```php
+    $sortBy = request()->query('sort_by', 'name');
+    $sortDir = request()->query('sort_dir', 'asc');
+    $counties = County::orderBy($sortBy, $sortDir)->paginate(20);
+```
+
+Ha az adott listát rendezzük valamelyik oszlop szerint és a rendezés iránya is változhat, akkor egy ilyen kódrészletet tegyünk a blade fájlba:
+
+```bladehtml
+<div class="paginator">
+	{{ $counties
+		->appends([
+			'sort_by' => request('sort_by'),
+			'sort_dir' => request('sort_dir'),
+		])
+		->links()
+
+	}}
+</div>
+```
+
+illetve a megfelelő, pl. app.css fájlban:
+
+```css
+.paginator {
+    margin: 3em auto 1em auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.paginator svg {
+    width: 1em;
+    height: 1em;
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+```
 ***
 
 # Összegzés

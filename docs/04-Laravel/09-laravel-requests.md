@@ -146,7 +146,7 @@ public function update(CityRequest $request, City $city)
 
 # 5. Hibaüzenetek megjelenítése Blade-ben
 
-```blade
+```bladehtml
 <form method="POST" action="{{ route('cities.store') }}">
     @csrf
 
