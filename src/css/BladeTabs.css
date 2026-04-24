@@ -1,0 +1,52 @@
+.blade-codeblock {
+    position: relative;
+}
+
+/* Alapállapot: teljesen átlátszó gomb */
+.blade-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 4px;
+    transition:
+            opacity 0.2s ease,
+            border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+/* Ha a kódblokk fölött van az egér → halványan jelenjen meg */
+.blade-codeblock:hover .blade-copy-btn {
+    opacity: 0.4;
+}
+
+/* Ha a gomb fölött van az egér → élénkebb keret, de továbbra is átlátszó háttér */
+.blade-copy-btn:hover {
+    opacity: 1;
+    border-color: rgba(120, 120, 120, 0.9);
+    background: transparent; /* fontos: továbbra is átlátszó */
+}
+
+/* Ikonok mérete */
+.blade-copy-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Siker ikon váltás */
+.blade-copy-btn.copied svg.copy-icon {
+    display: none;
+}
+
+.blade-copy-btn.copied svg.success-icon {
+    display: inline;
+}
+
+.blade-copy-btn svg.success-icon {
+    display: none;
+}
