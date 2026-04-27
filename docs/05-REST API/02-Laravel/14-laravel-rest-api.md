@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'user',
             'email' => 'user@example.com',
-            'password' => bcrypt('12345678'),
+            'password' => '12345678',
         ]);
     }
 }
@@ -250,8 +250,9 @@ php artisan make:controller CountyController
 ```php
 public function index()
 {
+    $counties = County::with('cities')->get();
     return response()->json([
-        'counties' => County::with('cities')->get(),
+        'counties' => $counties,
     ]);
 }
 ```
@@ -314,8 +315,9 @@ php artisan make:controller CityController
 ```php
 public function index()
 {
+    $cities = City::with('county')->get();
     return response()->json([
-        'cities' => City::with('county')->get(),
+        'cities' => $cities,
     ]);
 }
 ```

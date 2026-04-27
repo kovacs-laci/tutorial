@@ -78,8 +78,71 @@ $response = Http::api()->get('/counties');
 ```
 
 ---
+## 5. Amennyiben az API tokennel védi az adatmódosítást
 
-## 5. CountyController (kliens oldal)
+### 5.1 Hozzunk létre agy AuthController-t.
+
+```bash
+php artisan make:controller AuthController
+```
+
+`app/Http/Controllers/AuthController.php`
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
+class AuthController extends Controller
+{
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $response = Http::api()->post('/login', $request->only('email', 'password'));
+
+        if ($response->failed()) {
+            return back()->with('error', 'Hibás email vagy jelszó.');
+        }
+
+        session(['api_token' => $response->json('token')]);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function logout()
+    {
+        session()->forget('api_token');
+
+        return redirect()->route('login');
+    }
+}
+
+```
+
+### 5.2 Kliens oldali route-k
+
+```php
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+```
+
+### 5.3 A védett API hívások innen kezdve így működnek
+
+```php
+$response = Http::api()
+    ->withToken(session('api_token'))
+    ->post('/counties', $request->all());
+
+```
+
+## 6. CountyController (kliens oldal)
 
 `app/Http/Controllers/CountyController.php`
 
@@ -89,7 +152,7 @@ $response = Http::api()->get('/counties');
 public function index(Request $request)
 {
     $needle = $request->get('needle');
-    $url = $needle ? "counties?needle=" . urlencode($needle) : "counties";
+    $url = $needle ? "/counties?needle=" . urlencode($needle) : "/counties";
 
     $response = Http::api()->get($url);
 
@@ -191,7 +254,7 @@ public function destroy($id)
 
 ---
 
-## 6. Cities kezelés
+## 7. Cities kezelés
 
 A Cities controller ugyanígy működik, csak a végpontok:
 
@@ -223,7 +286,7 @@ public function index()
 
 ---
 
-## 7. County → Cities kapcsolat API kliens oldalon
+## 8. County → Cities kapcsolat API kliens oldalon
 
 Ha egy megyéhez tartozó városokat szeretnénk megjeleníteni:
 
@@ -242,7 +305,7 @@ public function show($id)
 
 A view-ban:
 
-```blade
+```bladehtml
 <h2>{{ $entity->name }}</h2>
 
 <h3>Városok</h3>
@@ -258,7 +321,9 @@ A view-ban:
 
 ---
 
-## 8. JSON feldolgozó segédfüggvények
+## 9. JSON feldolgozó segédfüggvények
+
+**Tegyük őket a megfelelő kontroller-be**
 
 ```php
 private function getCounties($response)
@@ -282,7 +347,9 @@ private function getCities($response)
 
 ---
 
-## 9. Route definíciók
+## 10. Route definíciók
+
+Itt nincs szükség megadni a middleware-ben a **middleware('auth:sanctum')** mert a hitelesítésért az api a felelős.
 
 ```php
 Route::get('/counties', [CountyController::class, 'index'])->name('counties.index');
@@ -298,9 +365,16 @@ Route::put('/cities/{id}', [CityController::class, 'update'])->name('cities.upda
 Route::delete('/cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 ```
 
+Ha az **API hitelsítést igényel**, akkor a végpontokat egészítsük ki ezekkel is:
+
+```php
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+```
 ---
 
-## 10. Összegzés
+## 11. Összegzés
 
 * A kliens alkalmazás **nem használ saját adatbázist**, hanem a Counties–Cities REST API-t hívja.
 * Az API URL-t a `config/services.php` és `.env` fájlban állítjuk be.
