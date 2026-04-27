@@ -137,8 +137,7 @@ public function show($id)
 ```php
 public function store(Request $request)
 {
-    $response = Http::api()
-        ->post('/counties', $request->all());
+    $response = Http::api()->post('/counties', $request->all());
 
     if ($response->failed()) {
         return back()->with('error', 'Nem sikerült létrehozni a megyét.');
