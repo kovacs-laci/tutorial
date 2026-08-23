@@ -6,19 +6,34 @@ title: "Saját függvények"
 
 # Saját függvények
 
-A függvények olyan újrahasználható kódrészek, amelyek egy adott feladatot végeznek el.  
-Segítenek abban, hogy a kódunk átláthatóbb és karbantarthatóbb legyen.
+A függvények olyan **újrahasználható kódrészek**, amelyek egy adott feladatot végeznek.  
+Segítenek abban, hogy a kódunk **átláthatóbb**, **modulárisabb** és **karbantarthatóbb** legyen.  
+
+---
+
+# Miért használunk függvényeket?
+
+- ismétlődő kód elkerülése  
+- logika elkülönítése  
+- könnyebb tesztelhetőség  
+- újrafelhasználhatóság  
+- tisztább, rendezettebb kód  
 
 ---
 
 # Függvény létrehozása
 
 ```php
-function udvozles() {
-    echo "Szia, üdv az oldalon!";
+function greet() {
+    echo "Hello, welcome!";
 }
 
-udvozles();
+greet();
+```
+
+**Output:**
+```
+Hello, welcome!
 ```
 
 ---
@@ -26,11 +41,16 @@ udvozles();
 # Paraméterek
 
 ```php
-function koszont($nev) {
-    echo "Szia, $nev!";
+function greetPerson(string $name) {
+    echo "Hello, $name!";
 }
 
-koszont("László");
+greetPerson("László");
+```
+
+**Output:**
+```
+Hello, László!
 ```
 
 ---
@@ -38,11 +58,16 @@ koszont("László");
 # Több paraméter
 
 ```php
-function osszead($a, $b) {
+function addNumbers(int $a, int $b) {
     echo $a + $b;
 }
 
-osszead(5, 7); // 12
+addNumbers(5, 7);
+```
+
+**Output:**
+```
+12
 ```
 
 ---
@@ -50,12 +75,17 @@ osszead(5, 7); // 12
 # Visszatérési érték
 
 ```php
-function terulet($a, $b) {
-    return $a * $b;
+function area(int $width, int $height): int {
+    return $width * $height;
 }
 
-$eredmeny = terulet(5, 3);
-echo $eredmeny; // 15
+$result = area(5, 3);
+echo $result;
+```
+
+**Output:**
+```
+15
 ```
 
 ---
@@ -63,26 +93,241 @@ echo $eredmeny; // 15
 # Alapértelmezett paraméter
 
 ```php
-function udvozlet($nev = "Vendég") {
-    echo "Üdv, $nev!";
+function greetUser(string $name = "Guest") {
+    echo "Welcome, $name!";
 }
 
-udvozlet();          // Üdv, Vendég!
-udvozlet("Kata");    // Üdv, Kata!
+greetUser();        // Welcome, Guest!
+greetUser("Kate");  // Welcome, Kate!
 ```
+
+---
+
+# Típusdeklarációk (modern PHP)
+
+```php
+function multiply(int $a, int $b): int {
+    return $a * $b;
+}
+```
+
+---
+
+# Tömb visszatérési érték
+
+```php
+function getUser(): array {
+    return [
+        "name" => "Kate",
+        "age" => 16
+    ];
+}
+
+print_r(getUser());
+```
+
+**Output:**
+```
+Array
+(
+    [name] => Kate
+    [age] => 16
+)
+```
+
+---
+
+# Függvény + tömb
+
+```php
+function sumArray(array $numbers): int {
+    $sum = 0;
+    foreach ($numbers as $number) {
+        $sum += $number;
+    }
+    return $sum;
+}
+
+echo sumArray([1, 2, 3, 4]);
+```
+
+**Output:**
+```
+10
+```
+
+---
+
+# Függvény + feltétel
+
+```php
+function isAdult(int $age): bool {
+    return $age >= 18;
+}
+
+echo isAdult(20) ? "Adult" : "Minor";
+```
+
+**Output:**
+```
+Adult
+```
+
+---
+
+# Függvény + ciklus
+
+```php
+function printFruits(array $fruits): void {
+    foreach ($fruits as $fruit) {
+        echo $fruit . "<br>";
+    }
+}
+
+printFruits(["apple", "pear", "plum"]);
+```
+
+**Output:**
+```
+apple
+pear
+plum
+```
+
+---
+
+# `void` visszatérési típus
+
+```php
+function logMessage(string $msg): void {
+    echo "[LOG] $msg<br>";
+}
+
+logMessage("System started");
+```
+
+**Output:**
+```
+[LOG] System started
+```
+
+---
+
+# Anonim függvény (closure)
+
+```php
+$double = function (int $n): int {
+    return $n * 2;
+};
+
+echo $double(5);
+```
+
+**Output:**
+```
+10
+```
+
+---
+
+# Arrow function (rövidített forma)
+
+```php
+$triple = fn($n) => $n * 3;
+
+echo $triple(4);
+```
+
+**Output:**
+```
+12
+```
+
+---
+
+# Tipikus hibák függvényeknél
+
+:::info Tipikus hibák
+- függvényen belül nem létező változó használata
+- return hiánya → `null`
+- túl sok felelősség egy függvényben
+- rossz elnevezések (pl. `doStuff()`)
+- túl hosszú függvények  
+  :::
 
 ---
 
 # Gyakorlófeladatok
 
-1. Készíts függvényt, amely kiírja a nevedet.
-2. Írj függvényt, amely két számot összead és visszaadja az eredményt.
-3. Készíts függvényt, amely egy névlistát kap paraméterként és kiírja az elemeit.
-4. Írj függvényt, amely eldönti, hogy egy szám páros vagy páratlan.
+**1. Készíts függvényt, amely kiírja a nevedet.**  
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+function printName(): void {
+    echo "László";
+}
+
+printName();
+```
+</details>
 
 ---
 
-## Megjegyzés
+**2. Írj függvényt, amely két számot összead és visszaadja az eredményt.**  
 
-- Érdemes utánanézni a függvények típusdeklarációinak (`int`, `string`, `array`).
-- Lásd még: névtelen függvények, arrow functionök.
+<details>
+<summary>Megoldás</summary>
+
+```php
+function add(int $a, int $b): int {
+    return $a + $b;
+}
+
+echo add(5, 7);
+```
+</details>
+
+---
+
+**3. Készíts függvényt, amely egy névlistát kap paraméterként és kiírja az elemeit.**  
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+function printNames(array $names): void {
+    foreach ($names as $name) {
+        echo $name . "<br>";
+    }
+}
+
+printNames(["Anna", "Bela", "Csaba"]);
+```
+</details>
+
+---
+
+**4. Írj függvényt, amely eldönti, hogy egy szám páros vagy páratlan.**  
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+function isEven(int $n): bool {
+    return $n % 2 === 0;
+}
+
+echo isEven(4) ? "Even" : "Odd";
+```
+</details>
+
+---
+
+# Megjegyzés
+
+- Érdemes utánanézni a függvények típusdeklarációinak (int, string, array).
+- Lásd még: névtelen függvények, arrow function-k.  
+
+---

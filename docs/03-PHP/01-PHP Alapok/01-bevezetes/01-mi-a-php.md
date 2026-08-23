@@ -2,56 +2,76 @@
 id: mi-a-php
 slug: /php-alapok/mi-a-php
 title: "Mi az a PHP?"
+sidebar_label: "Mi az a PHP?"
 ---
 
 # Mi az a PHP?
 
-A PHP egy **szerveroldali programozási nyelv**, amelyet elsősorban webalkalmazások készítésére használunk.  
-A böngésző nem közvetlenül a PHP‑kódot futtatja, hanem a szerver értelmezi, és **HTML-t küld vissza** a felhasználónak.
+A PHP egy szerveroldali programozási nyelv, amelyet weboldalak és webalkalmazások készítésére használnak.  
+A böngésző nem futtat PHP‑kódot. A PHP a szerveren fut, és a böngésző csak azt a HTML‑t látja, amit a PHP előállít.
 
-## Miért népszerű a PHP?
+---
 
-- Könnyen tanulható
-- Rengeteg dokumentáció érhető el
-- Szinte minden tárhely támogatja
-- Nagy rendszerek is PHP-ben készültek (WordPress, Moodle, MediaWiki)
+## Miért használják a PHP-t?
 
-## Hogyan működik?
+- könnyen megtanulható,
+- sok dokumentáció és példa érhető el,
+- szinte minden tárhely támogatja,
+- nagy, ismert rendszerek is PHP‑val működnek (például WordPress).
 
-1. A felhasználó megnyit egy oldalt (pl. `index.php`)
+A PHP jó választás kezdőknek, mert gyorsan látható eredményt ad: a kód fut, és azonnal megjelenik a böngészőben.
+
+---
+
+## Hogyan működik a PHP?
+
+A PHP működése egy egyszerű folyamat:
+
+1. A felhasználó megnyit egy PHP‑oldalt (például `index.php`)
 2. A szerver futtatja a PHP‑kódot
-3. A PHP HTML-t generál
-4. A böngésző ezt jeleníti meg
+3. A PHP HTML‑t generál
+4. A böngésző ezt a HTML‑t jeleníti meg
 
 ```
 Felhasználó → Kérés → Szerver (PHP fut) → HTML válasz → Böngésző
 ```
 
+A lényeg: a PHP a szerveren dolgozik, a böngésző pedig csak a végeredményt látja.
+
+---
+
 ## Egyszerű példa
 
 ```php
 <?php
-echo "Hello, világ!";
+$message = "Hello, world!";
+echo $message;
 ?>
 ```
 
-A böngészőben ez jelenik meg:
+### Magyarázat
+
+- A `$message` változó egy szöveget tárol.
+- Az `echo` utasítás kiírja a változó tartalmát a böngészőben.
+- A PHP‑kódot a `<?php ... ?>` jelölések között írjuk.
+- A böngészőben csak a következő jelenik meg:
 
 ```
-Hello, világ!
+Hello, world!
 ```
+
+A PHP‑kód nem látszik, mert azt a szerver futtatja.
 
 ---
 
-## Gyakorlófeladatok
+## Mit érdemes megjegyezni?
 
-1. Írd le saját szavaiddal, mire használjuk a PHP-t.
-2. Keresd meg, milyen ismert weboldalak készültek PHP-ben.
-3. Magyarázd el a különbséget a PHP és a JavaScript működése között.
+- A PHP mindig a szerveren fut.
+- A böngésző csak a generált HTML‑t látja.
+- A PHP és a HTML együtt használható ugyanabban a fájlban.
+- A PHP alkalmas egyszerű és összetett webalkalmazások készítésére is.
+
+A következő fejezetben megnézzük, hogyan lehet PHP‑kódot futtatni a saját gépen.
+```
 
 ---
-
-## Megjegyzés
-
-- Érdemes utánanézni a PHP történetének és verzióinak.
-- Lásd még: szerveroldali vs. kliensoldali programozás.

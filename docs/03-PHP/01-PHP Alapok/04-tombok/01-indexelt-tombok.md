@@ -6,30 +6,44 @@ title: "Indexelt tömbök"
 
 # Indexelt tömbök
 
-A tömbök több érték tárolására alkalmasak egyetlen változóban.  
-Az indexelt tömbök elemei **számozott indexekkel** érhetők el, 0-tól kezdődően.
+Az indexelt tömbökben az elemeket **számozott indexek** alapján érjük el.  
+Az első elem indexe mindig **0**.
 
 ---
 
 # Tömb létrehozása
 
 ```php
-$szamok = [10, 20, 30, 40];
+$numbers = [10, 20, 30];
 ```
 
-Ugyanez hosszabb formában:
+Ugyanez hosszú formában:
 
 ```php
-$szamok = array(10, 20, 30, 40);
+$numbers = array(10, 20, 30);
+```
+
+Üres tömb:
+
+```php
+$numbers = [];
+```
+
+Vegyes típusú tömb:
+
+```php
+$items = [10, "apple", true];
 ```
 
 ---
 
-# Elem elérése
+# Elem elérése index alapján
 
 ```php
-echo $szamok[0]; // 10
-echo $szamok[2]; // 30
+$fruits = ["apple", "pear", "plum"];
+
+echo $fruits[0]; // apple
+echo $fruits[2]; // plum
 ```
 
 ---
@@ -37,7 +51,7 @@ echo $szamok[2]; // 30
 # Elem módosítása
 
 ```php
-$szamok[1] = 25;
+$fruits[1] = "banana";
 ```
 
 ---
@@ -45,33 +59,213 @@ $szamok[1] = 25;
 # Új elem hozzáadása
 
 ```php
-$szamok[] = 50;
+$fruits[] = "orange";
 ```
 
 ---
 
-# Tömb bejárása
+# Tömb hossza – `count()`
 
 ```php
-$gyumolcsok = ["alma", "körte", "szilva"];
+$numbers = [10, 20, 30];
+echo count($numbers); // 3
+```
 
-foreach ($gyumolcsok as $gyumolcs) {
-    echo $gyumolcs . "<br>";
+---
+
+# Tömb bejárása `foreach`-el
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+foreach ($fruits as $fruit) {
+    echo $fruit . "<br>";
 }
 ```
 
 ---
 
+# Tömb bejárása indexszel – `for`
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+for ($i = 0; $i < count($fruits); $i++) {
+    echo $fruits[$i] . "<br>";
+}
+```
+
+---
+
+# Tömb módosítása bejárás közben (referencia)
+
+```php
+$numbers = [1, 2, 3];
+
+foreach ($numbers as &$number) {
+    $number *= 2;
+}
+
+print_r($numbers); // [2, 4, 6]
+```
+
+---
+
+# Tömb megfordítása (reverse)
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+for ($i = count($fruits) - 1; $i >= 0; $i--) {
+    echo $fruits[$i] . "<br>";
+}
+```
+
+---
+
+# Tipikus hibák indexelt tömböknél
+
+:::info Tipikus hibák
+- nem létező index elérése → warning
+- off-by-one hiba (`<=` vs `<`)
+- `count()` hívása minden iterációban → lassabb
+- referencia szerinti foreach után a változó „bennragad”  
+  :::
+
+---
+
 # Gyakorlófeladatok
 
-1. Hozz létre egy tömböt 5 kedvenc filmed címével, majd írd ki őket.
-2. Készíts egy tömböt 1–10 közötti számokkal, majd írd ki a harmadik elemet.
-3. Adj hozzá egy új elemet egy meglévő tömbhöz.
-4. Írd ki egy tömb összes elemét `foreach` segítségével.
+**1. Hozz létre egy tömböt 5 gyümölccsel, majd írd ki őket.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum", "banana", "orange"];
+
+foreach ($fruits as $fruit) {
+    echo $fruit . "<br>";
+}
+```
+</details>
+
+---
+
+**2. Írd ki egy tömb első és utolsó elemét.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+echo $fruits[0] . "<br>";
+echo $fruits[count($fruits) - 1] . "<br>";
+```
+</details>
+
+---
+
+**3. Adj hozzá egy új elemet a tömbhöz.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+$fruits[] = "banana";
+
+print_r($fruits);
+```
+</details>
+
+---
+
+**4. Írd ki a tömb hosszát.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$numbers = [10, 20, 30, 40];
+
+echo count($numbers); // 4
+```
+</details>
+
+---
+
+**5. Járd be a tömböt `for` ciklussal.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+for ($i = 0; $i < count($fruits); $i++) {
+    echo $fruits[$i] . "<br>";
+}
+```
+</details>
+
+---
+
+**6. Járd be a tömböt `foreach`-el.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+foreach ($fruits as $fruit) {
+    echo $fruit . "<br>";
+}
+```
+</details>
+
+---
+
+**7. Írd ki a tömb elemeit visszafelé.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$fruits = ["apple", "pear", "plum"];
+
+for ($i = count($fruits) - 1; $i >= 0; $i--) {
+    echo $fruits[$i] . "<br>";
+}
+```
+</details>
+
+---
+
+**8. Duplázd meg egy tömb számait referencia szerinti bejárással.**
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$numbers = [1, 2, 3];
+
+foreach ($numbers as &$number) {
+    $number *= 2;
+}
+
+print_r($numbers); // [2, 4, 6]
+```
+</details>
 
 ---
 
 ## Megjegyzés
 
-- Érdemes utánanézni a tömbök memóriakezelésének PHP-ben.
-- Lásd még: `count()`, `var_dump()`, `print_r()`.
+- Az asszociatív tömböket külön leckében tárgyaljuk.
+- A tömbműveletek (rendezés, keresés, törlés, implode/explode stb.) a **Tömbműveletek** leckében találhatók.
+
+---

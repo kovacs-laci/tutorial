@@ -14,11 +14,21 @@ A kulcs lehet szöveg vagy szám, de leggyakrabban szöveg.
 # Létrehozás
 
 ```php
-$tanulo = [
-    "nev" => "Kata",
-    "kor" => 16,
-    "osztaly" => "10.B"
+$student = [
+    "name" => "Kate",
+    "age" => 16,
+    "class" => "10.B"
 ];
+```
+
+**Output:**
+```
+Array
+(
+    [name] => Kate
+    [age] => 16
+    [class] => 10.B
+)
 ```
 
 ---
@@ -26,8 +36,14 @@ $tanulo = [
 # Elem elérése kulccsal
 
 ```php
-echo $tanulo["nev"]; // Kata
-echo $tanulo["kor"]; // 16
+echo $student["name"]; // Kate
+echo $student["age"];  // 16
+```
+
+**Output:**
+```
+Kate
+16
 ```
 
 ---
@@ -35,7 +51,18 @@ echo $tanulo["kor"]; // 16
 # Új elem hozzáadása
 
 ```php
-$tanulo["lakhely"] = "Vác";
+$student["city"] = "Vác";
+```
+
+**Output:**
+```
+Array
+(
+    [name] => Kate
+    [age] => 16
+    [class] => 10.B
+    [city] => Vác
+)
 ```
 
 ---
@@ -43,7 +70,43 @@ $tanulo["lakhely"] = "Vác";
 # Elem módosítása
 
 ```php
-$tanulo["kor"] = 17;
+$student["age"] = 17;
+```
+
+**Output:**
+```
+17
+```
+
+---
+
+# Kulcs létezésének ellenőrzése
+
+```php
+isset($student["age"]);           // true
+array_key_exists("class", $student); // true
+```
+
+**Megjegyzés:**  
+`isset()` false, ha az érték **null**,  
+`array_key_exists()` true, még akkor is.
+
+---
+
+# Elem törlése
+
+```php
+unset($student["class"]);
+```
+
+**Output:**
+```
+Array
+(
+    [name] => Kate
+    [age] => 17
+    [city] => Vác
+)
 ```
 
 ---
@@ -51,9 +114,79 @@ $tanulo["kor"] = 17;
 # Bejárás kulccsal és értékkel
 
 ```php
-foreach ($tanulo as $kulcs => $ertek) {
-    echo "$kulcs: $ertek<br>";
+foreach ($student as $key => $value) {
+    echo "$key: $value<br>";
 }
+```
+
+**Output:**
+```
+name: Kate
+age: 17
+city: Vác
+```
+
+---
+
+# Csak kulcsok bejárása
+
+```php
+foreach (array_keys($student) as $key) {
+    echo $key . "<br>";
+}
+```
+
+**Output:**
+```
+name
+age
+city
+```
+
+---
+
+# Csak értékek bejárása
+
+```php
+foreach (array_values($student) as $value) {
+    echo $value . "<br>";
+}
+```
+
+**Output:**
+```
+Kate
+17
+Vác
+```
+
+---
+
+# Asszociatív tömb módosítása bejárás közben (referencia)
+
+```php
+foreach ($student as &$value) {
+    $value = strtoupper($value);
+}
+```
+
+**Output:**
+```
+Array
+(
+    [name] => KATE
+    [age] => 17
+    [city] => VÁC
+)
+```
+
+---
+
+# Rendezés kulcs vagy érték szerint
+
+```php
+ksort($student); // kulcs szerint
+asort($student); // érték szerint
 ```
 
 ---
@@ -61,32 +194,116 @@ foreach ($tanulo as $kulcs => $ertek) {
 # Többdimenziós asszociatív tömb
 
 ```php
-$diakok = [
+$students = [
     [
-        "nev" => "Anna",
-        "kor" => 15
+        "name" => "Anna",
+        "age" => 15
     ],
     [
-        "nev" => "Béla",
-        "kor" => 16
+        "name" => "Bela",
+        "age" => 16
     ]
 ];
 
-echo $diakok[1]["nev"]; // Béla
+echo $students[1]["name"]; // Bela
 ```
+
+**Output:**
+```
+Bela
+```
+
+---
+
+# Tipikus hibák asszociatív tömböknél
+
+:::info Tipikus hibák
+- nem létező kulcs elérése → warning
+- kulcsok sorrendje nem garantált
+- `isset()` vs `array_key_exists()` különbsége
+- referencia szerinti foreach után a változó „bennragad”  
+  :::
 
 ---
 
 # Gyakorlófeladatok
 
-1. Hozz létre egy asszociatív tömböt egy könyvről (cím, szerző, év).
-2. Írd ki a könyv címét és szerzőjét.
-3. Adj hozzá egy új kulcsot: „oldalszám”.
-4. Készíts egy tömböt három diákról, mindegyik asszociatív tömb legyen.
+**1. Hozz létre egy asszociatív tömböt egy könyvről (title, author, year).**
+<details>
+<summary>Megoldás</summary>
+
+```php
+$book = [
+    "title" => "1984",
+    "author" => "George Orwell",
+    "year" => 1949
+];
+
+print_r($book);
+```
+</details>
+
+---
+
+**2. Írd ki a könyv címét és szerzőjét.**
+<details>
+<summary>Megoldás</summary>
+
+```php
+echo $book["title"] . "<br>";
+echo $book["author"];
+```
+</details>
+
+---
+
+**3. Adj hozzá egy új kulcsot: "pages".**
+<details>
+<summary>Megoldás</summary>
+
+```php
+$book["pages"] = 328;
+
+print_r($book);
+```
+</details>
+
+---
+
+**4. Készíts egy tömböt három diákról, mindegyik asszociatív tömb legyen.**
+<details>
+<summary>Megoldás</summary>
+
+```php
+$students = [
+    [
+        "name" => "Anna",
+        "age" => 15,
+        "class" => "9A"
+    ],
+    [
+        "name" => "Bela",
+        "age" => 16,
+        "class" => "10B"
+    ],
+    [
+        "name" => "Csaba",
+        "age" => 17,
+        "class" => "11C"
+    ]
+];
+
+foreach ($students as $student) {
+    echo $student["name"] . " (" . $student["class"] . ")<br>";
+}
+```
+</details>
 
 ---
 
 ## Megjegyzés
 
 - Érdemes utánanézni a JSON és az asszociatív tömbök kapcsolatának.
-- Lásd még: tömbök beágyazása, API válaszok feldolgozása.
+- Lásd még: tömbök beágyazása, API válaszok feldolgozása.   
+
+---
