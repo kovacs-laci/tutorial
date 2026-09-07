@@ -1,25 +1,32 @@
 ---
-id: mi-a-php
-slug: /php-alapok/mi-a-php
-title: "Mi az a PHP?"
-sidebar_label: "Mi az a PHP?"
+id: php-intro
+slug: /php-alapok/php-intro
+title: "PHP bevezetés"
+sidebar_label: "PHP bevezetés"
 ---
 
-# Mi az a PHP?
+# PHP bevezetés
 
-A PHP egy szerveroldali programozási nyelv, amelyet weboldalak és webalkalmazások készítésére használnak.  
-A böngésző nem futtat PHP‑kódot. A PHP a szerveren fut, és a böngésző csak azt a HTML‑t látja, amit a PHP előállít.
+Ez a lecke a PHP alapjait mutatja be.  
+A PHP‑ról részletesebb anyagokat itt találsz: 
+- https://www.w3schools.com/php/
+- https://www.php.net/
+- https://www.php.org/
+
+A PHP egy **szerveroldali programozási nyelv**, amelyet weboldalak és webalkalmazások készítésére használnak.  
+A böngésző nem futtatja a PHP‑kódot. A PHP a **szerveren** fut, és a böngésző csak azt a **HTML‑t** látja, amit a PHP előállít.
 
 ---
 
 ## Miért használják a PHP-t?
 
 - könnyen megtanulható,
-- sok dokumentáció és példa érhető el,
+- sok példa és dokumentáció érhető el,
 - szinte minden tárhely támogatja,
-- nagy, ismert rendszerek is PHP‑val működnek (például WordPress).
+- ismert rendszerek is PHP‑val működnek (például WordPress),
+- gyorsan ad látható eredményt: a kód fut, és azonnal megjelenik a böngészőben.
 
-A PHP jó választás kezdőknek, mert gyorsan látható eredményt ad: a kód fut, és azonnal megjelenik a böngészőben.
+A PHP jó választás kezdőknek, mert egyszerűen kipróbálható, és könnyű megérteni, hogyan kapcsolódik a web működéséhez.
 
 ---
 
@@ -40,6 +47,17 @@ A lényeg: a PHP a szerveren dolgozik, a böngésző pedig csak a végeredményt
 
 ---
 
+## Mi az a PHP fájl?
+
+A PHP fájl:
+
+- `.php` kiterjesztésű,
+- tartalmazhat HTML‑t, CSS‑t, JavaScript‑et és PHP‑kódot,
+- a PHP‑kód a szerveren fut,
+- a böngésző csak a generált HTML‑t kapja meg.
+
+---
+
 ## Egyszerű példa
 
 ```php
@@ -52,9 +70,9 @@ echo $message;
 ### Magyarázat
 
 - A `$message` változó egy szöveget tárol.
-- Az `echo` utasítás kiírja a változó tartalmát a böngészőben.
+- Az `echo` kiírja a változó tartalmát.
 - A PHP‑kódot a `<?php ... ?>` jelölések között írjuk.
-- A böngészőben csak a következő jelenik meg:
+- A böngészőben csak ez jelenik meg:
 
 ```
 Hello, world!
@@ -64,14 +82,22 @@ A PHP‑kód nem látszik, mert azt a szerver futtatja.
 
 ---
 
-## Mit érdemes megjegyezni?
+## Mire képes a PHP?
 
-- A PHP mindig a szerveren fut.
-- A böngésző csak a generált HTML‑t látja.
-- A PHP és a HTML együtt használható ugyanabban a fájlban.
-- A PHP alkalmas egyszerű és összetett webalkalmazások készítésére is.
+A PHP sokféle feladatra alkalmas:
 
-A következő fejezetben megnézzük, hogyan lehet PHP‑kódot futtatni a saját gépen.
-```
+- dinamikus tartalom előállítása,
+- fájlok kezelése a szerveren (létrehozás, olvasás, írás, törlés),
+- űrlapadatok fogadása és feldolgozása,
+- sütik kezelése,
+- adatbázis‑műveletek (adatok hozzáadása, módosítása, törlése),
+- felhasználói bejelentkezés és jogosultságkezelés,
+- adatok titkosítása.
+
+A PHP nem csak HTML‑t tud kiadni: képeket, PDF‑eket, XML‑t vagy más szöveges formátumokat is.
+
+---
+
+A következő fejezetben megnézzük, hogyan futtathatsz PHP‑kódot a saját gépeden.
 
 ---

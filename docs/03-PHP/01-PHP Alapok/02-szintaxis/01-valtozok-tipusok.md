@@ -22,7 +22,7 @@ $age = 17;
 A változónevek:
 
 - nem kezdődhetnek számmal,
-- csak betűt, számot és aláhúzást tartalmazhatnak,
+- csak betűt, számot és alulvonást (_) tartalmazhatnak,
 - ékezet nélküliek,
 - angolul íródnak,
 - beszédesek legyenek (a név utaljon a tartalomra),

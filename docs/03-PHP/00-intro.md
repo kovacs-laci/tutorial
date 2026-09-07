@@ -1,7 +1,7 @@
 ---
 id: php-intro
 slug: /php/intro
-title: "Bevezetés"
+title: "Intro"
 ---
 # Intro
 

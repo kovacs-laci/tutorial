@@ -64,7 +64,7 @@ php script.php
 A PHP tartalmaz egy egyszerű, beépített webszervert, amely fejlesztéshez jól használható.  
 Nem szükséges hozzá Apache vagy Nginx, elég a PHP önmagában.
 
-Ez különösen hasznos, ha gyorsan szeretnél egy mappát böngészőben futtatni.
+Ez különösen hasznos, ha gyorsan szeretnél egy kódot böngészőben futtatni.
 
 ### Indítás
 
@@ -110,7 +110,7 @@ echo $message;
 ## Docker (opcionális)
 
 A PHP futtatható konténerben is.  
-Ez haladóbb megoldás, de sok fejlesztő használja.
+Ez haladóbb megoldás, és sok fejlesztő használja.
 
 Egyszerű példa:
 
@@ -152,108 +152,3 @@ Ez egy teljes konfigurációs oldalt generál, amely megmutatja a PHP verziójá
 
 ---
 
-## Xdebug – PHP hibakeresés
-
-A PHP‑ban a hibakeresést (debugolást) az **Xdebug** nevű bővítmény segíti.  
-Az Xdebug lehetővé teszi, hogy a kód futása közben megállítsd a programot, és megnézd a változók értékét.
-
-Ez különösen hasznos, amikor összetettebb programokat vagy űrlapkezelést készítesz.
-
----
-
-### Telepítés
-
-A telepítés módja attól függ, milyen PHP‑t használsz.
-
-#### Windows (XAMPP)
-
-1. Nyisd meg a böngészőben:  
-   https://xdebug.org/wizard
-2. Másold be a `phpinfo()` oldal teljes tartalmát.
-3. A weboldal megmondja, melyik Xdebug verziót töltsd le.
-4. A letöltött `.dll` fájlt másold a PHP `ext` mappájába.
-5. A `php.ini` fájlba tedd be:
-
-```
-zend_extension=xdebug
-xdebug.mode=debug
-xdebug.start_with_request=yes
-```
-
-6. Indítsd újra az Apache‑ot.
-
----
-
-### Ellenőrzés
-
-Hozz létre egy fájlt:
-
-```php
-<?php
-phpinfo();
-?>
-```
-
-Ha az Xdebug telepítve van, a phpinfo oldalon megjelenik az „Xdebug” szakasz.
-
----
-
-### Debugolás VS Code-ban
-
-A PHP‑kód futása megállítható úgynevezett „breakpoint”-oknál.
-
-1. Telepítsd a **PHP Debug** kiegészítőt VS Code‑ba.
-2. Hozz létre egy `launch.json` fájlt:
-
-   ```json
-   {
-     "version": "0.2.0",
-     "configurations": [
-       {
-         "name": "Listen for Xdebug",
-         "type": "php",
-         "request": "launch",
-         "port": 9003
-       }
-     ]
-   }
-   ```
-
-3. Indítsd el a „Listen for Xdebug” debug módot.
-4. Tegyél egy breakpoint‑ot a PHP‑kódba.
-5. Nyisd meg a böngészőben az oldalt.
-
-A kód futása megáll, és a VS Code megmutatja a változók értékét.
-
----
-
-### Egyszerű példa
-
-```php
-<?php
-$value = 42;
-$result = $value * 2;
-echo $result;
-?>
-```
-
-Ha breakpoint‑ot teszel a `$result = $value * 2;` sorra, a debug megáll, és látod:
-
-- `$value` értéke: 42
-- `$result` még nem számolódott ki
-
-Ez segít megérteni, hogyan működik a program lépésről lépésre.
-
----
-
-### Mikor érdemes használni az Xdebugot?
-
-- amikor nem érted, miért nem azt az eredményt kapod, amit vársz,
-- amikor összetett logikát írsz,
-- amikor űrlapokkal vagy adatbázissal dolgozol,
-- amikor szeretnéd látni a változók aktuális értékét.
-
-Az Xdebug nem kötelező a tananyaghoz, de sokat segít a hibák megtalálásában.
-```
-
----
