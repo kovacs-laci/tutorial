@@ -1,7 +1,7 @@
 ---
-id: php-intro
-slug: /php/intro
-title: "Intro"
+id: php-tananyag-bevezetes
+slug: /php
+title: "PHP tananyag"
 ---
 # Intro
 
