@@ -1,10 +1,10 @@
 ---
 id: sql-attekintes
 slug: /sql
-title: "SQL tananyag áttekintése"
+title: "Áttekintés"
 ---
 
-# SQL tananyag
+# Áttekintés
 
 Ez a tananyag a relációs adatbázisok alapjaitól a többtáblás lekérdezésekig vezet. Minden gyakorlati példa a projekt Northwind-adatbázisára épül: [Northwind telepítőscript](/files/install_northwind.sql).
 
@@ -84,12 +84,13 @@ Ellenőrzés után a mentésből visszaállított adatbázist ugyanazokkal a lek
 
 1. Bevezetés és relációs alapfogalmak
 2. Adatbázisok és táblák (DDL)
-3. Megszorítások és indexek
-4. Adatmódosítás (DML)
-5. SELECT, szűrés és rendezés
-6. Összetett lekérdezések és összesítés
-7. Tárolt eljárások
-8. Northwind gyakorló feladatok
+3. Adatbázis-normalizálás
+4. Megszorítások és indexek
+5. Adatmódosítás (DML)
+6. SELECT, szűrés és rendezés
+7. Összetett lekérdezések és összesítés
+8. Tárolt eljárások
+9. Northwind gyakorló feladatok
 
 ## Northwind-táblák
 

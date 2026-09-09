@@ -1,7 +1,7 @@
 ---
 id: sql-alapfogalmak
 slug: /sql/bevezetes/sql-alapfogalmak
-title: "SQL alapfogalmak"
+title: "Alapfogalmak"
 ---
 # 1. fejezet: Bevezetés az SQL-be és Alapvető Fogalmak
 

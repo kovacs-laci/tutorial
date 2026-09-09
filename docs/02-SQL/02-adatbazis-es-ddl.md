@@ -1,3 +1,4 @@
+---
 id: sql-adatbazis-es-ddl
 slug: /sql/adatbazis-es-ddl/adatbazis-es-tablak
 title: "Adatbázisok és táblák (DDL)"

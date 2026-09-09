@@ -1,3 +1,8 @@
+---
+id: xampp-php85
+slug: /xampp-with-php-85
+title: "XAMPP + PHP 8.5"
+---
 # XAMPP + PHP 8.5 + Apache Lounge (OpenSSL 3.x) frissítési checklist
 
 Ez a checklist azt írja le, hogyan lehet XAMPP alatt **kézzel frissített PHP 8.5**‑öt működésre bírni úgy, hogy az Apache is elinduljon, és ne legyen `ssl_get0_group_name` vagy `ee key too small` hiba.

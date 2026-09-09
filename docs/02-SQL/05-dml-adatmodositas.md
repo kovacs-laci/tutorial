@@ -1,7 +1,7 @@
 ---
 id: sql-dml-adatmodositas
 slug: /sql/dml/adatmodositas
-title: "Adatmodosítás (DML)"
+title: "Adatmódosítás (DML)"
 ---
 # SQL Adatmanipulációs Nyelv (DML) – Írási műveletek
 
