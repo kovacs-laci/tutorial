@@ -77,6 +77,22 @@ git commit -m "commit message"
 ```
 A staging area tartalmának rögzítése a repository‑ban. A commit üzenet röviden írja le a változtatás célját.
 
+### Commitüzenetek
+
+Az alábbi előtagok használata ajánlott konvenció, nem kötelező Git-szabály:
+
+```bash
+git commit -m "feat: add login form"
+git commit -m "fix: validate empty email"
+git commit -m "docs: update Git workflow"
+```
+
+- `feat`: új funkció;
+- `fix`: hibajavítás;
+- `docs`: dokumentáció;
+- `refactor`: szerkezeti átalakítás;
+- `test`: teszt módosítása.
+
 ---
 
 ## Távoli repo beállítása
@@ -223,21 +239,3 @@ git stash list
 git stash apply stash@{0}
 git stash drop stash@{0}
 ```
-
-## Commitüzenetek
-
-Az alábbi előtagok használata ajánlott konvenció, nem kötelező Git-szabály:
-
-```bash
-git commit -m "feat: add login form"
-git commit -m "fix: validate empty email"
-git commit -m "docs: update Git workflow"
-```
-
-- `feat`: új funkció;
-- `fix`: hibajavítás;
-- `docs`: dokumentáció;
-- `refactor`: szerkezeti átalakítás;
-- `test`: teszt módosítása.
-
-
