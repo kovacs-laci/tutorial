@@ -161,7 +161,7 @@ Egy megye több várost tartalmazhat.
 Ezért a **cities** tábla tartalmaz egy idegen kulcsot:
 
 ```
-id_country
+id_county
 ```
 
 ---
@@ -189,7 +189,7 @@ return new class extends Migration
 
             $table->id();
 
-            $table->foreignId('id_country')
+            $table->foreignId('id_county')
                   ->constrained('counties')
                   ->onDelete('cascade');
 
@@ -210,7 +210,7 @@ return new class extends Migration
 # Magyarázat
 
 ```
-$table->foreignId('id_country')
+$table->foreignId('id_county')
 ```
 
 Létrehoz egy idegen kulcs mezőt.
