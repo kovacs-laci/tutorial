@@ -27,13 +27,13 @@ Meglévő távoli repository klónozása. Ha nem adsz meg cél mappát, a repo n
 
 ### Új branch létrehozása
 ```bash
-git checkout -b [branch neve]
+git switch -c [branch neve]
 ```
-Új branch létrehozása és azonnali átváltás rá.
+Új branch létrehozása és azonnali átváltás rá. Régebbi Git-verziókban ugyanerre a `git checkout -b` parancsot használják.
 
 ### Váltás egy branch-re
 ```bash
-git checkout [branch neve]
+git switch [branch neve]
 ```
 Átváltás egy már létező branch‑re.
 
@@ -62,7 +62,14 @@ Egy konkrét fájl hozzáadása a staging area‑hoz.
 ```bash
 git add .
 ```
-Az összes módosított fájl hozzáadása a staging area‑hoz.
+Az összes módosított fájl hozzáadása a staging area-hoz. Csak a `git status` ellenőrzése után használd, mert érzékeny vagy ideiglenes fájlokat is hozzáadhat.
+
+### Staging ellenőrzése
+```bash
+git diff
+git diff --staged
+```
+Az első a még staging előtt álló, a második a commitra előkészített módosításokat mutatja.
 
 ### Commit készítése
 ```bash
@@ -81,9 +88,9 @@ Távoli repository (pl. GitHub) hozzárendelése az aktuális projekthez.
 
 ### Upstream beállítása
 ```bash
-git push --set-upstream origin master
+git push --set-upstream origin main
 ```
-Beállítja, hogy a helyi `master` branch kövesse a távoli `master` branch‑et. Ezután elég a sima `git push`.
+Beállítja, hogy a helyi `main` branch kövesse a távoli `main` branch‑et. Ezután elég a sima `git push`.
 
 ---
 
@@ -95,18 +102,41 @@ git push
 ```
 A helyi commitok feltöltése a távoli repository‑ba.
 
+Push előtt érdemes ellenőrizni, hogy valóban a megfelelő commitokat küldöd-e fel:
+
+```bash
+git status
+git log --oneline -3
+git push
+```
+
 ### Aktuális branch lekérése
 ```bash
-git pull
+git pull --ff-only origin main
 ```
-A távoli repository változásainak letöltése és beolvasztása a helyi branch‑be.
+A távoli repository változásainak letöltése és beolvasztása a helyi `main` branch-be. A `--ff-only` megakadályozza a váratlan merge commit létrehozását.
+
+A `git pull` két lépést végez el egymás után:
+
+```text
+git pull = git fetch + git merge
+```
+
+Ha előbb csak megnéznéd a távoli változásokat, használd külön a `git fetch` parancsot.
+
+### Távoli változások előzetes megtekintése
+```bash
+git fetch origin
+git log --oneline main..origin/main
+```
+A `fetch` letölti a távoli változásokat, de nem módosítja automatikusan a munkakönyvtárat.
 
 ---
 
 ## Merge
 
 ```bash
-git checkout [cél branch]
+git switch [cél branch]
 git merge [branch]
 ```
 Az adott branch változásainak beolvasztása a cél branch‑be. Előtte mindig váltani kell a cél branch‑re.
@@ -117,9 +147,9 @@ Az adott branch változásainak beolvasztása a cél branch‑be. Előtte mindig
 
 ### Egy fájl visszaállítása
 ```bash
-git checkout [fájl neve]
+git restore --source=HEAD -- [fájl neve]
 ```
-A fájl visszaállítása az utolsó commit állapotára, a helyi módosítások elvetésével.
+A fájl visszaállítása az utolsó commit állapotára. A helyi módosítások elvesznek, ezért a parancs előtt ellenőrizd a `git diff` kimenetét.
 
 ### Korábbi commit visszavonása
 ```bash
@@ -130,6 +160,16 @@ git revert <commit-hash>
 ---
 
 ## Ellenőrzés és diff
+
+### Commitok áttekintése
+```bash
+git log --oneline --graph --decorate --all
+```
+
+### Távoli repository ellenőrzése
+```bash
+git remote -v
+```
 
 ### Ki módosította az adott fájlt
 ```bash
@@ -165,14 +205,39 @@ Erőszakosan törli a branch‑et, akkor is, ha nincs merge‑ölve.
 
 ### Változások mentése
 ```bash
-git stash
+git stash push -m "félbehagyott munka"
 ```
 Az aktuális, commitolatlan változtatások ideiglenes elmentése egy verembe, majd a munkakönyvtár visszaállítása tiszta állapotra.
 
 ### Változások visszahozása
 ```bash
+git stash list
 git stash pop
 ```
-A legutolsó stash visszaállítása a munkakönyvtárba, és eltávolítása a veremből.
+A stash-ek listázása, majd a legutolsó visszaállítása és eltávolítása a veremből. Ütközés esetén a stash nem feltétlenül törlődik automatikusan.
+
+Ha előbb ellenőriznéd a visszaállított változásokat, használd az `apply` parancsot, majd szükség esetén töröld a stash-t:
+
+```bash
+git stash list
+git stash apply stash@{0}
+git stash drop stash@{0}
 ```
+
+## Commitüzenetek
+
+Az alábbi előtagok használata ajánlott konvenció, nem kötelező Git-szabály:
+
+```bash
+git commit -m "feat: add login form"
+git commit -m "fix: validate empty email"
+git commit -m "docs: update Git workflow"
+```
+
+- `feat`: új funkció;
+- `fix`: hibajavítás;
+- `docs`: dokumentáció;
+- `refactor`: szerkezeti átalakítás;
+- `test`: teszt módosítása.
+
 
