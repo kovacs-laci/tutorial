@@ -53,7 +53,7 @@ export default function Home() {
                         Git gyorstalpaló
                     </Link>
 
-                    <Link className="button button--secondary" to="/docs/sql-ismerteto">
+                    <Link className="button button--secondary" to="/docs/sql">
                         SQL ismertető
                     </Link>
 

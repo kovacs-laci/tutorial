@@ -1,7 +1,7 @@
 ---
-id: sql-bevezeto
-slug: /sql-bevezeto
-title: "Bevezetés az SQL-be és Alapvető Fogalmak"
+id: sql-alapfogalmak
+slug: /sql/bevezetes/sql-alapfogalmak
+title: "SQL alapfogalmak"
 ---
 # 1. fejezet: Bevezetés az SQL-be és Alapvető Fogalmak
 
@@ -120,3 +120,29 @@ Az SQL parancsokat többféleképpen futtathatjuk:
 - `DROP INDEX` – index törlése  
 
 ---
+
+## Gyakorló feladatok
+
+1. Melyik kategóriába tartozik a `CREATE TABLE`, a `SELECT`, a `COMMIT` és a `GRANT`?
+2. Nevezd meg a `Customers` elsődleges kulcsát és az `Orders` hozzá kapcsolódó idegen kulcsát.
+
+<details>
+<summary>Megoldások</summary>
+
+<!-- 1. feladat megoldása -->
+1. `CREATE TABLE`: DDL, `SELECT`: lekérdezés, `COMMIT`: TCL, `GRANT`: DCL.
+<!-- 2. feladat megoldása -->
+2. `Customers.CustomerID` az elsődleges kulcs, az `Orders.CustomerID` erre hivatkozik.
+</details>
+
+3. Melyik tábla kapcsolja össze a rendeléseket a termékekkel?
+4. Milyen sorrendben futtatnál egy új rendelés és rendelési tétel létrehozásához kapcsolódó műveleteket?
+
+<details>
+<summary>Megoldások</summary>
+
+<!-- 3. feladat megoldása -->
+3. Az `OrderDetails` kapcsolja össze az `Orders` és a `Products` táblát az `OrderID` és `ProductID` mezőkkel.
+<!-- 4. feladat megoldása -->
+4. Először létrehoznám a rendelést az `Orders` táblában, majd az új `OrderID` ismeretében beszúrnám a tételeket az `OrderDetails` táblába. Több lépést tranzakcióban érdemes végrehajtani.
+</details>

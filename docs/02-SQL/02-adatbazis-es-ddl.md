@@ -1,16 +1,10 @@
----
-id: sql-ddl
-slug: /sql-ddl
-title: "SQL Adatdefiníciós Nyelv (DDL)"
+id: sql-adatbazis-es-ddl
+slug: /sql/adatbazis-es-ddl/adatbazis-es-tablak
+title: "Adatbázisok és táblák (DDL)"
 ---
 # SQL Adatdefiníciós Nyelv (DDL) – Szerkezetkezelés
 
-Készítette: Kovács László  
-Forrás: https://www.w3schools.com/
-
----
-
-## 2.1 CREATE DATABASE
+## CREATE DATABASE
 
 ### Definíció
 Új adatbázis létrehozására szolgál.
@@ -30,7 +24,7 @@ SHOW DATABASES;
 
 ---
 
-## 2.2 DROP DATABASE
+## DROP DATABASE
 
 ### Definíció
 Meglévő adatbázis törlésére szolgál.
@@ -50,37 +44,7 @@ SHOW DATABASES;
 
 ---
 
-## 2.3 BACKUP DATABASE (SQL Server)
-
-### Definíció
-Biztonsági másolat készítése egy meglévő adatbázisról.
-
-**Szintaxis**
-```sql
-BACKUP DATABASE adatbazis_nev
-TO DISK = 'filepath';
-```
-
-**Differenciális mentés**
-```sql
-BACKUP DATABASE adatbazis_nev
-TO DISK = 'filepath'
-WITH DIFFERENTIAL;
-```
-
-**Példák**
-```sql
-BACKUP DATABASE Northwind
-TO DISK = 'D:\backups\Northwind_full.bak';
-
-BACKUP DATABASE Northwind
-TO DISK = 'D:\backups\Northwind_diff.bak'
-WITH DIFFERENTIAL;
-```
-
----
-
-## 2.4 CREATE TABLE
+## CREATE TABLE
 
 ### Definíció
 Új tábla létrehozására szolgál.
@@ -98,22 +62,22 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Suppliers_Test (
     SupplierID INT PRIMARY KEY,
-    CompanyName NVARCHAR(40) NOT NULL,
-    City NVARCHAR(20),
-    Country NVARCHAR(20)
+    SupplierName VARCHAR(50) NOT NULL,
+    City VARCHAR(20),
+    Country VARCHAR(15)
 );
 ```
 
 **Másolás meglévő táblából**
 ```sql
 CREATE TABLE Customers_Copy AS
-SELECT CustomerID, CompanyName, ContactName
+SELECT CustomerID, CustomerName, ContactName
 FROM Customers;
 ```
 
 ---
 
-## 2.5 DROP TABLE
+## DROP TABLE
 
 ### Definíció
 Meglévő tábla törlésére szolgál.
@@ -130,7 +94,7 @@ DROP TABLE Suppliers_Test;
 
 ---
 
-## 2.6 TRUNCATE TABLE
+## TRUNCATE TABLE
 
 ### Definíció
 Törli a táblán belüli összes adatot, de a szerkezetet megtartja.
@@ -142,12 +106,14 @@ TRUNCATE TABLE tabla_nev;
 
 **Példa**
 ```sql
-TRUNCATE TABLE Orders;
+CREATE TABLE Orders_Practice AS SELECT * FROM Orders;
+TRUNCATE TABLE Orders_Practice;
+DROP TABLE Orders_Practice;
 ```
 
 ---
 
-## 2.7 ALTER TABLE
+## ALTER TABLE
 
 ### Definíció
 Meglévő táblák szerkezetének módosítására szolgál.
@@ -167,19 +133,51 @@ DROP COLUMN oszlop_nev;
 **Szintaxis – adattípus módosítása**
 ```sql
 ALTER TABLE tabla_nev
-ALTER COLUMN oszlop_nev új_adattipus;
+MODIFY COLUMN oszlop_nev új_adattipus;
 ```
 
 **Példák (Northwind)**
 ```sql
 ALTER TABLE Employees
-ADD BirthDate DATE;
+ADD COLUMN PracticeNote VARCHAR(100);
 
 ALTER TABLE Employees
-DROP COLUMN BirthDate;
+MODIFY COLUMN PracticeNote VARCHAR(150);
 
 ALTER TABLE Employees
-ALTER COLUMN City NVARCHAR(50);
+DROP COLUMN PracticeNote;
 ```
 
 ---
+
+## Gyakorló feladatok
+
+1. Készíts `Products_Practice` táblát a `Products` tábla `ProductID`, `ProductName` és `Price` oszlopaival.
+2. Adj hozzá egy `PracticeNote` oszlopot, módosítsd a típusát, majd töröld az oszlopot.
+3. Töröld a gyakorlótáblát a feladat végén.
+
+<details>
+<summary>Megoldások</summary>
+
+```sql
+-- 1. feladat megoldása
+DROP TABLE IF EXISTS Products_Practice;
+
+CREATE TABLE Products_Practice AS
+SELECT ProductID, ProductName, Price
+FROM Products;
+
+ALTER TABLE Products_Practice
+ADD COLUMN PracticeNote VARCHAR(50);
+
+-- 2. feladat megoldása
+ALTER TABLE Products_Practice
+MODIFY COLUMN PracticeNote VARCHAR(100);
+
+ALTER TABLE Products_Practice
+DROP COLUMN PracticeNote;
+
+-- 3. feladat megoldása
+DROP TABLE Products_Practice;
+```
+</details>

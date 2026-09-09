@@ -1,7 +1,7 @@
 ---
-id: sql-select
-slug: /sql-select
-title: "SQL Lekérdezések (SELECT)"
+id: sql-select-alapok
+slug: /sql/select-alapok/select-szures-rendezes
+title: "SELECT, szűrés és rendezés"
 ---
 # SQL Lekérdezések (SELECT) – Szűrés, Rendezés és Függvények
 
@@ -182,4 +182,64 @@ SELECT * FROM Customers ORDER BY Country, CustomerName;
 SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;
 ```
 
+## További gyakorló feladatok
+
+1. Listázd a Londonban vagy Berlinben található ügyfeleket.
+2. Listázd a 10 és 25 közötti árú, `a` betűt tartalmazó nevű termékeket.
+3. Listázd a legdrágább öt terméket.
+4. Számítsd ki a termékek darabszámát, átlagárát és összárát.
+
+<details>
+<summary>Megoldások</summary>
+
+```sql
+-- 1. feladat megoldása
+SELECT CustomerName, City, Country
+FROM Customers
+WHERE City IN ('London', 'Berlin')
+ORDER BY City, CustomerName;
+
+-- 2. feladat megoldása
+SELECT ProductName, Price
+FROM Products
+WHERE Price BETWEEN 10 AND 25
+	AND ProductName LIKE '%a%'
+ORDER BY Price;
+
+-- 3. feladat megoldása
+SELECT ProductName, Price
+FROM Products
+ORDER BY Price DESC
+LIMIT 5;
+
+-- 4. feladat megoldása
+SELECT COUNT(*) AS ProductCount,
+			 AVG(Price) AS AveragePrice,
+			 SUM(Price) AS TotalPrice
+FROM Products;
+```
+</details>
+
 ---
+
+## Gyakorló feladatok
+
+1. Listázd a 20-nál olcsóbb termékek nevét és árát ár szerint növekvő sorrendben.
+2. Listázd az ügyfelek különböző országait ábécésorrendben.
+
+<details>
+<summary>Megoldások</summary>
+
+```sql
+-- 1. feladat megoldása
+SELECT ProductName, Price
+FROM Products
+WHERE Price < 20
+ORDER BY Price, ProductName;
+
+-- 2. feladat megoldása
+SELECT DISTINCT Country
+FROM Customers
+ORDER BY Country;
+```
+</details>

@@ -1,16 +1,11 @@
 ---
-id: sql-dml
-slug: /sql-dml
-title: "SQL Adatmanipulációs Nyelv (DML)"
+id: sql-dml-adatmodositas
+slug: /sql/dml/adatmodositas
+title: "Adatmodosítás (DML)"
 ---
 # SQL Adatmanipulációs Nyelv (DML) – Írási műveletek
 
-Készítette: Kovács László  
-Forrás: https://www.w3schools.com/
-
----
-
-## 4.1 INSERT INTO
+## INSERT INTO
 
 ### Definíció
 Az **INSERT INTO** utasítás új rekordok beszúrására szolgál egy táblázatba.  
@@ -42,8 +37,8 @@ VALUES (value1, value2, value3, ...);
 
 #### Teljes rekord beszúrása
 ```sql
-INSERT INTO Customers (CustomerID, CompanyName, ContactName, Country)
-VALUES ('HUN01', 'Teszt Kft.', 'Kovács László', 'Hungary');
+INSERT INTO Customers (CustomerName, ContactName, Country)
+VALUES ('Teszt Kft.', 'Kovács László', 'Hungary');
 ```
 
 #### Új rekord beszúrása oszlopnevek megadásával
@@ -52,8 +47,7 @@ INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Cou
 VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
 ```
 
-> Megjegyzés:  
-> A `CustomerID` mezőbe nem illesztettünk be számot, mert az **auto-increment** mező, és automatikusan generálódik.
+> Megjegyzés: a `CustomerID` auto-increment mező, ezért az adatbázis generálja.
 
 #### Adatok beszúrása csak megadott oszlopokba
 ```sql
@@ -75,7 +69,7 @@ VALUES ('Chai', 18),
 ```
 ---
 
-## 4.2 NULL érték
+## NULL érték
 
 ### Mi az a NULL érték?
 A **NULL értékkel** rendelkező mező olyan mező, amelynek nincs értéke.  
@@ -134,7 +128,7 @@ WHERE Address IS NOT NULL;
 - A NULL értékek kezelése kritikus az adatminőség és a lekérdezések pontossága szempontjából.
 
 ---
-## 4.3 UPDATE
+## UPDATE
 
 ### Definíció
 Az **UPDATE** utasítás egy tábla meglévő rekordjainak módosítására szolgál.  
@@ -190,7 +184,7 @@ WHERE condition;
 ```sql
 UPDATE Customers
 SET Address = NULL
-WHERE CustomerID = 'ALFKI';
+WHERE CustomerID = 1;
 ```
 
 > Tipp:  
@@ -207,7 +201,7 @@ WHERE CustomerID = 'ALFKI';
 
 ---
 
-## 4.4 DELETE
+## DELETE
 
 ### Definíció
 A **DELETE** utasítás egy táblázatban meglévő rekordok törlésére szolgál.  
@@ -315,7 +309,7 @@ WHERE condition;
 
 #### Új tábla létrehozása néhány oszloppal
 ```sql
-SELECT CustomerID, CompanyName
+SELECT CustomerID, CustomerName
 INTO Customers_Backup
 FROM Customers
 WHERE Country = 'Germany';
@@ -408,8 +402,8 @@ WHERE condition;
 
 #### Adatok másolása egy másik táblába
 ```sql
-INSERT INTO Customers_Copy (CustomerID, CompanyName)
-SELECT CustomerID, CompanyName
+INSERT INTO Customers_Copy (CustomerID, CustomerName)
+SELECT CustomerID, CustomerName
 FROM Customers
 WHERE Country = 'USA';
 ```
@@ -444,4 +438,43 @@ WHERE Country = 'Germany';
 - A `WHERE` záradék segítségével szűrhetjük, mely rekordok kerüljenek átmásolásra.
 - Az `INSERT INTO SELECT` gyakran használható adatarchiválásra, migrációra vagy táblák közötti adatátvitelre.
 
+## Gyakorló feladatok
+
+1. Készíts másolatot a `Customers` tábláról `Customers_DmlPractice` néven.
+2. Módosítsd benne az 1-es ügyfél városát.
+3. Szúrj be egy új gyakorló ügyfelet, kérdezd le, majd töröld a gyakorlótáblát.
+
+<details>
+<summary>Megoldások</summary>
+
+```sql
+-- 1. feladat megoldása
+DROP TABLE IF EXISTS Customers_DmlPractice;
+
+CREATE TABLE Customers_DmlPractice AS
+SELECT * FROM Customers;
+
+UPDATE Customers_DmlPractice
+SET City = 'Budapest'
+WHERE CustomerID = 1;
+
+-- 2. feladat megoldása
+INSERT INTO Customers_DmlPractice
+    (CustomerName, ContactName, City, Country)
+VALUES
+    ('SQL gyakorló ügyfél', 'Teszt Elek', 'Budapest', 'Hungary');
+
+SELECT CustomerID, CustomerName, City, Country
+FROM Customers_DmlPractice
+WHERE City = 'Budapest';
+
+-- 3. feladat megoldása
+DELETE FROM Customers_DmlPractice
+WHERE CustomerName = 'SQL gyakorló ügyfél';
+
+DROP TABLE Customers_DmlPractice;
+```
+</details>
+
 ---
+

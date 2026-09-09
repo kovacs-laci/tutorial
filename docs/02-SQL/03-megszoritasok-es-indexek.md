@@ -1,16 +1,11 @@
 ---
-id: sql-megszoritasok
-slug: /sql-megszoritasok
-title: "SQL Megszorítások és Indexek"
+id: sql-megszoritasok-es-indexek
+slug: /sql/megszoritasok-es-indexek/megszoritasok
+title: "Megszorítások és indexek"
 ---
 # SQL Megszorítások és Indexek
 
-Készítette: Kovács László  
-Forrás: https://www.w3schools.com/
-
----
-
-## 3.1 NOT NULL
+## NOT NULL
 
 ### Definíció
 Biztosítja, hogy egy oszlop nem fogad el `NULL` értéket.  
@@ -27,15 +22,15 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Employees_Test (
     EmpID INT NOT NULL,
-    LastName NVARCHAR(20) NOT NULL,
-    FirstName NVARCHAR(20) NOT NULL,
-    City NVARCHAR(20)
+    LastName VARCHAR(20) NOT NULL,
+    FirstName VARCHAR(20) NOT NULL,
+    City VARCHAR(20)
 );
 ```
 
 ---
 
-## 3.2 UNIQUE
+## UNIQUE
 
 ### Definíció
 Biztosítja, hogy egy oszlop minden értéke különböző legyen.  
@@ -52,15 +47,15 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Suppliers_Test (
     SupplierID INT NOT NULL UNIQUE,
-    CompanyName NVARCHAR(40) NOT NULL,
-    City NVARCHAR(20),
-    Country NVARCHAR(20)
+    SupplierName VARCHAR(50) NOT NULL,
+    City VARCHAR(20),
+    Country VARCHAR(15)
 );
 ```
 
 ---
 
-## 3.3 PRIMARY KEY
+## PRIMARY KEY
 
 ### Definíció
 Az elsődleges kulcs egyedileg azonosítja a táblázat minden rekordját.  
@@ -77,13 +72,13 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Categories_Test (
     CategoryID INT NOT NULL PRIMARY KEY,
-    CategoryName NVARCHAR(20) NOT NULL
+    CategoryName VARCHAR(25) NOT NULL
 );
 ```
 
 ---
 
-## 3.4 FOREIGN KEY
+## FOREIGN KEY
 
 ### Definíció
 Kapcsolatot hoz létre két tábla között.  
@@ -101,14 +96,14 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Orders_Test (
     OrderID INT PRIMARY KEY,
-    CustomerID NVARCHAR(5),
+    CustomerID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 ```
 
 ---
 
-## 3.5 CHECK
+## CHECK
 
 ### Definíció
 Biztosítja, hogy egy oszlop értékei megfeleljenek egy feltételnek.
@@ -124,14 +119,14 @@ CREATE TABLE tabla_nev (
 ```sql
 CREATE TABLE Products_Test (
     ProductID INT PRIMARY KEY,
-    ProductName NVARCHAR(40),
+    ProductName VARCHAR(50),
     Price DECIMAL(10,2) CHECK (Price > 0)
 );
 ```
 
 ---
 
-## 3.6 DEFAULT
+## DEFAULT
 
 ### Definíció
 Alapértelmezett értéket állít be egy oszlophoz, ha nincs megadva érték.
@@ -146,15 +141,15 @@ CREATE TABLE tabla_nev (
 **Példa (Northwind)**
 ```sql
 CREATE TABLE Customers_Test (
-    CustomerID NVARCHAR(5) PRIMARY KEY,
-    CompanyName NVARCHAR(40),
-    Country NVARCHAR(20) DEFAULT 'Hungary'
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    Country VARCHAR(15) DEFAULT 'Hungary'
 );
 ```
 
 ---
 
-## 3.7 CREATE INDEX
+## CREATE INDEX
 
 ### Definíció
 Az indexek gyorsítják a lekérdezéseket.  
@@ -168,11 +163,46 @@ ON tabla_nev(oszlop_nev);
 
 **Példa (Northwind)**
 ```sql
-CREATE INDEX idx_city
-ON Customers(City);
+CREATE TABLE Customers_IndexPractice AS
+SELECT * FROM Customers;
 
-CREATE UNIQUE INDEX idx_company
-ON Suppliers(CompanyName);
+CREATE INDEX idx_city
+ON Customers_IndexPractice(City);
+
+SHOW INDEX FROM Customers_IndexPractice;
+DROP INDEX idx_city ON Customers_IndexPractice;
+DROP TABLE Customers_IndexPractice;
 ```
 
 ---
+
+## Gyakorló feladatok
+
+1. Készíts táblát, amelyben a `CustomerID` elsődleges kulcs, a `CustomerName` kötelező, az `Email` pedig egyedi.
+2. Hozz létre indexet a gyakorlótábla `Country` oszlopára.
+3. Ellenőrizd, majd töröld az indexet és a táblát.
+
+<details>
+<summary>Megoldások</summary>
+
+```sql
+-- 1. feladat megoldása
+DROP TABLE IF EXISTS Customers_ConstraintPractice;
+
+CREATE TABLE Customers_ConstraintPractice (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    Country VARCHAR(15) DEFAULT 'Hungary'
+);
+
+CREATE INDEX idx_practice_country
+ON Customers_ConstraintPractice(Country);
+
+-- 2. feladat megoldása
+SHOW INDEX FROM Customers_ConstraintPractice;
+-- 3. feladat megoldása
+DROP INDEX idx_practice_country ON Customers_ConstraintPractice;
+DROP TABLE Customers_ConstraintPractice;
+```
+</details>
