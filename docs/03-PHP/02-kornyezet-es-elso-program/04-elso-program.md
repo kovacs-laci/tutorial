@@ -134,7 +134,7 @@ Készíts egy oldalt, amely:
 ### Példa megoldás
 
 ```php
-<h1>Profile</h1>
+<h1>Welcome to my profile page!</h1>
 
 <?php
 $name = "John Doe";

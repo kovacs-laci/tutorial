@@ -57,8 +57,3 @@ A cél, hogy lépésről lépésre, gyakorlati példákkal ismerkedj meg a moder
 - Végül lépj tovább a **Laravel** fejezetekre, ahol mindezek összeérnek egy teljes alkalmazásban.
 
 ---
-
-<small>
-A tananyag összeállításához modern eszközöket – köztük AI‑alapú asszisztenseket – is használtam.  
-A szakmai tartalom, a példák és a magyarázatok végső formája azonban az én munkám és felelősségem.
-</small>

@@ -94,6 +94,13 @@ export default function Home() {
                     <li><strong>Stripe</strong> segítségével add hozzá az online fizetési lehetőséget a Laravel webalkalmazásodhoz.</li>
                 </ol>
 
+                <p>
+                    <small>
+                        A tananyag összeállításához modern eszközöket – köztük AI‑alapú asszisztenseket – is használtam.  
+                        A szakmai tartalom, a példák és a magyarázatok végső formája azonban az én munkám és felelősségem.
+                    </small>
+                </p>
+
                 <p style={{marginTop: '2rem'}}>
                     Jó tanulást és sok sikerélményt a fejlesztésben!<br />
                     <br />Happy coding! 🙃
