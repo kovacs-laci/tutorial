@@ -57,7 +57,7 @@ export default function Home() {
                         SQL ismertető
                     </Link>
 
-                    <Link className="button button--secondary" to="/docs/php/bevezetes/php-tananyag">
+                    <Link className="button button--secondary" to="/docs/php/bevezetes/php-bevezetes">
                         PHP alapok
                     </Link>
 
