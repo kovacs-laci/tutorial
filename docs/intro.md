@@ -55,3 +55,10 @@ A cél, hogy lépésről lépésre, gyakorlati példákkal ismerkedj meg a moder
 - Kezdd a **Git gyorstalpalóval**, hogy biztos alapokra építs.
 - Folytasd a **PHP alapokkal**, majd tanuld meg az **MySQL** adatbázis‑kezelést.
 - Végül lépj tovább a **Laravel** fejezetekre, ahol mindezek összeérnek egy teljes alkalmazásban.
+
+---
+
+<small>
+A tananyag összeállításához modern eszközöket – köztük AI‑alapú asszisztenseket – is használtam.  
+A szakmai tartalom, a példák és a magyarázatok végső formája azonban az én munkám és felelősségem.
+</small>
