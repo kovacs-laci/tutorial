@@ -35,6 +35,82 @@ if ($jegy >= 5) {
 }
 ```
 
+Ha lehetséges kerüljük az if/else használatát, csökkentve ezzel a program komplexitását. Az előző példa else nélkül:
+
+```php
+$jegy = 4;
+$message = "Nem jeles";
+
+if ($jegy >= 5) {
+    $message = "Jeles";
+} 
+echo $message;
+```
+
+## Korai visszatérés (*early return*) segítségével teljesen elkerülhető az `else` ág.
+
+A lényeg:  
+Ha egy feltétel *hibát* vagy *kivételes esetet* jelez, azt **azonnal kezeld és térj vissza**, majd a függvény „fő ága” maradjon tiszta, behúzásmentes.
+
+---
+
+## Példa: 0-val való osztás kezelése `else` nélkül
+
+### Hagyományos (nem ajánlott)
+```php
+function divide($a, $b)
+{
+    if ($b == 0) {
+        return "Divide by zero";
+    } else {
+        return $a / $b;
+    }
+}
+```
+
+### Modern, tiszta, PSR‑12 kompatibilis (ajánlott)
+```php
+function divide($a, $b)
+{
+    if ($b == 0) {
+        return "Divide by zero";
+    }
+
+    return $a / $b;
+}
+```
+
+---
+
+## Miért jobb az „early return”?
+
+- **Nincs felesleges else** → a kód olvashatóbb, laposabb.
+- **A hibás esetet azonnal kezeled**, nem kell végigolvasni a függvényt.
+- **A „happy path” tiszta marad**, behúzás nélkül.
+- **PSR‑12 és modern PHP közösségi stílus** is ezt preferálja.
+
+---
+
+## Még egy példa: több hibás eset kezelése else nélkül
+
+```php
+function safeDivide($a, $b)
+{
+    if (!is_numeric($a) || !is_numeric($b)) {
+        return "Invalid input";
+    }
+
+    if ($b == 0) {
+        return "Divide by zero";
+    }
+
+    return $a / $b;
+}
+```
+
+Minden hiba külön korai visszatérés, a végén pedig a „normál” működés.
+
+
 ## If/Else formázás – PHP Coding Standard (PSR‑12)
 
 A PSR‑12 szerint az `else` és `elseif` **ugyanazon a soron kezdődik**, ahol az előző blokk záró kapcsos zárójele (`}`) található.

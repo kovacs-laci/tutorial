@@ -303,8 +303,9 @@ $age = 18; // új érték
 
 ---
 
-## Megjegyzés
+**Megjegyzés**
 
-A PHP **weak typing** rendszert használ, ezért a típusok automatikusan változhatnak.  
+A PHP **weak typing** rendszert használ, ezért a típusok automatikusan változhatnak.
 A `var_dump()` és `print_r()` később az űrlapkezelésnél és adatbázis‑műveleteknél is nagyon hasznosak lesznek.
+
 ---
