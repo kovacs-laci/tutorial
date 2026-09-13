@@ -304,30 +304,6 @@ if ($role === "admin") {
 
 ---
 
-# Early return – modern szemlélet
-
-A feltételeket **előre** ellenőrizzük, és ha nem teljesülnek, **kilépünk**.
-
-```php
-function checkAge($age) {
-    if ($age < 0) {
-        return "Érvénytelen";
-    }
-
-    if ($age < 18) {
-        return "Kiskorú";
-    }
-
-    if ($age < 65) {
-        return "Felnőtt";
-    }
-
-    return "Idős";
-}
-```
-
-Ez csökkenti a cyclomatic complexity‑t és olvashatóbbá teszi a kódot.
-
 ---
 
 # Mapping – a legszebb megoldás egyszerű elágazásokra

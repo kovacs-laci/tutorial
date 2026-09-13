@@ -43,31 +43,32 @@ Ez biztosítja, hogy:
 
 ## REST API végpontok
 
-| HTTP metódus | Végpont                          | Leírás                               | Hitelesítés | Válasz példa |
-|--------------|----------------------------------|--------------------------------------|-------------|--------------|
-| POST         | /users/login                     | Bejelentkezés                        | Nem         | \{ "token": "...", "user": \{...\} \} |
-| POST         | /users/logout                    | Kijelentkezés                        | Igen        | \{ "message": "Logged out" \} |
-| GET          | /counties                        | Megyék listázása                     | Nem         | \{ "counties": [...] \} |
-| GET          | /counties/\{id\}                   | Megye lekérése                       | Nem         | \{ "county": \{...\} \} |
-| POST         | /counties                        | Új megye létrehozása                 | Igen        | \{ "message": "Created", "county": \{...\} \} |
-| PUT          | /counties/\{id\}                   | Megye módosítása                     | Igen        | \{ "message": "Updated", "county": \{...\} \} |
-| DELETE       | /counties/\{id\}                   | Megye törlése                        | Igen        | \{ "message": "Deleted" \} |
-| GET          | /cities                          | Városok listázása                    | Nem         | \{ "cities": [...] \} |
-| GET          | /cities/\{id\}                     | Város lekérése                       | Nem         | \{ "city": \{...\} \} |
-| POST         | /cities                          | Új város létrehozása                 | Igen        | \{ "message": "Created", "city": \{...\} \} |
-| PUT          | /cities/\{id\}                     | Város módosítása                     | Igen        | \{ "message": "Updated", "city": \{...\} \} |
-| DELETE       | /cities/\{id\}                     | Város törlése                        | Igen        | \{ "message": "Deleted" \} |
-| GET          | /counties/\{county\}/cities        | Adott megye városainak listázása     | Nem         | \{ "cities": [...] \} |
-| POST         | /counties/\{county\}/cities        | Új város létrehozása adott megyében  | Igen        | \{ "message": "Created", "city": \{...\} \} |
-| PUT          | /counties/\{county\}/cities/\{id\}   | Város módosítása adott megyében      | Igen        | \{ "message": "Updated", "city": \{...\} \} |
-| DELETE       | /counties/\{county\}/cities/\{id\}   | Város törlése adott megyében         | Igen        | \{ "message": "Deleted" \} |
-| POST         | /users/login        | Bejelentkezés              | Nem         | \{ "token": "...", "user": \{...\} \} |
-| POST         | /users/logout       | Kijelentkezés              | Igen        | \{ "message": "Logged out" \} |
-| POST         | /users              | Új felhasználó létrehozása | Nem         | \{ "id": 1, "message": "Created" \} |
-| GET          | /users              | Felhasználók listázása     | Igen        | \{ "users": [...] \} |
-| GET          | /users/\{id\}         | Felhasználó lekérése       | Igen        | \{ "user": \{...\} \} |
-| PUT          | /users/\{id\}         | Felhasználó módosítása     | Igen        | \{ "message": "Updated", "user": \{...\} \} |
-| DELETE       | /users/\{id\}         | Felhasználó törlése        | Igen        | \{ "message": "Deleted" \} |
+| HTTP metódus | Végpont | Leírás | Hitelesítés | Sikeres státusz | Válasz példa |
+|---|---|---|---|---|---|
+| GET | `/counties` | Megyék listázása | Nem | `200 OK` | `{ "counties": [...] }` |
+| GET | `/counties/{id}` | Megye lekérése | Nem | `200 OK` | `{ "county": { ... } }` |
+| POST | `/counties` | Új megye létrehozása | Igen | `201 Created` | `{ "county": { ... } }` |
+| PUT | `/counties/{id}` | Megye módosítása | Igen | `200 OK` | `{ "county": { ... } }` |
+| DELETE | `/counties/{id}` | Megye törlése | Igen | `204 No Content` | nincs választest |
+| GET | `/cities` | Városok listázása | Nem | `200 OK` | `{ "cities": [...] }` |
+| GET | `/cities/{id}` | Város lekérése | Nem | `200 OK` | `{ "city": { ... } }` |
+| POST | `/cities` | Új város létrehozása | Igen | `201 Created` | `{ "city": { ... } }` |
+| PUT | `/cities/{id}` | Város módosítása | Igen | `200 OK` | `{ "city": { ... } }` |
+| DELETE | `/cities/{id}` | Város törlése | Igen | `204 No Content` | nincs választest |
+| GET | `/counties/{countyId}/cities` | Adott megye városainak listázása | Nem | `200 OK` | `{ "cities": [...] }` |
+| POST | `/users/login` | Bejelentkezés | Nem | `200 OK` | `{ "token": "...", "user": { ... } }` |
+| POST | `/users/logout` | Kijelentkezés | Igen | `204 No Content` | nincs választest |
+| POST | `/users` | Új felhasználó létrehozása | Nem | `201 Created` | `{ "id": 1, "message": "Created" }` |
+| GET | `/users` | Felhasználók listázása | Igen | `200 OK` | `{ "users": [...] }` |
+| GET | `/users/{id}` | Felhasználó lekérése | Igen | `200 OK` | `{ "user": { ... } }` |
+| PUT | `/users/{id}` | Felhasználó módosítása | Igen | `200 OK` | `{ "user": { ... } }` |
+| DELETE | `/users/{id}` | Felhasználó törlése | Igen | `204 No Content` | nincs választest |
+Opcionális
+| POST | `/counties/{countyId}/cities` | Új város létrehozása adott megyében | Igen | `201 Created` | `{ "city": { ... } }` |
+| PUT | `/counties/{countyId}/cities/{id}` | Város módosítása adott megyében | Igen | `200 OK` | `{ "city": { ... } }` |
+| DELETE | `/counties/{countyId}/cities/{id}` | Város törlése adott megyében | Igen | `204 No Content` | nincs választest |
+
+Ha a kért erőforrás nem található, a végpont `404 Not Found` választ ad. Hibás vagy hiányos bemenet esetén `400 Bad Request`, hitelesítési hiba esetén pedig `401 Unauthorized` vagy jogosultsági hiba esetén `403 Forbidden` használható.
 
 ---
 
