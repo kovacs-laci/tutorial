@@ -256,9 +256,10 @@ Ezek a minták lefedik a leggyakoribb listázási feladatokat Laravelben:
         ]);
 
         $county = County::create($validated);
+        $counties = County::all();
 
         return redirect()
-            ->route('counties.show', $county)
+            ->route('counties.index', compact('counties')
             ->with('status', 'Megye létrehozva!');
     }
 
@@ -281,8 +282,10 @@ Ezek a minták lefedik a leggyakoribb listázási feladatokat Laravelben:
 
         $county->update($validated);
 
+        $counties = County::all();
+
         return redirect()
-            ->route('counties.show', $county)
+            ->route('counties.index', compact('counties')
             ->with('status', 'Megye frissítve!');
     }
 
