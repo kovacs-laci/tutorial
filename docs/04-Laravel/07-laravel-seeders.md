@@ -43,12 +43,12 @@ A példában két tábla szerepel:
 
 ### cities
 - id
-- id_county
+- county_id
 - name
 - zip_code
 
 Fontos:
-- A `cities.id_county` idegen kulcs a `counties.id` mezőre.
+- A `cities.county_id` idegen kulcs a `counties.id` mezőre.
 - Ezért a seedelés sorrendje kritikus.
 
 Először a **counties**, majd a **cities** kerül létrehozásra.
@@ -128,13 +128,13 @@ class CitySeeder extends Seeder
             City::create([
                 'name' => $county->name . ' város 1',
                 'zip_code' => '1000',
-                'id_county' => $county->id,
+                'county_id' => $county->id,
             ]);
 
             City::create([
                 'name' => $county->name . ' város 2',
                 'zip_code' => '2000',
-                'id_county' => $county->id,
+                'county_id' => $county->id,
             ]);
         }
     }
@@ -144,7 +144,7 @@ class CitySeeder extends Seeder
 👉 Itt jól látható az **1:N kapcsolat**:
 
 * Egy county több city-hez kapcsolódik.
-* A `id_county` mező biztosítja a kapcsolatot.
+* A `county_id` mező biztosítja a kapcsolatot.
 
 ---
 
@@ -168,7 +168,7 @@ public function run(): void
 Fontos:
 
 * A `CountySeeder` mindig előbb fut.
-* Ha fordítva lenne, a `CitySeeder` hibát dobna, mert nem létezne érvényes `id_county`.
+* Ha fordítva lenne, a `CitySeeder` hibát dobna, mert nem létezne érvényes `county_id`.
 
 ---
 

@@ -333,7 +333,7 @@ class CityController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'zip_code' => ['required', 'string', 'max:20'],
-            'id_county' => ['required', 'exists:counties,id'],
+            'county_id' => ['required', 'exists:counties,id'],
         ]);
 
         City::create($validated);
@@ -358,7 +358,7 @@ class CityController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'zip_code' => ['required', 'string', 'max:20'],
-            'id_county' => ['required', 'exists:counties,id'],
+            'county_id' => ['required', 'exists:counties,id'],
         ]);
 
         $city->update($validated);

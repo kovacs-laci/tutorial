@@ -84,7 +84,7 @@ class CityRequest extends FormRequest
             'zip_code' => ['sometimes', 'string', 'max:10'],
 
             // Kapcsolat ellenőrzése az 1:N relációban
-            'id_county' => ['sometimes', 'exists:counties,id'],
+            'county_id' => ['sometimes', 'exists:counties,id'],
         ];
     }
 
@@ -95,7 +95,7 @@ class CityRequest extends FormRequest
             'name.max' => 'A város neve legfeljebb 255 karakter lehet.',
             'zip_code.string' => 'Az irányítószám csak szöveg lehet.',
             'zip_code.max' => 'Az irányítószám legfeljebb 10 karakter lehet.',
-            'id_county.exists' => 'A kiválasztott megye nem létezik.',
+            'county_id.exists' => 'A kiválasztott megye nem létezik.',
         ];
     }
 }
@@ -189,7 +189,7 @@ return [
     'attributes' => [
         'name' => 'város neve',
         'zip_code' => 'irányítószám',
-        'id_county' => 'megye',
+        'county_id' => 'megye',
     ],
 ];
 ```

@@ -133,7 +133,7 @@ class City extends Model
     protected $fillable = [
         'name',
         'zip_code',
-        'id_county'
+        'county_id'
     ];
 
     /**

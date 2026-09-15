@@ -85,7 +85,7 @@ class CityFactory extends Factory
         return [
             'name' => $this->faker->city,
             'zip_code' => $this->faker->postcode,
-            'id_county' => County::factory(),
+            'county_id' => County::factory(),
         ];
     }
 }
@@ -94,7 +94,7 @@ class CityFactory extends Factory
 ### Fontos rész
 
 ```php
-'id_county' => County::factory(),
+'county_id' => County::factory(),
 ```
 
 Ez azt jelenti:
@@ -105,7 +105,7 @@ Ez azt jelenti:
 
 Ez különösen fontos, mert:
 
-* a `cities.id_county`
+* a `cities.county_id`
 * idegen kulcs a `counties.id` mezőre
 
 ---
@@ -142,7 +142,7 @@ Ez azt jelenti:
 
 * 5 megye
 * mindegyikhez 10 város
-* automatikusan kezeli a `id_county` kapcsolatot
+* automatikusan kezeli a `county_id` kapcsolatot
 
 ---
 
@@ -228,7 +228,7 @@ Ez:
 
 * A **factory** dinamikus tesztadat generáló eszköz.
 * A counties–cities példában különösen jól használható.
-* Az 1:N kapcsolatot a `hasCities()` vagy `id_county => County::factory()` kezeli.
+* Az 1:N kapcsolatot a `hasCities()` vagy `county_id => County::factory()` kezeli.
 * Seeder + factory együtt adja a leghatékonyabb fejlesztési workflow-t.
 * Fejlesztés közben a `migrate:fresh --seed` a leggyakoribb parancs.
 
