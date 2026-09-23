@@ -267,6 +267,7 @@ Az input mezők sikeres validálása után elmenti a felhasználó által megado
         ]);
 
         $county = County::create($validated);
+        $counties = County::all();
 
         return redirect()
             ->route('counties.index')
@@ -311,6 +312,8 @@ Validálás után frissíti az adatbázisban a módosított rekordhoz tartozó a
         ]);
 
         $county->update($validated);
+
+        $counties = County::all();
 
         return redirect()
             ->route('counties.index')
