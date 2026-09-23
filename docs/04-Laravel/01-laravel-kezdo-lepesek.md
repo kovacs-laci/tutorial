@@ -15,7 +15,7 @@ County
 
 City
 - id
-- id_county
+- county_id
 - name
 - zip_code
 ````
@@ -159,7 +159,7 @@ counties
 
 cities
 - id
-- id_county
+- county_id
 - name
 - zip_code
 ```

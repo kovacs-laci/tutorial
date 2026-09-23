@@ -1,4 +1,4 @@
-id,name,zip_code,id_county
+id,name,zip_code,county_id
 1,Aba,8128,1
 2,Aba,8127,1
 3,Abádszalók,5241,2

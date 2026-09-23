@@ -61,7 +61,7 @@ class City {
     return City(
       id: int.parse(json['id'].toString()),
       name: json['city'],
-      countyId: int.parse(json['id_county'].toString()),
+      countyId: int.parse(json['county_id'].toString()),
       zipCode: json['zip_code'].toString(),
     );
   }
@@ -120,7 +120,7 @@ Backend válasz:
 {
   "id": 5,
   "city": "Pécs",
-  "id_county": 1,
+  "county_id": 1,
   "zip_code": "7621"
 }
 ```
@@ -131,7 +131,7 @@ Leképezés:
 | ---------- | --------- |
 | id         | id        |
 | city       | name      |
-| id_county  | countyId  |
+| county_id  | countyId  |
 | zip_code   | zipCode   |
 
 ### Miért `int.parse()`?

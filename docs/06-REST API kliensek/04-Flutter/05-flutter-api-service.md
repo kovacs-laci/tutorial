@@ -302,7 +302,7 @@ Future<City> createCity(
     body: jsonEncode({
       'city': city.name,
       'zip_code': city.zipCode,
-      'id_county': city.countyId,
+      'county_id': city.countyId,
     }),
   );
 
