@@ -58,7 +58,6 @@ printNumber(10); // a paraméter értéke 10
 # Globális változó
 
 A függvényen kívül létrehozott változó **nem érhető el automatikusan** a függvényben.  
-Ez az eredeti leckében is szerepel
 
 ```php
 $value = 5;
@@ -101,7 +100,7 @@ showValue();
 
 # `$GLOBALS` tömb
 
-Az eredeti leckében is szerepel, mint alternatív megoldás
+Alternatív megoldás
 
 ```php
 $value = 10;
@@ -129,7 +128,6 @@ printGlobal();
 # Statikus változó
 
 A statikus változó **megőrzi az értékét a függvényhívások között**.  
-Ez az eredeti leckében is szerepel 
 
 ```php
 function counter() {

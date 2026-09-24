@@ -56,7 +56,7 @@ A `--resource` kapcsoló automatikusan létrehozza az összes RESTful metódust 
 
 ---
 
-# 4. CountyController – Listázási minták (index() metódus)
+## 4. CountyController – Listázási minták (index() metódus)
 
 Ebben a fejezetben bemutatjuk a `CountyController@index()` metódus különböző gyakran használt változatait Laravelben.
 
@@ -64,7 +64,7 @@ A példák sorrendje az egyszerűtől halad a bonyolultabb, valós alkalmazási 
 
 ---
 
-## 4.1. Egyszerű listázás
+### 4.1. Egyszerű listázás
 
 ```php
 public function index()
@@ -81,7 +81,7 @@ Ez a leggyakoribb listázási forma: egyszerű lekérdezés.
 
 ***
 
-## 4.2. Listázás kapcsolattal (Eager Loading)
+### 4.2. Listázás kapcsolattal (Eager Loading)
 
 Ha a `County` modell rendelkezik `cities()` kapcsolattal (1:N), akkor a kapcsolódó városokat is előre be tudjuk tölteni.
 
@@ -100,7 +100,7 @@ A `with()` használata drasztikusan csökkenti az adatbázis-lekérdezések szá
 
 ***
 
-## 4.3. Listázás szűréssel (megye neve alapján)
+### 4.3. Listázás szűréssel (megye neve alapján)
 
 A keresőmező neve: **`needle`**
 
@@ -127,7 +127,7 @@ A `where('name', 'like', ...)` alkalmas karakterlánc-alapú keresésekre (pl. r
 
 ***
 
-## 4.4. Listázás kapcsolattal és szűréssel
+### 4.4. Listázás kapcsolattal és szűréssel
 
 Ebben a példában **mind a megyék nevét**, mind a hozzájuk tartozó **városok nevét** lehet keresni.
 
@@ -165,7 +165,7 @@ Ha a `cities` táblában is van `name` mező, és a `counties` táblában is van
 
 ***
 
-## 4.5. Paginálás
+### 4.5. Paginálás
 
 A paginálás minden fenti példában ugyanúgy működik:
 
@@ -243,7 +243,7 @@ Ezek a minták lefedik a leggyakoribb listázási feladatokat Laravelben:
 *   szűrés kapcsolt modell mezőre
 *   paginálás
     
-# 5. create() metódus
+## 5. create() metódus
 
 Csak egyetlen funkciója van: meghívja a `create` formot:
 
@@ -254,7 +254,7 @@ Csak egyetlen funkciója van: meghívja a `create` formot:
     }
 ```
 
-# 6. store() metódus
+## 6. store() metódus
 
 Ezt a metódust hívja meg a `create` form **Mentés** gombja. 
 Az input mezők sikeres validálása után elmenti a felhasználó által megadott adatokat az adatbázisba.
@@ -275,7 +275,7 @@ Az input mezők sikeres validálása után elmenti a felhasználó által megado
     }
 ```
 
-# 7. show() metódus
+## 7. show() metódus
 
 Kiolvassa az adatbázisból a keresett adatokat és meghívja a `show` formot, amely csak olvasható formában megmutatja a kiválasztott adatokat a felhasználónak.
 
@@ -288,7 +288,7 @@ Kiolvassa az adatbázisból a keresett adatokat és meghívja a `show` formot, a
     }
 ```
 
-# 8. edit() metódus
+## 8. edit() metódus
 
 Kiolvassa az adatbázisból a módosítandó adatokat és megjeleníti az `edit` formot.
 
@@ -299,7 +299,7 @@ Kiolvassa az adatbázisból a módosítandó adatokat és megjeleníti az `edit`
     }
 ```
 
-# 9. update() metódus
+## 9. update() metódus
 
 Ezt a metódust hívja meg az `edit` form **Mentés** gombja.
 Validálás után frissíti az adatbázisban a módosított rekordhoz tartozó adatokat.
@@ -321,7 +321,7 @@ Validálás után frissíti az adatbázisban a módosított rekordhoz tartozó a
     }
 ```
 
-# 10. destroy() metódus
+## 10. destroy() metódus
 
 A listázó oldalon található **Törlés** gomb hívja meg. 
 Törli a kiválasztott adatot az adatbázisból.
@@ -341,7 +341,7 @@ Törli a kiválasztott adatot az adatbázisból.
 
 ## CityController példa
 
-### `app/Http/Controllers/CityController.php`
+**`app/Http/Controllers/CityController.php`**
 
 ```php
 <?php
