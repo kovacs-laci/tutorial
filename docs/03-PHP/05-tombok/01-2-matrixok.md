@@ -71,6 +71,32 @@ for ($row = 0; $row < count($matrix); $row++) {
 }
 ```
 
+**Kicsit hatékonyabban**
+```php
+$rowCount = count($matrix); 
+$colCount = count($matrix[0]);
+
+for ($row = 0; $row < $rowCount; $row++) {
+    for ($col = 0; $col < $colCount; $col++) {
+        echo $matrix[$row][$col] . " ";
+    }
+    echo PHP_EOL;
+}
+```
+
+**Ha nem biztos, hogy minden sor ugyanolyan hosszú, akkor:**
+```php
+$rowCount = count($matrix); 
+for ($row = 0; $row < $rowCount; $row++) {
+
+    $colCount = count($matrix[$row]);    
+    for ($col = 0; $col < $colCount; $col++) {
+        echo $matrix[$row][$col] . " ";
+    }
+    echo PHP_EOL;
+}
+```
+
 Kimenet:
 
 ```
@@ -82,7 +108,7 @@ Kimenet:
 
 # Bejárás `foreach` segítségével
 
-A `foreach` sokkal olvashatóbb:
+Ha nincs szükséged az indexekre ($row, $col), akkor ezt szokás előnyben részesíteni, mert a `foreach` olvashatóbb és nem kell a count()-tal foglalkozni.
 
 ```php
 foreach ($matrix as $row) {
