@@ -121,7 +121,20 @@ foreach ($matrix as $row) {
     echo "Sor összege: $sum" . PHP_EOL;
 }
 ```
+**Egymásba ágyazott ciklusokkal:**
 
+```php
+foreach ($matrix as $i => $row) {
+    $sum = 0;
+    // Sor elemeinek összeadása kézzel
+    foreach ($row as $value) {
+        $sum += $value;
+    }
+
+    echo "Sor $i összege: $sum" . PHP_EOL;
+}
+
+```
 ## Mátrix transzponálása (oszlopok ↔ sorok)
 
 A **transzponálás** azt jelenti, hogy a mátrix **sorait és oszlopait felcseréljük**.

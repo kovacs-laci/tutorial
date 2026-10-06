@@ -448,10 +448,8 @@ function isPrime(int $number): bool
     }
 
     // Csak a négyzetgyökig kell vizsgálni
-    $limit = (int) sqrt($number);
-
     // Csak páratlan számokat vizsgálunk (3,5,7...)
-    for ($i = 3; $i <= $limit; $i += 2) {
+    for ($i = 3; $i * $i <= $number; $i += 2) {
         if ($number % $i === 0) {
             return false;
         }
