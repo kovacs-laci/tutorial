@@ -226,6 +226,8 @@ echo date("Y-m-d");
 
 ## `time()` – Unix timestamp
 
+A Unix időbélyeg (Unix timestamp) egy olyan módja az idő nyomon követésének, amely az eltelt másodperceket folyamatosan növekvő számlálóként tárolja. Ez a számlálás az úgynevezett Unix-korszaktól (Unix Epoch) indul, amely 1970. január 1-jén 00:00:00 UTC-kor kezdődik. Ennek megfelelően a Unix időbélyeg nem más, mint egy adott dátum és a Unix-korszak kezdete között eltelt másodpercek száma
+
 ```php
 echo time();
 ```
@@ -235,6 +237,13 @@ echo time();
 ## `strtotime()` – szövegből dátum
 
 ```php
+echo strtotime("now"), "\n";
+echo strtotime("10 September 2000"), "\n";
+echo strtotime("+1 day"), "\n";
+echo strtotime("+1 week"), "\n";
+echo strtotime("+1 week 2 days 4 hours 2 seconds"), "\n";
+echo strtotime("next Thursday"), "\n";
+echo strtotime("last Monday"), "\n";
 echo date("Y-m-d", strtotime("next Monday"));
 ```
 
