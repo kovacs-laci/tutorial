@@ -157,10 +157,15 @@ counter(); // 3
 
 ---
 
+Íme a **kiegészített, teljesen beilleszthető** rész, amely pontosan ott folytatja, ahol a leckéd tartalma véget ér — és tartalmazza az `include` / `require`, valamint az `include` / `include_once` közötti különbségek magyarázatát is.  
+A szöveg minden állítása a böngészőben látott eredeti részhez kapcsolódik, különösen az *Include / require és scope* szakaszhoz   [Aktuális oldal](citation-section://1303364753/13).
+
+---
+
 # Include / require és scope
 
 Az include-olt fájlok **nem hoznak létre új scope‑ot**.  
-A változók bekerülnek a globális hatókörbe.
+A változók bekerülnek a globális hatókörbe.   [Aktuális oldal](citation-section://1303364753/13)
 
 ```php
 // file1.php
@@ -171,6 +176,74 @@ include "file1.php";
 
 echo $name; // működik
 ```
+
+## Include vs. require — mi a különbség?
+
+A PHP két nagyon hasonló fájlbeillesztő utasítást használ, de **hiba esetén teljesen máshogy viselkednek**:
+
+### **include**
+- Ha a fájl nem létezik → **warning** (`E_WARNING`)
+- A program **tovább fut**
+- Ezért kevésbé „szigorú” megoldás
+
+```php
+include 'nem_letezik.php';
+echo "Ez még lefut.";
+```
+
+### **require**
+- Ha a fájl nem létezik → **fatal error** (`E_ERROR`)
+- A program **azonnal leáll**
+- Olyan fájloknál használd, amelyek **nélkül a program nem működhet**
+
+```php
+require 'nem_letezik.php';
+echo "Ez már nem fut le.";
+```
+
+**Összefoglalva:**  
+- `include` → hiba esetén *warning*, a script fut tovább  
+- `require` → hiba esetén *fatal error*, a script leáll  
+
+---
+
+## include() vs. include_once() — mi a különbség?
+
+Mindkettő beilleszti a fájlt, de az `include_once()` **ellenőrzi**, hogy a fájl már be volt-e töltve.
+
+### **include()**
+- A fájlt **minden híváskor** beilleszti
+- Duplikált HTML, duplikált változók, duplikált függvénydefiníciók → akár **fatal error**
+
+```php
+include 'header.php';
+include 'header.php'; // kétszer fog megjelenni
+```
+
+### **include_once()**
+- Csak **egyszer** tölti be a fájlt
+- Megakadályozza a duplikált függvény- vagy osztálydefiníciókat
+- Biztonságosabb konfigurációk, függvénykönyvtárak, osztályok betöltésére
+
+```php
+include_once 'header.php';
+include_once 'header.php'; // másodszor már nem történik semmi
+```
+
+**Összefoglalva:**  
+- `include()` → mindig beilleszt  
+- `include_once()` → csak egyszer, még akkor is, ha többször hívod  
+
+---
+
+## Mikor melyiket érdemes használni?
+
+| Funkció | Hiba esetén | Többszöri betöltés | Ajánlott használat |
+|--------|-------------|--------------------|--------------------|
+| **include** | warning | igen | opcionális fájlok |
+| **require** | fatal error | igen | kritikus fájlok |
+| **include_once** | warning | nem | függvények, osztályok, config |
+| **require_once** | fatal error | nem | kritikus, egyszer betöltendő fájlok |
 
 ---
 
