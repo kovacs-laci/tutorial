@@ -222,10 +222,10 @@ A megoldás két tabon jelenik meg:
 
 ---
 
-## PHP megoldás
+**PHP megoldás**
 
 <details>
-<summary>Kattints a megnyitáshoz</summary>
+<summary>Megoldás</summary>
 
 ```php
 // 3x3 mátrix generálása
@@ -263,7 +263,7 @@ for ($col = 0; $col < 3; $col++) {
 
 ---
 
-## HTML táblázatos megoldás
+**HTML táblázatos megoldás**
 
 <details>
 <summary>Megoldás</summary>
