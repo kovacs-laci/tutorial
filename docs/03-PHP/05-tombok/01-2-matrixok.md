@@ -63,16 +63,18 @@ A mátrix bejárásához **két egymásba ágyazott ciklus** kell:
 ## Bejárás két `for` ciklussal
 
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 for ($row = 0; $row < count($matrix); $row++) {
     for ($col = 0; $col < count($matrix[$row]); $col++) {
         echo $matrix[$row][$col] . " ";
     }
-    echo PHP_EOL;
+    echo $eol;
 }
 ```
 
 **Kicsit hatékonyabban**
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 $rowCount = count($matrix); 
 $colCount = count($matrix[0]);
 
@@ -80,12 +82,13 @@ for ($row = 0; $row < $rowCount; $row++) {
     for ($col = 0; $col < $colCount; $col++) {
         echo $matrix[$row][$col] . " ";
     }
-    echo PHP_EOL;
+    echo $eol;
 }
 ```
 
 **Ha nem biztos, hogy minden sor ugyanolyan hosszú, akkor:**
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 $rowCount = count($matrix); 
 for ($row = 0; $row < $rowCount; $row++) {
 
@@ -93,7 +96,7 @@ for ($row = 0; $row < $rowCount; $row++) {
     for ($col = 0; $col < $colCount; $col++) {
         echo $matrix[$row][$col] . " ";
     }
-    echo PHP_EOL;
+    echo $eol;
 }
 ```
 
@@ -111,11 +114,12 @@ Kimenet:
 Ha nincs szükséged az indexekre ($row, $col), akkor ezt szokás előnyben részesíteni, mert a `foreach` olvashatóbb és nem kell a count()-tal foglalkozni.
 
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 foreach ($matrix as $row) {
     foreach ($row as $value) {
         echo $value . " ";
     }
-    echo PHP_EOL;
+    echo $eol;
 }
 ```
 
@@ -142,14 +146,16 @@ $cols = count($matrix[0]);
 ## Sorok összege
 
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 foreach ($matrix as $row) {
     $sum = array_sum($row);
-    echo "Sor összege: $sum" . PHP_EOL;
+    echo "Sor összege: $sum" . $eol;
 }
 ```
 **Egymásba ágyazott ciklusokkal:**
 
 ```php
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 foreach ($matrix as $i => $row) {
     $sum = 0;
     // Sor elemeinek összeadása kézzel
@@ -157,7 +163,7 @@ foreach ($matrix as $i => $row) {
         $sum += $value;
     }
 
-    echo "Sor $i összege: $sum" . PHP_EOL;
+    echo "Sor $i összege: $sum" . $eol;
 }
 
 ```
@@ -203,9 +209,9 @@ for ($i = 0; $i < count($matrix[0]); $i++) {
 
 ---
 
-# Gyakorló feladat
+# Gyakorló feladatok
 
-**Feladat:**  
+**1. feladat:**  
 Hozz létre egy 3×3-as mátrixot véletlen számokkal 1 és 99 között, majd írd ki:
 
 1. a mátrixot,
@@ -216,7 +222,7 @@ A megoldás két tabon jelenik meg:
 
 ---
 
-## 🟦 PHP megoldás
+## PHP megoldás
 
 <details>
 <summary>Kattints a megnyitáshoz</summary>
@@ -231,22 +237,25 @@ for ($i = 0; $i < 3; $i++) {
 }
 
 // Mátrix kiírása
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 foreach ($matrix as $row) {
-    echo implode(" ", $row) . PHP_EOL;
+    echo implode(" ", $row) . $eol;
 }
 
 // Sorok összege
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 foreach ($matrix as $i => $row) {
-    echo "Sor $i összege: " . array_sum($row) . PHP_EOL;
+    echo "Sor $i összege: " . array_sum($row) . $eol;
 }
 
 // Oszlopok összege
+$eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 for ($col = 0; $col < 3; $col++) {
     $sum = 0;
     for ($row = 0; $row < 3; $row++) {
         $sum += $matrix[$row][$col];
     }
-    echo "Oszlop $col összege: $sum" . PHP_EOL;
+    echo "Oszlop $col összege: $sum" . $eol;
 }
 ```
 
@@ -254,10 +263,10 @@ for ($col = 0; $col < 3; $col++) {
 
 ---
 
-## 🟩 HTML táblázatos megoldás
+## HTML táblázatos megoldás
 
 <details>
-<summary>Kattints a megnyitáshoz</summary>
+<summary>Megoldás</summary>
 
 ```php
 // 3x3 mátrix generálása
@@ -297,6 +306,39 @@ for ($col = 0; $col < 3; $col++) {
 
 </details>
 
+---
+**2. feladat:** 
+Egy véletlenszerű számokkal feltöltött kétdimenziós mátrixban találd meg a leggyakrabban előforduló számot
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+foreach ($matrix as $row) {
+    foreach ($row as $value) {
+        if (isset($counts[$value])) {
+            $counts[$value]++;
+        } else {
+            $counts[$value] = 1;
+        }
+    }
+}
+
+// leggyakoribb elem keresése
+$maxCount = 0;
+$mostFrequent = null;
+
+foreach ($counts as $number => $count) {
+    if ($count > $maxCount) {
+        $maxCount = $count;
+        $mostFrequent = $number;
+    }
+}
+
+echo "The most frequent number is: $mostFrequent ($maxCount occurrences)";
+```
+
+</details>
 ---
 
 # Összefoglalás
