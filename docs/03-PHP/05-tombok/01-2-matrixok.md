@@ -209,9 +209,9 @@ for ($i = 0; $i < count($matrix[0]); $i++) {
 
 ---
 
-# Gyakorló feladatok
+## Gyakorló feladatok
 
-**1. feladat:**  
+### 1. feladat:
 Hozz létre egy 3×3-as mátrixot véletlen számokkal 1 és 99 között, majd írd ki:
 
 1. a mátrixot,
@@ -276,19 +276,17 @@ for ($i = 0; $i < 3; $i++) {
         $matrix[$i][$j] = rand(1, 99);
     }
 }
-?>
 
-<table border="1" cellpadding="8" style="border-collapse: collapse;">
-    <?php foreach ($matrix as $row): ?>
-        <tr>
-            <?php foreach ($row as $value): ?>
-                <td><?= $value ?></td>
-            <?php endforeach; ?>
-        </tr>
-    <?php endforeach; ?>
-</table>
+echo '<table border="1" cellpadding="8" style="border-collapse: collapse;">';
+foreach ($matrix as $row) {
+    echo '<tr>';
+    foreach ($row as $value) {
+        echo "<td>$value</td>";
+    }
+    echo '</tr>';
+}
+echo '</table>';
 
-<?php
 // Sorok összege
 foreach ($matrix as $i => $row) {
     echo "Sor $i összege: " . array_sum($row) . "<br>";
@@ -307,7 +305,7 @@ for ($col = 0; $col < 3; $col++) {
 </details>
 
 ---
-**2. feladat:** 
+### 2. feladat:
 Egy véletlenszerű számokkal feltöltött kétdimenziós mátrixban találd meg a leggyakrabban előforduló számot
 
 <details>
@@ -340,6 +338,35 @@ echo "The most frequent number is: $mostFrequent ($maxCount occurrences)";
 
 </details>
 ---
+
+### 3. feladat
+Keresd meg a mátrixban a 2. legkisebb számot
+
+<details>
+<summary>Megoldás</summary>
+
+```php
+$values = [];
+
+foreach ($matrix as $row) {
+    foreach ($row as $value) {
+
+        if (!in_array($value, $values)) {
+            $values[] = $value;
+        }
+
+    }
+}
+
+sort($values);
+
+if (count($values) >= 2) {
+    echo "Második legkisebb érték: " . $values[1];
+} else {
+    echo "Nincs második különböző legkisebb elem.";
+}
+```
+</details>
 
 # Összefoglalás
 

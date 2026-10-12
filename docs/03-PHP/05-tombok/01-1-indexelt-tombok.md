@@ -11,7 +11,7 @@ Az első elem indexe mindig **0**.
 
 ---
 
-# Tömb létrehozása
+## Tömb létrehozása
 
 ```php
 $numbers = [10, 20, 30];
@@ -37,7 +37,7 @@ $items = [10, "apple", true];
 
 ---
 
-# Elem elérése index alapján
+## Elem elérése index alapján
 
 ```php
 $fruits = ["apple", "pear", "plum"];
@@ -48,7 +48,7 @@ echo $fruits[2]; // plum
 
 ---
 
-# Elem módosítása
+## Elem módosítása
 
 ```php
 $fruits[1] = "banana";
@@ -56,7 +56,7 @@ $fruits[1] = "banana";
 
 ---
 
-# Új elem hozzáadása
+## Új elem hozzáadása
 
 ```php
 $fruits[] = "orange";
@@ -64,7 +64,7 @@ $fruits[] = "orange";
 
 ---
 
-# Tömb hossza – `count()`
+## Tömb hossza – `count()`
 
 ```php
 $numbers = [10, 20, 30];
@@ -73,7 +73,7 @@ echo count($numbers); // 3
 
 ---
 
-# Tömb bejárása `foreach`-el
+## Tömb bejárása `foreach`-el
 
 ```php
 $fruits = ["apple", "pear", "plum"];
@@ -85,7 +85,7 @@ foreach ($fruits as $fruit) {
 
 ---
 
-# Tömb bejárása indexszel – `for`
+## Tömb bejárása indexszel – `for`
 
 ```php
 $fruits = ["apple", "pear", "plum"];
@@ -97,7 +97,7 @@ for ($i = 0; $i < count($fruits); $i++) {
 
 ---
 
-# Tömb módosítása bejárás közben (referencia)
+## Tömb módosítása bejárás közben (referencia)
 
 ```php
 $numbers = [1, 2, 3];
@@ -111,7 +111,7 @@ print_r($numbers); // [2, 4, 6]
 
 ---
 
-# Tömb megfordítása (reverse)
+## Tömb megfordítása (reverse)
 
 ```php
 $fruits = ["apple", "pear", "plum"];
@@ -123,7 +123,7 @@ for ($i = count($fruits) - 1; $i >= 0; $i--) {
 
 ---
 
-# Tipikus hibák indexelt tömböknél
+## Tipikus hibák indexelt tömböknél
 
 :::info Tipikus hibák
 - nem létező index elérése → warning
@@ -134,9 +134,9 @@ for ($i = count($fruits) - 1; $i >= 0; $i--) {
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlás
 
-**1. Hozz létre egy tömböt 5 gyümölccsel, majd írd ki őket.**
+### 1. Hozz létre egy tömböt 5 gyümölccsel, majd írd ki őket.
 
 <details>
 <summary>Megoldás</summary>
@@ -152,7 +152,7 @@ foreach ($fruits as $fruit) {
 
 ---
 
-**2. Írd ki egy tömb első és utolsó elemét.**
+### 2. Írd ki egy tömb első és utolsó elemét.
 
 <details>
 <summary>Megoldás</summary>
@@ -167,7 +167,7 @@ echo $fruits[count($fruits) - 1] . "<br>";
 
 ---
 
-**3. Adj hozzá egy új elemet a tömbhöz.**
+### 3. Adj hozzá egy új elemet a tömbhöz.
 
 <details>
 <summary>Megoldás</summary>
@@ -183,7 +183,7 @@ print_r($fruits);
 
 ---
 
-**4. Írd ki a tömb hosszát.**
+### 4. Írd ki a tömb hosszát.
 
 <details>
 <summary>Megoldás</summary>
@@ -197,7 +197,7 @@ echo count($numbers); // 4
 
 ---
 
-**5. Járd be a tömböt `for` ciklussal.**
+### 5. Járd be a tömböt `for` ciklussal.
 
 <details>
 <summary>Megoldás</summary>
@@ -213,7 +213,7 @@ for ($i = 0; $i < count($fruits); $i++) {
 
 ---
 
-**6. Járd be a tömböt `foreach`-el.**
+### 6. Járd be a tömböt `foreach`-el.
 
 <details>
 <summary>Megoldás</summary>
@@ -229,7 +229,7 @@ foreach ($fruits as $fruit) {
 
 ---
 
-**7. Írd ki a tömb elemeit visszafelé.**
+### 7. Írd ki a tömb elemeit visszafelé.
 
 <details>
 <summary>Megoldás</summary>
@@ -245,7 +245,7 @@ for ($i = count($fruits) - 1; $i >= 0; $i--) {
 
 ---
 
-**8. Duplázd meg egy tömb számait referencia szerinti bejárással.**
+### 8. Duplázd meg egy tömb számait referencia szerinti bejárással.
 
 <details>
 <summary>Megoldás</summary>
