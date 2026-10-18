@@ -201,6 +201,4 @@ echo $html;
 - A HEREDOC tiszta, kezdőbarát módszer HTML generálásra.
 - A feltételes és tömb‑alapú HTML generálás a dinamikus tartalom alapja.
 - Az űrlapok és GET/POST külön fejezetben szerepelnek.
-
-A következő fejezetben megnézzük,mi a különbség a PHP és JS által vezérelt weboldalak között.
 ---
