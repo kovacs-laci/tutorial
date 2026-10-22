@@ -352,7 +352,7 @@ setcookie(
 
 A `$_FILES` tömb a feltöltött fájlok adatait tartalmazza. A feltöltés űrlapjának `POST` metódust és `enctype="multipart/form-data"` attribútumot kell használnia.
 
-A fájl feldolgozásának, ellenőrzésének és áthelyezésének részletes példái a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) találhatók. Röviden: az `$_FILES["kep"]["error"]` jelzi a feltöltés eredményét, az `$_FILES["kep"]["tmp_name"]` az ideiglenes fájl útvonala, az `$_FILES["kep"]["size"]` a méret bájtban. A kliens által küldött fájlnevet és típust nem szabad megbízható adatként kezelni.
+A fájl feldolgozásának, ellenőrzésének és áthelyezésének részletes példái a [Fájlfeltöltés leckében](../07-fajlkezeles/04-fajlfeltoltes.md) találhatók. Röviden: az `$_FILES["kep"]["error"]` jelzi a feltöltés eredményét, az `$_FILES["kep"]["tmp_name"]` az ideiglenes fájl útvonala, az `$_FILES["kep"]["size"]` a méret bájtban. A kliens által küldött fájlnevet és típust nem szabad megbízható adatként kezelni.
 
 ---
 ## Összefoglalás
@@ -377,7 +377,7 @@ A fájl feldolgozásának, ellenőrzésének és áthelyezésének részletes p�
 4. Törölj egy session változót az `unset()` használatával.
 5. Készíts cookie-t, amely eltárolja a kiválasztott témát (`light` vagy `dark`).
 6. Olvasd ki a cookie értékét.
-7. Készíts fájlfeltöltő űrlapot, majd dolgozd fel a feltöltést a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) leírtak szerint.
+7. Készíts fájlfeltöltő űrlapot, majd dolgozd fel a feltöltést a [Fájlfeltöltés leckében](../07-fajlkezeles/04-fajlfeltoltes.md) leírtak szerint.
 
 ---
 

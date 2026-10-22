@@ -221,7 +221,7 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ```html
 <input type="file" name="profile-pic">
 ```
-Fájlfeltöltéskor az űrlapnak `enctype="multipart/form-data"` attribútumra is szüksége van. A megvalósítást a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) mutatjuk be.
+Fájlfeltöltéskor az űrlapnak `enctype="multipart/form-data"` attribútumra is szüksége van. A megvalósítást a [Fájlfeltöltés leckében](../07-fajlkezeles/04-fajlfeltoltes.md) mutatjuk be.
 
 ---
 
