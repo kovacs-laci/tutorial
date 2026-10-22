@@ -4,8 +4,6 @@ slug: /laravel/rest-api
 title: "Laravel REST API"
 ---
 
-# Laravel REST API
-
 Ez a lecke egy **REST API** létrehozását mutatja be a **counties–cities** domainen,
 Laravel + Sanctum használatával.
 

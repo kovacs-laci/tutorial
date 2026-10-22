@@ -4,8 +4,6 @@ slug: /php/fajlkezeles/fajlok-irasa
 title: "Fájlok írása"
 ---
 
-# Fájlok írása
-
 A PHP segítségével fájlokba is írhatunk adatot.  
 Ez lehet naplózás, egyszerű adatmentés vagy konfigurációk tárolása.
 

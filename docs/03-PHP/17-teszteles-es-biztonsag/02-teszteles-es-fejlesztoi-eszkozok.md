@@ -4,8 +4,6 @@ slug: /php/teszteles-es-biztonsag/teszteles-es-fejlesztoi-eszkozok
 title: "Tesztelés és fejlesztői eszközök"
 ---
 
-# Tesztelés és fejlesztői eszközök
-
 Ez a fejezet a projektalapú tananyag következő lépése. A teljes gyakorlati anyag hamarosan készül.
 
 ## Tervezett témák

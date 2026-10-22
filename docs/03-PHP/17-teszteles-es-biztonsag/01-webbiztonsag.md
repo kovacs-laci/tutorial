@@ -4,8 +4,6 @@ slug: /php/teszteles-es-biztonsag/webbiztonsag
 title: "PHP webbiztonság"
 ---
 
-# PHP webbiztonság
-
 A biztonság nem egyetlen függvény, hanem több réteg együttese.
 
 ## Kimeneti escaping és SQL

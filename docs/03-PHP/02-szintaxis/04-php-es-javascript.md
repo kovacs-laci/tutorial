@@ -4,8 +4,6 @@ slug: /php/szintaxis/php-es-javascript
 title: "Különbség a PHP és JavaScript között"
 ---
 
-# Különbség a PHP és JavaScript között
-
 A két nyelv közti különbséget sokan „szintaxis‑szinten” keresik, pedig a valódi eltérés **a működési modellben**, **a futtatási környezetben** és **a szerepkörben** van. Ha ezeket megérti valaki, rögtön világossá válik, miért használjuk a PHP‑t szerveroldalon, a JavaScriptet pedig kliensoldalon (és miért mosódik ez ma már részben össze).
 
 ---
@@ -34,7 +32,7 @@ A JavaScript ideális interaktív felületekhez, gombokhoz, animációkhoz, dina
 
 ## 2. Mikor fut le a kód?
 
-## **PHP → kéréskor**
+### **PHP → kéréskor**
 Minden egyes HTTP kérésnél:
 
 1. A szerver betölti a PHP fájlt
@@ -46,7 +44,7 @@ A PHP tehát **stateless**, minden kérés „tiszta lappal” indul.
 
 ---
 
-## **JavaScript → folyamatosan fut a böngészőben**
+### **JavaScript → folyamatosan fut a böngészőben**
 A JS:
 
 - reagál eseményekre (kattintás, gépelés, görgetés),

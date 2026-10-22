@@ -5,8 +5,6 @@ sidebar_label: LayoutView
 slug: /rest-client/layout-view
 ---
 
-# LayoutView – Közös oldalstruktúra
-
 A REST API kliensben minden oldal külön View osztályt kap, de a HTML‑oldalak közös részei — mint a fejléc, menü, konténer és lábléc — ismétlődnének.
 
 A Laravel gyakorlatát követve ezért készítünk egy **LayoutView** osztályt, amely:

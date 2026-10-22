@@ -4,8 +4,6 @@ slug: /php/pdo-alapok/kapcsolat
 title: "PDO: Adatbázis kapcsolat létrehozása"
 ---
 
-# PDO: Adatbázis kapcsolat létrehozása
-
 A PDO (PHP Data Objects) egy egységes, biztonságos módja az adatbázisok kezelésének.  
 A PDO használata ajánlott, mert:
 

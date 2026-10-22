@@ -4,8 +4,6 @@ slug: /php/pdo-lekerdezesek-crud/tranzakciok-es-lapozas
 title: "Tranzakciók és lapozás"
 ---
 
-# Tranzakciók és lapozás
-
 ## Tranzakció
 
 Tranzakcióban több módosítást egyetlen egységként kezelünk. Hiba esetén minden módosítás visszavonható.

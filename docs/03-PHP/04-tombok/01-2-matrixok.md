@@ -5,8 +5,6 @@ title: "Kétdimenziós mátrixok és bejárásuk"
 sidebar_label: "Kétdimenziós mátrixok"
 ---
 
-# Kétdimenziós mátrixok
-
 A kétdimenziós tömb (mátrix) olyan tömb, amelynek **minden eleme egy újabb tömb**.  
 Leggyakrabban táblázatok, rácsok, játékmezők, vagy matematikai mátrixok reprezentálására használjuk.
 
@@ -25,11 +23,11 @@ Ez egy **3×3-as mátrix**, ahol:
 
 ---
 
-# Mátrix létrehozása dinamikusan
+## Mátrix létrehozása dinamikusan
 
 Gyakori feladat, hogy a mátrixot nem kézzel írjuk, hanem **programból generáljuk**.
 
-## 2×5-ös mátrix generálása
+### 2×5-ös mátrix generálása
 
 ```php
 $matrix = [];
@@ -53,14 +51,14 @@ Eredmény:
 
 ---
 
-# Mátrix bejárása
+## Mátrix bejárása
 
 A mátrix bejárásához **két egymásba ágyazott ciklus** kell:
 
 - külső ciklus → sorok
 - belső ciklus → oszlopok
 
-## Bejárás két `for` ciklussal
+### Bejárás két `for` ciklussal
 
 ```php
 $eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
@@ -109,7 +107,7 @@ Kimenet:
 
 ---
 
-# Bejárás `foreach` segítségével
+## Bejárás `foreach` segítségével
 
 Ha nincs szükséged az indexekre ($row, $col), akkor ezt szokás előnyben részesíteni, mert a `foreach` olvashatóbb és nem kell a count()-tal foglalkozni.
 
@@ -125,25 +123,25 @@ foreach ($matrix as $row) {
 
 ---
 
-# Mátrix mérete
+## Mátrix mérete
 
 A mátrix sorainak száma:
 
 ```php
-$rows = count($matrix);
+$rowCount = count($matrix);
 ```
 
 Az első sor oszlopainak száma:
 
 ```php
-$cols = count($matrix[0]);
+$colCount = count($matrix[0]);
 ```
 
 ---
 
-# Mátrix műveletek
+## Mátrix műveletek
 
-## Sorok összege
+### Sorok összege
 
 ```php
 $eol = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
@@ -167,7 +165,7 @@ foreach ($matrix as $i => $row) {
 }
 
 ```
-## Mátrix transzponálása (oszlopok ↔ sorok)
+### Mátrix transzponálása (oszlopok ↔ sorok)
 
 A **transzponálás** azt jelenti, hogy a mátrix **sorait és oszlopait felcseréljük**.
 
@@ -180,7 +178,7 @@ Ez egy *tükrözés* a főátló mentén.
 
 ---
 
-# Példa
+**Példa**
 
 Eredeti mátrix:
 
@@ -217,8 +215,6 @@ Hozz létre egy 3×3-as mátrixot véletlen számokkal 1 és 99 között, majd �
 1. a mátrixot,
 2. minden sor összegét,
 3. minden oszlop összegét.
-
-A megoldás két tabon jelenik meg:
 
 ---
 
@@ -368,7 +364,7 @@ if (count($values) >= 2) {
 ```
 </details>
 
-# Összefoglalás
+## Összefoglalás
 
 - A kétdimenziós tömb egy tömb, amely tömböket tartalmaz.  
 - Mátrixot legegyszerűbben két egymásba ágyazott ciklussal generálunk.  

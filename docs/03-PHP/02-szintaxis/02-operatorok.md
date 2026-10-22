@@ -4,14 +4,12 @@ slug: /php/szintaxis/operatorok
 title: "Operátorok"
 ---
 
-# Operátorok
-
 Az operátorok műveleteket végeznek változókon vagy értékeken.  
 A PHP sokféle operátort támogat, amelyekkel számolhatunk, összehasonlíthatunk, logikai műveleteket végezhetünk, vagy módosíthatjuk a változók értékét.
 
 ---
 
-# Aritmetikai operátorok
+## Aritmetikai operátorok
 
 ```php
 $a = 10;
@@ -26,7 +24,7 @@ echo $a % $b; // 1 (maradék)
 
 ---
 
-# Összehasonlító operátorok
+## Összehasonlító operátorok
 
 ```php
 $a == $b   // egyenlő (érték alapján)
@@ -39,7 +37,7 @@ $a <= $b   // kisebb vagy egyenlő
 
 ---
 
-## Strict comparison operátorok
+### Strict comparison operátorok
 
 A PHP gyengén típusos, ezért az `==` csak az értéket hasonlítja össze, a típust nem.
 
@@ -57,7 +55,7 @@ Ez sok hibát előz meg, ezért érdemes mindig `===`‑t használni.
 
 ---
 
-# Logikai operátorok
+## Logikai operátorok
 
 ```php
 &&   // ÉS
@@ -91,7 +89,7 @@ if ($isMember xor $hasCoupon) {
 
 ---
 
-# Értékadó operátorok
+## Értékadó operátorok
 
 ```php
 $x = 5;
@@ -103,7 +101,7 @@ $x /= 3; // 8
 
 ---
 
-# Növelés és csökkentés
+### Növelés és csökkentés
 
 ```php
 $i = 0;
@@ -122,7 +120,7 @@ echo $i++; // 6 (előbb kiír, aztán növel)
 
 ---
 
-# String operátorok
+## String operátorok
 
 ### Összefűzés
 
@@ -133,7 +131,7 @@ $text .= " World"; // Hello World
 
 ---
 
-# Ternary operátor
+## Ternary operátor
 
 Rövid feltételes kifejezés:
 
@@ -144,7 +142,7 @@ $message = ($age >= 18) ? "Adult" : "Minor";
 
 ---
 
-# Null coalescing operátor (`??`)
+## Null coalescing operátor (`??`)
 
 Ha a bal oldali érték nem létezik vagy null, a jobb oldali kerül felhasználásra.
 
@@ -156,7 +154,7 @@ Ez különösen hasznos lesz az űrlapkezelés fejezetben.
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlófeladatok
 
 1. Írj programot, amely két számot összead, kivon, szoroz és oszt.
 2. Készíts egy változót, amely egy életkort tárol. Írd ki, hogy a személy kiskorú vagy nagykorú.

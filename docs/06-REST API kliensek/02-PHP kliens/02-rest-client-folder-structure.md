@@ -5,8 +5,6 @@ sidebar_label: Mappastruktúra
 slug: /rest-client/folder-structure
 ---
 
-# Projekt mappastruktúra és inicializálás
-
 A REST API kliens egy önálló PHP alkalmazás, amely **nem tartalmaz adatbázist**,  
 és **nem futtat SQL lekérdezéseket**.  
 Minden adatot a háttérben futó REST API‑tól kér le HTTP kérésekkel.

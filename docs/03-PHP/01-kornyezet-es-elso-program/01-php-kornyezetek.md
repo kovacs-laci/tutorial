@@ -4,8 +4,6 @@ slug: /php/kornyezet-es-elso-program/php-kornyezetek
 title: "PHP környezetek"
 ---
 
-# PHP környezetek
-
 A PHP futtatásához szükség van egy olyan környezetre, amely képes értelmezni a PHP‑kódot.  
 Ez lehet helyi fejlesztői környezet, konténer vagy online futtató szolgáltatás.  
 Ebben a fejezetben áttekintjük a leggyakoribb megoldásokat.

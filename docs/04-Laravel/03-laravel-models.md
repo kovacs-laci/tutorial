@@ -4,8 +4,6 @@ slug: /laravel/models
 title: "Modell osztályok létrehozása"
 ---
 
-# Modell osztályok létrehozása
-
 A **modellek** a Laravelben az adatbázis táblák objektum-orientált reprezentációi.
 
 Az **Eloquent ORM** segítségével az adatbázis rekordokkal úgy dolgozhatunk, mintha PHP objektumok lennének.

@@ -5,8 +5,6 @@ sidebar_label: IndexView
 slug: /rest-client/counties/index-view
 ---
 
-# IndexView – A megyék listájának nézete
-
 A REST API kliensben minden oldalhoz külön View osztályt készítünk, a Laravel gyakorlatát követve:
 
 - `IndexView` – listázás

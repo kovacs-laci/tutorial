@@ -4,8 +4,6 @@ slug: /php/fuggvenyek/kivetelkezeles
 title: "Kivételkezelés"
 ---
 
-# Kivételkezelés
-
 A kivétel olyan rendkívüli helyzet, amelyet a program futás közben jelez.  
 Például adatbázis‑kapcsolat vagy fájl olvasása is sikertelen lehet.  
 A kivételkezelés célja nem az összes hiba elrejtése, hanem a **várható hibák kulturált kezelése** és a **váratlan hibák naplózása**.
@@ -50,14 +48,14 @@ function validateAge(int $age): void
 
 ---
 
-# Matematikai hibák kezelése kivétellel
+## Matematikai hibák kezelése kivétellel
 
 Az osztás tipikus hibaforrás: ha a nevező 0, a művelet matematikailag értelmezhetetlen.  
 PHP-ben ezt kulturáltan kivétellel kezeljük.
 
 ---
 
-## Osztás beépített kivétellel: `DivisionByZeroError`
+### Osztás beépített kivétellel: `DivisionByZeroError`
 
 ```php
 function divide(int $a, int $b): float
@@ -104,12 +102,12 @@ try {
 
 ---
 
-# Beépített kivételosztályok megismerése
+## Beépített kivételosztályok megismerése
 
 A PHP minden kivételosztályt az **Exception** vagy az **Error** osztályból származtat.  
 A teljes listát legegyszerűbben Reflection segítségével tudjuk lekérdezni.
 
-## Beépített kivételosztályok listázása Reflectionnel
+### Beépített kivételosztályok listázása Reflectionnel
 
 ```php
 $declared = get_declared_classes();
@@ -125,7 +123,7 @@ Ez kiírja az összes olyan osztályt, amely az Exception vagy Error leszármazo
 
 ---
 
-## Fontosabb beépített kivételek
+### Fontosabb beépített kivételek
 
 - Exception  
 - Error  
@@ -161,7 +159,7 @@ foreach (get_declared_classes() as $class) {
 
 ---
 
-# Gyakorló feladat
+## Gyakorló feladat
 
 **Feladat:**  
 Írj egy `listExceptions()` függvényt, amely:

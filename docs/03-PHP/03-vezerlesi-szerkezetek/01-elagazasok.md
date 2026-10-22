@@ -4,14 +4,12 @@ slug: /php/vezerlesi-szerkezetek/elagazasok
 title: "Elágazások"
 ---
 
-# Elágazások
-
 Az elágazások segítségével a program különböző utasításokat hajt végre attól függően, hogy egy feltétel igaz vagy hamis.  
 A PHP többféle elágazási szerkezetet támogat: `if`, `elseif`, `else`, `switch`, `match`.
 
 ---
 
-# Alap if szerkezet
+## Alap if szerkezet
 
 ```php
 $kor = 18;
@@ -23,7 +21,7 @@ if ($kor >= 18) {
 
 ---
 
-# if – else
+## if – else
 
 ```php
 $jegy = 4;
@@ -47,7 +45,7 @@ if ($jegy >= 5) {
 echo $message;
 ```
 
-## Korai visszatérés (*early return*) segítségével teljesen elkerülhető az `else` ág.
+### Korai visszatérés (*early return*) segítségével teljesen elkerülhető az `else` ág.
 
 A lényeg:  
 Ha egy feltétel *hibát* vagy *kivételes esetet* jelez, azt **azonnal kezeld és térj vissza**, majd a függvény „fő ága” maradjon tiszta, behúzásmentes.
@@ -69,6 +67,7 @@ function divide($a, $b)
 ```
 
 ### Modern, tiszta, PSR‑12 kompatibilis (ajánlott)
+
 ```php
 function divide($a, $b)
 {
@@ -91,7 +90,7 @@ function divide($a, $b)
 
 ---
 
-## Még egy példa: több hibás eset kezelése else nélkül
+## Több hibás eset kezelése else nélkül
 
 ```php
 function safeDivide($a, $b)
@@ -138,7 +137,7 @@ else {
 
 ---
 
-# if – elseif – else
+## if – elseif – else
 
 ```php
 $jegy = 3;
@@ -156,7 +155,7 @@ if ($jegy == 5) {
 
 ---
 
-# Switch
+## Switch
 
 A switch **laza összehasonlítást** használ (==), ezért `"5"` és `5` azonosnak számít.
 
@@ -180,7 +179,7 @@ switch ($nap) {
 
 ---
 
-# Logikai kapcsolatok
+## Logikai kapcsolatok
 
 ### AND (&&)
 
@@ -217,7 +216,7 @@ if ($a xor $b) {
 
 ---
 
-# Match – modern elágazás (PHP 8+)
+## Match – modern elágazás (PHP 8+)
 
 A `match` tömörebb, biztonságosabb és **szigorú összehasonlítást** használ (===).  
 Minden esetet le kell fedni.
@@ -254,7 +253,7 @@ echo $kategoria;
 
 ---
 
-# Truthy és falsy értékek
+## Truthy és falsy értékek
 
 Az `if` bármilyen értéket elfogad, amit a PHP automatikusan logikai értékké alakít.
 
@@ -281,7 +280,7 @@ if ($name) {
 
 ---
 
-# Miért kerüljük a hosszú if–elseif láncokat?
+## Miért kerüljük a hosszú if–elseif láncokat?
 
 A hosszú elágazások növelik a **cyclomatic complexity** értéket:  
 minél több ág, annál nehezebb olvasni, tesztelni és karbantartani.
@@ -306,7 +305,7 @@ if ($role === "admin") {
 
 ---
 
-# Mapping – a legszebb megoldás egyszerű elágazásokra
+## Mapping – a legszebb megoldás egyszerű elágazásokra
 
 ```php
 $roles = [
@@ -323,7 +322,7 @@ Cyclomatic complexity: **0**.
 
 ---
 
-# Match vs switch – rövid összehasonlítás
+## Match vs switch – rövid összehasonlítás
 
 | Tulajdonság | switch | match |
 |------------|--------|--------|
@@ -335,31 +334,32 @@ Cyclomatic complexity: **0**.
 
 ---
 
-# `return`, `exit`, `die`, `break` – mikor melyiket?
+## `return`, `exit`, `die`, `break` – mikor melyiket?
 
-## `return`
+### `return`
 - függvényből lép ki
 - visszaad egy értéket
 - a script fut tovább
 
-## `exit`
+### `exit`
 - a teljes script futását leállítja
 - üzenetet is kiírhat
 
-## `die`
+### `die`
 - alias az `exit`-re
 - ugyanazt csinálja
 
-## `break`
+### `break`
 - ciklusból vagy switch-ből lép ki
 - nem állítja le a scriptet
 - nem lép ki függvényből
 
 ---
 
-# Info blokk – tipikus hibák
+## Tipikus hibák
 
-:::info Tipikus hibák elágazásoknál
+:::info 
+Tipikus hibák elágazásoknál
 - elfelejtett kapcsos zárójelek
 - túl hosszú if–elseif láncok
 - switch-ben hiányzó `break`
@@ -368,11 +368,11 @@ Cyclomatic complexity: **0**.
 - hibás feltételek nem korai ellenőrzése
 - `exit`/`die` túlzott használata
 - PSR‑12 formázás figyelmen kívül hagyása  
-  :::
+:::
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlófeladatok
 
 1. Írj programot, amely eldönti, hogy egy szám pozitív, negatív vagy nulla.
 2. Készíts programot, amely pontszám alapján kiírja az érdemjegyet.

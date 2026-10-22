@@ -4,14 +4,12 @@ slug: /php/tombok/asszociativ-tombok
 title: "Asszociatív tömbök"
 ---
 
-# Asszociatív tömbök
-
 Az asszociatív tömbökben az elemeket **kulcs–érték párok** formájában tároljuk.  
 A kulcs lehet szöveg vagy szám, de leggyakrabban szöveg.
 
 ---
 
-# Létrehozás
+## Létrehozás
 
 ```php
 $student = [
@@ -33,7 +31,7 @@ Array
 
 ---
 
-# Elem elérése kulccsal
+## Elem elérése kulccsal
 
 ```php
 echo $student["name"]; // Kate
@@ -48,7 +46,7 @@ Kate
 
 ---
 
-# Új elem hozzáadása
+## Új elem hozzáadása
 
 ```php
 $student["city"] = "Vác";
@@ -67,7 +65,7 @@ Array
 
 ---
 
-# Elem módosítása
+## Elem módosítása
 
 ```php
 $student["age"] = 17;
@@ -80,7 +78,7 @@ $student["age"] = 17;
 
 ---
 
-# Kulcs létezésének ellenőrzése
+## Kulcs létezésének ellenőrzése
 
 ```php
 isset($student["age"]);           // true
@@ -93,7 +91,7 @@ array_key_exists("class", $student); // true
 
 ---
 
-# Elem törlése
+## Elem törlése
 
 ```php
 unset($student["class"]);
@@ -111,7 +109,7 @@ Array
 
 ---
 
-# Bejárás kulccsal és értékkel
+## Bejárás kulccsal és értékkel
 
 ```php
 foreach ($student as $key => $value) {
@@ -128,7 +126,7 @@ city: Vác
 
 ---
 
-# Csak kulcsok bejárása
+## Csak kulcsok bejárása
 
 ```php
 foreach (array_keys($student) as $key) {
@@ -145,7 +143,7 @@ city
 
 ---
 
-# Csak értékek bejárása
+## Csak értékek bejárása
 
 ```php
 foreach (array_values($student) as $value) {
@@ -162,7 +160,7 @@ Vác
 
 ---
 
-# Asszociatív tömb módosítása bejárás közben (referencia)
+## Asszociatív tömb módosítása bejárás közben (referencia)
 
 ```php
 foreach ($student as &$value) {
@@ -182,7 +180,7 @@ Array
 
 ---
 
-# Rendezés kulcs vagy érték szerint
+## Rendezés kulcs vagy érték szerint
 
 ```php
 ksort($student); // kulcs szerint
@@ -191,7 +189,7 @@ asort($student); // érték szerint
 
 ---
 
-# Többdimenziós asszociatív tömb
+## Többdimenziós asszociatív tömb
 
 ```php
 $students = [
@@ -215,18 +213,19 @@ Bela
 
 ---
 
-# Tipikus hibák asszociatív tömböknél
+## Tipikus hibák asszociatív tömböknél
 
-:::info Tipikus hibák
+:::info 
+Tipikus hibák
 - nem létező kulcs elérése → warning
 - kulcsok sorrendje nem garantált
 - `isset()` vs `array_key_exists()` különbsége
 - referencia szerinti foreach után a változó „bennragad”  
-  :::
+:::
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlófeladatok
 
 **1. Hozz létre egy asszociatív tömböt egy könyvről (title, author, year).**
 <details>

@@ -4,14 +4,12 @@ slug: /php/fuggvenyek/sajat-fuggvenyek
 title: "Saját függvények"
 ---
 
-# Saját függvények
-
 A függvények olyan **újrahasználható kódrészek**, amelyek egy adott feladatot végeznek.  
 Segítenek abban, hogy a kódunk **átláthatóbb**, **modulárisabb** és **karbantarthatóbb** legyen.  
 
 ---
 
-# Miért használunk függvényeket?
+## Miért használunk függvényeket?
 
 - ismétlődő kód elkerülése  
 - logika elkülönítése  
@@ -31,6 +29,12 @@ function greet() {
 greet();
 ```
 
+### Mi történik a példában?
+
+- A `function greet()` sorral létrehozunk egy `greet` nevű függvényt.
+- A függvény törzsében lévő `echo` kiírja az üzenetet, amikor a függvényt meghívjuk.
+- A `greet();` a függvényhívás. A definíció önmagában még nem futtatja le a függvény tartalmát.
+
 **Output:**
 ```
 Hello, welcome!
@@ -48,6 +52,8 @@ function greetPerson(string $name) {
 greetPerson("László");
 ```
 
+A `$name` a függvény **paramétere**: ezen a néven kapja meg a függvény a neki átadott adatot. A `"László"` a híváskor átadott **argumentum**, amely a paraméterhez kerül. A `string` típusjelölés azt mutatja, hogy a függvény szöveget vár.
+
 **Output:**
 ```
 Hello, László!
@@ -64,6 +70,8 @@ function addNumbers(int $a, int $b) {
 
 addNumbers(5, 7);
 ```
+
+A függvény két paramétert vár, ezért híváskor két értéket adunk át. Az értékek sorrendje számít: az első kerül az `$a`, a második a `$b` változóba. Ez a változat az összeget az `echo` segítségével rögtön kiírja.
 
 **Output:**
 ```
@@ -83,6 +91,8 @@ $result = area(5, 3);
 echo $result;
 ```
 
+Az `area()` nem írja ki az eredményt, hanem a `return` segítségével **visszaadja**. Így az eredményt eltárolhatjuk a `$result` változóban, később újra felhasználhatjuk, vagy csak ezután írhatjuk ki. A `: int` jelzi, hogy a visszatérési érték egész szám.
+
 **Output:**
 ```
 15
@@ -101,6 +111,8 @@ greetUser();        // Welcome, Guest!
 greetUser("Kate");  // Welcome, Kate!
 ```
 
+Az `$name` paraméter alapértelmezett értéke `"Guest"`. Ezért a paraméter elhagyásakor ezt az értéket használja a függvény, a második hívásban viszont a `"Kate"` argumentum felülírja az alapértelmezést. Kötelező paraméter nem állhat alapértelmezett értékű paraméter után.
+
 ---
 
 ## Típusdeklarációk (modern PHP)
@@ -110,6 +122,8 @@ function multiply(int $a, int $b): int {
     return $a * $b;
 }
 ```
+
+Az `int` a két bemenő paraméter elvárt típusát jelöli, a `: int` pedig a visszatérési érték típusát. A típusdeklarációk egyértelműbbé teszik, milyen adatokkal dolgozik a függvény, és segítenek korábban észrevenni a hibás hívásokat.
 
 ---
 
@@ -125,6 +139,8 @@ function getUser(): array {
 
 print_r(getUser());
 ```
+
+A `getUser()` egy asszociatív tömböt ad vissza, amelyben a mezőket beszédes kulcsokkal érjük el. A `print_r()` a teljes tömb olvasható szerkezetét jeleníti meg; programkódban az egyes adatok például a `getUser()["name"]` kifejezéssel is felhasználhatók.
 
 **Output:**
 ```
@@ -151,6 +167,8 @@ function sumArray(array $numbers): int {
 echo sumArray([1, 2, 3, 4]);
 ```
 
+A függvény üres összeggel indul. A `foreach` sorra veszi a kapott tömb elemeit, a `+=` pedig mindegyiket hozzáadja a `$sum` változóhoz. A ciklus után a függvény visszaadja a végeredményt, ezért azt a hívó kód kiírhatja vagy más számításban felhasználhatja.
+
 **Output:**
 ```
 10
@@ -167,6 +185,8 @@ function isAdult(int $age): bool {
 
 echo isAdult(20) ? "Adult" : "Minor";
 ```
+
+A függvény az összehasonlítás eredményét logikai értékként (`true` vagy `false`) adja vissza. A `? :` (ternáris) operátor ez alapján választ a két szöveg közül: 18 vagy annál nagyobb életkornál az első, egyébként a második ágat használja.
 
 **Output:**
 ```
@@ -187,6 +207,8 @@ function printFruits(array $fruits): void {
 printFruits(["apple", "pear", "plum"]);
 ```
 
+A `void` azt jelzi, hogy a függvény nem ad vissza értéket; a feladata itt a kiírás. A `foreach` minden gyümölcsnél lefuttatja a ciklus törzsét, ezért mindegyik név külön sorba kerül. A HTML-ben a `<br>` sortörést jelenít meg.
+
 **Output:**
 ```
 apple
@@ -206,6 +228,8 @@ function logMessage(string $msg): void {
 logMessage("System started");
 ```
 
+Ez a példa is `void` függvény: a `string $msg` paraméterből összeállít egy naplóüzenetet, és azonnal kiírja. Az ilyen, mellékhatást végző függvényeknél a hívás helyén nem kapunk később felhasználható eredményt.
+
 **Output:**
 ```
 [LOG] System started
@@ -223,6 +247,8 @@ $double = function (int $n): int {
 echo $double(5);
 ```
 
+A closure-t egy változóhoz rendeljük, ezért a `$double(5)` alakban, függvényként hívhatjuk meg. A paraméter megkapja az `5` értéket, a `return` pedig visszaadja annak kétszeresét. Az anonim függvénynek nincs külön neve a függvénydefinícióban.
+
 **Output:**
 ```
 10
@@ -237,6 +263,8 @@ $triple = fn($n) => $n * 3;
 
 echo $triple(4);
 ```
+
+Az arrow function rövid forma egyetlen kifejezésből álló függvényhez. Az `=>` utáni kifejezés eredményét automatikusan visszaadja, ezért nem írunk bele külön `return` utasítást. A hagyományos closure-höz hasonlóan változóban tároljuk és hívjuk meg.
 
 **Output:**
 ```
@@ -352,8 +380,8 @@ function getMatrix(int $rows, int $cols): array
 {
     $matrix = [];
 
-    for ($row = 0; $row < $rows; $r++) {
-        for ($col = 0; $col < $cols; $c++) {
+    for ($row = 0; $row < $rows; $row++) {
+        for ($col = 0; $col < $cols; $col++) {
             $matrix[$row][$col] = rand(1, 99);
         }
     }
@@ -416,6 +444,16 @@ showMatrix('cli', $matrix);
 // HTML kimenet
 showMatrix('html', $matrix);
 ```
+
+### Hogyan épül fel a megoldás?
+
+- A `getMatrix()` két egymásba ágyazott ciklussal tölti fel a tömböt: a külső ciklus a sorokat, a belső az oszlopokat járja be. Minden cellába egy véletlen egész szám kerül.
+- A `showRowCli()` egy sor elemeit szóközökkel összefűzi, majd sortörést ír ki. A `showMatrixCli()` minden sorra meghívja ezt a segédfüggvényt.
+- A `showRowHtml()` a sor értékeit `<td>` cellák közé teszi, a `showMatrixHtml()` pedig a sorokat egy `<table>` elembe rendezi.
+- A `showMatrix()` a `switch` segítségével a kért megjelenítő függvényhez irányítja a hívást. Ha ismeretlen értéket kap, kivételt dob, így a hibás mód nem marad észrevétlen.
+- A főprogram a mátrixot egyszer hozza létre, majd ugyanazt az adatot két különböző megjelenítőnek adja át. Így a számítás és a megjelenítés egymástól független marad.
+
+Futtatáskor a `cli` változat terminálra, a `html` változat HTML-tartalomként írja ki a mátrixot.
 </details>
 
 ---
@@ -459,8 +497,12 @@ function isPrime(int $number): bool
 }
 
 $number = 101;
-echo isPrime($number) ? "$number prím" : "$number nem prím"
+echo isPrime($number) ? "$number prím" : "$number nem prím";
 ```
+
+A függvény először az 1-nél kisebb vagy egyenlő számokat utasítja el, majd külön kezeli a 2-t és a többi páros számot. Ezután csak a páratlan lehetséges osztókat vizsgálja. Ha valamelyik maradék nélkül osztja a számot, a függvény azonnal `false` értékkel tér vissza; ha egyet sem talál, `true`-t ad vissza.
+
+Az `isPrime()` eredményét a ternáris operátor alakítja kiírható szöveggé. A `$number` változó mindkét kimeneti ágban az éppen vizsgált értéket tartalmazza.
 :::info Miért elég a négyzetgyökig vizsgálni?
 
 A prímvizsgálatnál nem kell minden számot végigpróbálni 2-től a vizsgált számig.  
@@ -607,6 +649,8 @@ function printFibonacci(int $n): void
 printFibonacci(10);
 ```
 
+Amikor a `printFibonacci(10)` lefut, a ciklus a 0-tól 9-ig terjedő indexekre kéri le a Fibonacci-értékeket. A `fib()` az első két értéknél (`0` és `1`) eléri az alapesetet; minden további értéket két kisebb indexű hívás eredményének összeadásával számol ki.
+
 :::info
 A Fibonacci-sorozat minden eleme két korábbi elem összege.  
 A rekurzió két irányba ágazik:  
@@ -645,6 +689,9 @@ function factorial(int $n): int
 
 echo factorial(5); // 120
 ```
+
+Az `factorial(5)` hívás egymásba ágyazott hívások sorozatát indítja: `5 * factorial(4)`, majd `4 * factorial(3)`, és így tovább, amíg el nem éri az alapesetet. A visszatérések során az eredmények összeszorzódnak, ezért lesz a végeredmény `120`.
+
 :::info
 A faktoriális minden lépésben egyre kisebb számra hívja meg a függvényt.  
 A folyamat addig tart, amíg el nem érjük az alapesetet (1).
@@ -674,6 +721,9 @@ function digitSum(int $n): int
 
 echo digitSum(12345); // 15
 ```
+
+Az `n % 10` az utolsó számjegyet adja meg (`12345` esetén `5`), az `intdiv($n, 10)` pedig elhagyja ezt a számjegyet (`1234`). A függvény így minden lépésben hozzáad egy számjegyet az összeghez, míg egyjegyű számhoz nem jut.
+
 :::info
 A függvény minden lépésben leválasztja az utolsó számjegyet (`n % 10`),  
 majd a maradék számra (`n / 10`) újra meghívja önmagát.  
@@ -706,6 +756,9 @@ function printList(array $items, int $index = 0): void
 
 printList(["alma", "körte", "szilva"]);
 ```
+
+A függvény a megadott indexű elemet írja ki, majd ugyanazt a tömböt a következő indexszel adja át a következő hívásnak. Amikor az index eléri a tömb hosszát, az alapeset `return` utasítással megállítja a további hívásokat. Üres tömb esetén az alapeset már az első híváskor teljesül.
+
 :::info
 A függvény minden lépésben kiírja az aktuális elemet,  
 majd a következő indexszel újra meghívja önmagát.  
@@ -713,5 +766,3 @@ A rekurzió addig tart, amíg az index el nem éri a tömb végét.
 :::
 
 </details>
-
-

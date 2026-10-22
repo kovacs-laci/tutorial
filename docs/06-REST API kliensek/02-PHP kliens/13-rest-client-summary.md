@@ -5,8 +5,6 @@ sidebar_label: Összefoglalás
 slug: /rest-client/summary
 ---
 
-# Összefoglalás
-
 Ebben a fejezetben lezárjuk a REST API‑kliens építéséről szóló tananyagot. A célunk az volt, hogy egy modern, tiszta és könnyen bővíthető kliensalkalmazást hozzunk létre, amely PHP‑ban kommunikál egy különálló REST API‑val. A folyamat során nemcsak a technikai megoldásokat építettük fel, hanem a mögöttes gondolkodásmódot is megismertük: hogyan szerveződik egy kliens, hogyan épül fel egy kérés, és hogyan válik a kód átláthatóvá és taníthatóvá.
 
 ## Mit valósítottunk meg?

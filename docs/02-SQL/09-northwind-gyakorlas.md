@@ -4,8 +4,6 @@ slug: /sql/gyakorlas/northwind
 title: "Northwind SQL gyakorlás"
 ---
 
-# Northwind SQL gyakorlás
-
 A feladatokat a `static/files/install_northwind.sql` scriptből telepített adatbázison futtasd. Minden megoldás közvetlenül az adott feladat után, kattintásra jelenik meg.
 
 ## DDL: adatbázisok és táblák

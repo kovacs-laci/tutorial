@@ -4,14 +4,12 @@ slug: /php/vezerlesi-szerkezetek/gyakorlatok
 title: "Haladó feladatok – Vezérlési szerkezetek"
 ---
 
-# Haladó feladatok – Vezérlési szerkezetek
-
 Ebben a részben összetettebb feladatokkal gyakorolhatod az elágazásokat és ciklusokat.  
 A feladatokhoz **rejtett megoldásokat** is találsz.
 
 ---
 
-# 1. Szorzótábla generálása
+## 1. Szorzótábla generálása
 
 Írj programot, amely kiírja a 10×10-es szorzótáblát két egymásba ágyazott `for` ciklus segítségével.
 
@@ -30,7 +28,7 @@ for ($row = 1; $row <= 10; $row++) {
 
 ---
 
-# 2. Minimum és maximum keresése tömbben
+## 2. Minimum és maximum keresése tömbben
 
 Adott egy tömb:
 
@@ -63,7 +61,7 @@ echo "Max: $max<br>";
 
 ---
 
-# 3. Számok összege
+## 3. Számok összege
 
 Írj programot, amely egy tömb elemeinek összegét számolja ki.
 
@@ -85,7 +83,7 @@ echo "Sum: $sum";
 
 ---
 
-# 4. Csillagpiramis
+## 4. Csillagpiramis
 
 Készíts programot, amely az alábbi mintát rajzolja ki:
 
@@ -109,7 +107,7 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-# 5. Egyszerű menü
+## 5. Egyszerű menü
 
 Írj programot, amely:
 
@@ -146,7 +144,7 @@ switch ($choice) {
 
 ---
 
-# 6. Input normalizálás és validálás (early return + mapping)
+## 6. Input normalizálás és validálás (early return + mapping)
 
 Írj függvényt, amely egy felhasználói szerepet kap (`admin`, `editor`, `user`, `guest`), és visszaadja a jogosultsági szintet.  
 Érvénytelen bemenet esetén: `"Invalid role"`.
@@ -173,7 +171,7 @@ function getRoleLevel(string $role): string|int
 
 ---
 
-# 7. Termék megjeleníthetősége (truthy/falsy + guard clause)
+## 7. Termék megjeleníthetősége (truthy/falsy + guard clause)
 
 A termék akkor jeleníthető meg, ha:
 
@@ -200,7 +198,7 @@ function canDisplayProduct(array $product): bool
 
 ---
 
-# 8. Pontszám kategorizálása match-csel
+## 8. Pontszám kategorizálása match-csel
 
 Írj függvényt, amely egy pontszám alapján kategóriát ad vissza:
 
@@ -227,7 +225,7 @@ function getScoreCategory(int $score): string
 
 ---
 
-# 9. Switch vs match – különbségek felismerése
+## 9. Switch vs match – különbségek felismerése
 
 Készíts két függvényt:
 
@@ -269,7 +267,7 @@ function getDayMatch(int $day): string
 
 ---
 
-# 10. Cyclomatic complexity csökkentése – három megoldás
+## 10. Cyclomatic complexity csökkentése – három megoldás
 
 Adott egy rossz kód:
 
@@ -352,7 +350,7 @@ function getAgeCategoryMap(int $age): string
 
 ---
 
-# 11. Komplex jogosultsági rendszer tiszta logikával
+## 11. Komplex jogosultsági rendszer tiszta logikával
 
 Írj függvényt, amely eldönti, hogy egy felhasználó hozzáférhet‑e egy admin oldalhoz.
 
@@ -384,7 +382,7 @@ function canAccessAdmin(array $user): bool
 
 ---
 
-# 12. Input normalizálás több lépésben
+## 12. Input normalizálás több lépésben
 
 Írj függvényt, amely:
 
@@ -414,7 +412,7 @@ function normalizeRole(string $role): string
 
 ---
 
-# 13. Komplex feltétel optimalizálása
+## 13. Komplex feltétel optimalizálása
 
 Írj függvényt, amely három külön logikát kezel:
 
@@ -455,7 +453,7 @@ function isAllowed(array $user): bool
 
 ---
 
-# 14. Hibakódok kezelése prioritással
+## 14. Hibakódok kezelése prioritással
 
 Írj függvényt, amely:
 
@@ -488,7 +486,7 @@ function getErrorMessage(int $code): string
 
 ---
 
-# 15. Routing tömb alapú vezérléssel
+## 15. Routing tömb alapú vezérléssel
 
 Készíts routing logikát tömbbel:
 
@@ -525,7 +523,7 @@ function resolveRoute(string $path): string
 
 ---
 
-# Megjegyzés
+## Megjegyzés
 
 Érdemes utánanézni a beágyazott ciklusok működésének, az algoritmusok alapjainak, valamint az iteráció és rekurzió közötti különbségeknek.
 

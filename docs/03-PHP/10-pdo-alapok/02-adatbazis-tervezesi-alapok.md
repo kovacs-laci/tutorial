@@ -4,8 +4,6 @@ slug: /php/pdo-alapok/adatbazis-tervezesi-alapok
 title: "Adatbázis-tervezési alapok"
 ---
 
-# Adatbázis-tervezési alapok
-
 A megbízható PDO-kódhoz előbb az adatbázis szerkezetét kell jól megtervezni.
 
 ## Kapcsolatok és megszorítások

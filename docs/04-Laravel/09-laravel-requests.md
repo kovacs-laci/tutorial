@@ -4,8 +4,6 @@ slug: /laravel/requests
 title: "Request osztályok és validáció"
 ---
 
-# Request osztályok és validáció
-
 A **FormRequest** osztályok a Laravelben lehetővé teszik, hogy a validációs logikát külön fájlokba szervezzük ki.
 
 Ez különösen fontos nagyobb projektekben, mert:
@@ -123,7 +121,7 @@ public function store(CityRequest $request)
     City::create($request->validated());
 
     return redirect()->route('cities.index')
-        ->with('status', 'Város sikeresen létrehozva!');
+        ->with('success', 'Város sikeresen létrehozva!');
 }
 
 public function update(CityRequest $request, City $city)
@@ -131,7 +129,7 @@ public function update(CityRequest $request, City $city)
     $city->update($request->validated());
 
     return redirect()->route('cities.index')
-        ->with('status', 'Város sikeresen frissítve!');
+        ->with('success', 'Város sikeresen frissítve!');
 }
 ```
 

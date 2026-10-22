@@ -5,8 +5,6 @@ sidebar_label: CreateView
 slug: /rest-client/counties/create-view
 ---
 
-# CreateView – Új megye létrehozása
-
 A REST API kliensben minden oldal külön View osztályt kap, a Laravel gyakorlatát követve.  
 A `CreateView` feladata:
 

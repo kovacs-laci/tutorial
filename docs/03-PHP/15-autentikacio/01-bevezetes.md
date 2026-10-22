@@ -4,8 +4,6 @@ slug: /php/autentikacio/bevezetes
 title: "Regisztráció, bejelentkezés és autentikáció alapjai"
 ---
 
-# Regisztráció, bejelentkezés és autentikáció alapjai
-
 A webalkalmazások működésének alapja, hogy a rendszer tudja, ki használja az adott funkciókat.  
 A felhasználó azonosításának első lépése a **regisztráció**, amelyet a **bejelentkezés** és az **autentikáció** követ.  
 A jól megtervezett folyamatok biztosítják az adatok védelmét, a jogosultságok helyes kezelését és a rendszer megbízhatóságát.

@@ -7,6 +7,7 @@ title: "GET és POST kérések"
 A PHP-ban az űrlapokból érkező adatokat a **GET** és **POST** HTTP metódusokkal tudjuk fogadni.
 
 Mindkettő adatot küld a szerver felé, de különböző módon.
+A kapott adatot ellenőrizni kell, és HTML-kimenetbe írás előtt escape-elni kell. Erről és az adatvezérelt oldalak készítéséről a [dinamikus weboldal készítése leckében](./04-dinamikus-weboldal.md) is látsz példát.
 
 ---
 
@@ -21,9 +22,82 @@ http://localhost/oldal.php?name=Anna&age=17
 Az adatokat a `$_GET` szuperglobális tömb tartalmazza.
 
 ```php
-echo $_GET["name"];
-echo $_GET["age"];
+$name = $_GET["name"] ?? "";
+$age = $_GET["age"] ?? "";
+
+if (is_string($name) && is_string($age)) {
+    echo htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+    echo "<br>";
+    echo htmlspecialchars($age, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+}
 ```
+
+:::info 
+Mit jelentenek az `ENT_QUOTES` és `ENT_SUBSTITUTE` konstansok?
+
+A `htmlspecialchars()` függvény második paraméterében különböző beállításokat adhatunk meg a HTML-karakterek kezelésére.
+
+### `ENT_QUOTES`
+
+Az `ENT_QUOTES` hatására a PHP az **egyszeres** (`'`) és **dupla idézőjeleket** (`"`) is HTML entitássá alakítja.
+
+```php
+$text = 'Péter azt mondta: "Hello!"';
+
+echo htmlspecialchars($text, ENT_QUOTES);
+```
+
+**Output:**
+
+```html
+Péter azt mondta: &quot;Hello!&quot;
+```
+
+### `ENT_SUBSTITUTE`
+
+Az `ENT_SUBSTITUTE` gondoskodik arról, hogy hibás vagy érvénytelen karakterkódolás esetén a függvény ne okozzon hibát. Ilyenkor a problémás karaktereket helyettesítő karakterrel helyettesíti.
+
+Ez különösen akkor hasznos, ha külső forrásból (űrlap, fájl, API stb.) érkező adatokat dolgozunk fel.
+
+### Miért használjuk együtt?
+
+A modern PHP alkalmazásokban gyakran találkozhatunk ezzel a formával:
+
+```php
+htmlspecialchars(
+    $value,
+    ENT_QUOTES | ENT_SUBSTITUTE,
+    "UTF-8"
+);
+```
+
+Ebben:
+
+- `ENT_QUOTES` → minden idézőjel biztonságosan escape-elődik
+- `ENT_SUBSTITUTE` → a hibás karakterek nem okoznak problémát
+- `"UTF-8"` → a karakterkódolás egyértelműen meg van adva
+
+### Biztonsági előny
+
+```php
+$name = '<script>alert("XSS")</script>';
+
+echo htmlspecialchars(
+    $name,
+    ENT_QUOTES | ENT_SUBSTITUTE,
+    "UTF-8"
+);
+```
+
+**Output:**
+
+```html
+&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;
+```
+
+A böngésző ezt már egyszerű szövegként jeleníti meg, így a beágyazott JavaScript nem fut le.
+
+:::
 
 ### Egyszerű GET űrlap
 
@@ -76,7 +150,7 @@ Ez nem titkosítás. Érzékeny adatok kezeléséhez HTTPS, szerveroldali valid�
 |------------|------|-------|
 | Adat helye | URL-ben | Kérés törzsében |
 | Látható az URL-ben | Igen | Nem |
-| Maximális hossz | Van | Gyakorlatilag nincs |
+| Kérésméret | Az URL hossza korlátozott | A szerver beállításai korlátozzák |
 | Mire jó | Keresés, szűrés | Bejelentkezés, űrlapok |
 
 ---
@@ -147,7 +221,7 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ```html
 <input type="file" name="profile-pic">
 ```
-Fájl feltöltésekor az űrlapnak enctype="multipart/form-data" attribútumra is szüksége van. Ezzel a fájlkezelés leckében részletesen foglalkozunk.
+Fájlfeltöltéskor az űrlapnak `enctype="multipart/form-data"` attribútumra is szüksége van. A megvalósítást a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) mutatjuk be.
 
 ---
 
@@ -198,7 +272,10 @@ A lenyíló lista előre definiált lehetőségeket kínál a felhasználónak.
 **Feldolgozás PHP-ban**
 
 ```php
-echo $_GET["city"];
+$city = $_GET["city"] ?? "";
+if (is_string($city)) {
+    echo htmlspecialchars($city, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+}
 ```
 
 ---
@@ -224,8 +301,12 @@ A checkboxokból egyszerre több elemet is kiválaszthatunk.
 **Feldolgozás PHP-ban**
 
 ```php
-foreach ($_POST["languages"] as $language) {
-    echo $language . "<br>";
+if (isset($_POST["languages"]) && is_array($_POST["languages"])) {
+    foreach ($_POST["languages"] as $language) {
+        if (is_string($language)) {
+            echo htmlspecialchars($language, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "<br>";
+        }
+    }
 }
 ```
 
@@ -254,7 +335,10 @@ A rádiógombok esetén egyszerre csak egy érték választható.
 **Feldolgozás PHP-ban**
 
 ```php
-echo $_POST["level"];
+$level = $_POST["level"] ?? "";
+if (is_string($level)) {
+    echo htmlspecialchars($level, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+}
 ```
 
 ---
@@ -289,7 +373,11 @@ Gyakori megoldás, hogy az űrlap és a feldolgozás ugyanabban a fájlban talá
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    echo "Szia, " . $_POST["name"] . "!";
+    $name = $_POST["name"] ?? "";
+
+    if (is_string($name)) {
+        echo "Szia, " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "!";
+    }
 }
 ```
 
@@ -336,7 +424,10 @@ Nagyobb projektekben gyakran külön fájl végzi a feldolgozást.
 ```php
 <?php
 
-echo "Szia, " . $_POST["name"] . "!";
+$name = $_POST["name"] ?? "";
+if (is_string($name)) {
+    echo "Szia, " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "!";
+}
 ```
 
 **Előnyök**

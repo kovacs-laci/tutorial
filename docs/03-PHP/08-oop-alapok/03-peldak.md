@@ -4,8 +4,6 @@ slug: /php/oop-alapok/peldak
 title: "Öröklődés, polimorfizmus és absztrakció"
 ---
 
-# Öröklődés, polimorfizmus és absztrakció
-
 Az OOP ereje a **kapcsolatokban** rejlik: osztályok örökölhetnek egymástól, felülírhatnak metódusokat, és egységes módon viselkedhetnek.
 
 ---

@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/form-evolucio/controllerek
 title: "8.3 ClassController és StudentController"
 ---
 
-# 8.3 ClassController és StudentController
-
 A modellek elkészítése után a következő lépés a **controller réteg** felépítése. A controllerek feladata, hogy:
 
 - fogadják a felhasználói kéréseket (GET, POST),

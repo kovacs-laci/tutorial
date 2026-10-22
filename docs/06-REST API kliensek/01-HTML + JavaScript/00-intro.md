@@ -5,8 +5,6 @@ title: "Laravel REST API – HTML + JavaScript kliens"
 sidebar_label: Bevezető
 ---
 
-# Laravel REST API – HTML + JavaScript kliens
-
 Ebben a projektben egy **Laravelben írt REST API-hoz** készítünk egy **önálló HTML + JavaScript klienst**.
 
 A cél nem backend fejlesztés, hanem annak megértése, hogyan kommunikál egy böngészőben futó frontend alkalmazás egy REST API-val — tiszta struktúrával, jól elkülönített modulokkal és újrafelhasználható API réteggel.

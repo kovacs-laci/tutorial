@@ -4,8 +4,6 @@ slug: /php/pdo-lekerdezesek-crud/crud
 title: "Mini projekt: Diáklista (CRUD)"
 ---
 
-# Mini projekt: Diáklista (CRUD)
-
 Ebben a mini projektben egy teljes CRUD alkalmazást készítünk PDO-val,  
 **mindenhol nevesített paramétereket használva**.
 

@@ -5,8 +5,6 @@ sidebar_label: CountiesController
 slug: /rest-client/counties-controller
 ---
 
-# CountiesController – A megyék CRUD vezérlője
-
 A REST API kliensünkben a controller felel azért, hogy:
 
 - fogadja a routertől érkező kérést,

@@ -4,8 +4,6 @@ slug: /php/pdo-oop/kapcsolat-oop
 title: "OOP alapú adatbázis kapcsolat PDO-val"
 ---
 
-# OOP alapú adatbázis kapcsolat PDO-val
-
 Ebben a fejezetben azt mutatjuk be, hogyan érdemes az adatbázis‑kapcsolatot **objektumorientált módon** felépíteni.  
 A cél:
 

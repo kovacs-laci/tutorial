@@ -4,8 +4,6 @@ slug: /php/szintaxis/valtozok-tipusok
 title: "Változók és típusok"
 ---
 
-# Változók és típusok
-
 A változók olyan „dobozok”, amelyekben adatot tárolunk.  
 PHP-ben minden változó **$ jellel** kezdődik.
 

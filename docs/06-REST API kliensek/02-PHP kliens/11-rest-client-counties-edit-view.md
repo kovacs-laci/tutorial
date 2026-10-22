@@ -5,8 +5,6 @@ sidebar_label: EditView
 slug: /rest-client/counties/edit-view
 ---
 
-# EditView – Meglévő megye módosítása
-
 A REST API kliensben minden oldal külön View osztályt kap, a Laravel gyakorlatát követve.  
 Az `EditView` feladata:
 

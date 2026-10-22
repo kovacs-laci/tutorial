@@ -4,8 +4,6 @@ slug: /nodejs/rest-api
 title: "Node.js REST API"
 ---
 
-# Node.js REST API
-
 ## 1️⃣ A feladat célja
 
 Ebben a tananyagban egy **Node.js + Express** alapú REST API-t készítünk, amely két adattáblából dolgozik:

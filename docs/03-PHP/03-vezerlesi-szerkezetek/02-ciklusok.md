@@ -4,14 +4,12 @@ slug: /php/vezerlesi-szerkezetek/ciklusok
 title: "Ciklusok"
 ---
 
-# Ciklusok
-
 A ciklusok ismétlődő műveletek végrehajtására szolgálnak.  
 A PHP négy alap ciklusszerkezetet támogat: `for`, `while`, `do–while`, `foreach`.
 
 ---
 
-# `for` ciklus
+## `for` ciklus
 
 Akkor használjuk, ha **előre tudjuk**, hányszor kell ismételni.
 
@@ -32,7 +30,7 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-## Lépésköz (step) megadása
+### Lépésköz (step) megadása
 
 ```php
 for ($i = 0; $i <= 10; $i += 2) {
@@ -52,7 +50,7 @@ for ($i = 0; $i <= 10; $i += 2) {
 
 ---
 
-## Visszafelé haladó ciklus
+### Visszafelé haladó ciklus
 
 ```php
 for ($i = 10; $i >= 1; $i--) {
@@ -76,7 +74,7 @@ for ($i = 10; $i >= 1; $i--) {
 
 ---
 
-## Tömb bejárása hátulról előre
+### Tömb bejárása hátulról előre
 
 ```php
 $names = ["Anna", "Bela", "Csaba"];
@@ -95,7 +93,7 @@ Anna
 
 ---
 
-# `while` ciklus
+## `while` ciklus
 
 Akkor fut, amíg a feltétel igaz.
 
@@ -128,7 +126,7 @@ while ($i <= 5) {
 
 ---
 
-# `do – while`
+## `do – while`
 
 Legalább egyszer lefut.
 
@@ -152,7 +150,7 @@ do {
 
 ---
 
-# `foreach` ciklus
+## `foreach` ciklus
 
 Tömbök bejárására használjuk — ez a **modern, ajánlott** mód.
 
@@ -173,7 +171,7 @@ Csaba
 
 ---
 
-## Asszociatív tömb bejárása
+### Asszociatív tömb bejárása
 
 ```php
 $student = [
@@ -194,7 +192,7 @@ age: 16
 
 ---
 
-## Értékek módosítása referencia szerint
+### Értékek módosítása referencia szerint
 
 ```php
 $numbers = [1, 2, 3];
@@ -218,9 +216,9 @@ Array
 
 ---
 
-# `break` és `continue`
+## `break` és `continue`
 
-## `break` – ciklus megszakítása
+### `break` – ciklus megszakítása
 
 ```php
 for ($i = 1; $i <= 10; $i++) {
@@ -239,7 +237,7 @@ for ($i = 1; $i <= 10; $i++) {
 
 ---
 
-## `continue` – ugrás a következő iterációra
+### `continue` – ugrás a következő iterációra
 
 ```php
 for ($i = 1; $i <= 5; $i++) {
@@ -258,7 +256,7 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-## Early continue – tisztább ciklusok
+### Early continue – tisztább ciklusok
 
 ```php
 for ($i = 1; $i <= 5; $i++) {
@@ -276,7 +274,7 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-# `for` vs `foreach` – mikor melyiket?
+## `for` vs `foreach` – mikor melyiket?
 
 | Feladat | Ajánlott ciklus |
 |--------|------------------|
@@ -287,7 +285,7 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-# Off-by-one hibák
+## Off-by-one hibák
 
 ```php
 for ($i = 0; $i <= 5; $i++) {
@@ -313,38 +311,17 @@ for ($i = 0; $i < 5; $i++) {
 
 ---
 
-# Big O – nagyon röviden
+# Tipikus hibák
 
-```php
-for (...) {
-    ...
-}
-```
-
-→ **O(n)**
-
-```php
-for (...) {
-    for (...) {
-        ...
-    }
-}
-```
-
-→ **O(n²)**
-
----
-
-# Info blokk – tipikus hibák
-
-:::info Tipikus hibák ciklusoknál
+:::info 
+Tipikus hibák ciklusoknál
 - off-by-one hibák (`<=` vs `<`)
 - léptetés elfelejtése → végtelen ciklus
 - tömb bejárása `for`-ral `foreach` helyett
 - `continue` félreértése
 - dupla ciklusok indokolatlan használata (O(n²))
 - referencia szerinti foreach hibás használata
-  :::
+:::
 
 ---
 

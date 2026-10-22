@@ -4,8 +4,6 @@ slug: /php/fajlkezeles/fajlok-olvasasa
 title: "Fájlok olvasása"
 ---
 
-# Fájlok olvasása
-
 A PHP lehetővé teszi, hogy fájlok tartalmát beolvassuk és feldolgozzuk.  
 Ez gyakran hasznos naplózásnál, konfigurációknál vagy egyszerű adatkezelésnél.
 

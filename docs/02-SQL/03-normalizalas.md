@@ -4,8 +4,6 @@ slug: /sql/normalizalas
 title: "Adatbázis-normalizálás és a 3. normál forma"
 ---
 
-# Adatbázis-normalizálás és a 3. normál forma
-
 A normalizálás célja, hogy az adatokat úgy osszuk fel táblákba, hogy csökkenjen az ismétlődés, és az adatok módosítása ne okozzon ellentmondásokat.
 
 A Northwind adatbázis már több fontos normalizálási elvet alkalmaz. A leckében először egy szándékosan rossz, egyetlen táblás szerkezetet alakítunk át 1NF, 2NF, majd 3NF formára.

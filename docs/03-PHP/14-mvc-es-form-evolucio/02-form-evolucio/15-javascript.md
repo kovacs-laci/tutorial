@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/form-evolucio/javascript
 title: "8.7 AJAX, Fetch és Async/Await megoldások"
 ---
 
-# 8.7 AJAX, Fetch és Async/Await megoldások
-
 A 8.6 fejezetben elkészült a dinamikus felület HTML‑része, ahol év → osztály → diákok sorrendben lehet választani.  
 Ebben a fejezetben azt nézzük meg, hogyan lehet ezt a működést JavaScript segítségével megvalósítani.
 

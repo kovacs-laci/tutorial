@@ -4,8 +4,6 @@ slug: /rest-api-client/flutter/app-styles
 title: AppStyles – Központosított stíluskezelés Flutterben
 ---
 
-# AppStyles – Központosított stíluskezelés Flutterben
-
 Ebben a leckében az `AppStyles` osztályt vizsgáljuk meg.
 
 Ez a komponens felel:

@@ -5,8 +5,6 @@ sidebar_label: ShowView
 slug: /rest-client/counties/show-view
 ---
 
-# ShowView – Megye adatainak megjelenítése
-
 A REST API kliensben minden oldal külön View osztályt kap, a Laravel gyakorlatát követve.  
 A `ShowView` feladata:
 

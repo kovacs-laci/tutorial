@@ -3,8 +3,6 @@ sidebar_position: 0
 title: "Bevezető"
 ---
 
-# Bevezető
-
 Ez az oldal rövid áttekintést ad arról, hogy milyen témákat találsz ebben a tananyagban.  
 A cél, hogy lépésről lépésre, gyakorlati példákkal ismerkedj meg a modern szoftverfejlesztés alapjaival.
 

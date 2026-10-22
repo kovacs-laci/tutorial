@@ -4,14 +4,10 @@ slug: /php/szintaxis/kiiras-kommentek
 title: "Kiírás és kommentek"
 ---
 
-# Kiírás és kommentek
-
 A PHP-ban többféleképpen írhatunk ki szöveget, és többféleképpen kommentelhetünk.  
 Ez az egyik legalapvetőbb szintaxis, amelyet minden PHP fájlban használni fogsz.
 
 ---
-
-# Kiírás
 
 ## `echo`
 

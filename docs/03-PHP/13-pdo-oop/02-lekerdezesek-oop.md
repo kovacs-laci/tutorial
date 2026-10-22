@@ -4,8 +4,6 @@ slug: /php/pdo-oop/lekerdezesek-oop
 title: "OOP alapú lekérdezések PDO-val"
 ---
 
-# OOP alapú lekérdezések PDO-val
-
 Ebben a fejezetben az adatbázis‑lekérdezéseket objektumorientált módon szervezzük.  
 
 A cél, hogy bemutassuk:

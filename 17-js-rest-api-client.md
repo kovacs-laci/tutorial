@@ -4,8 +4,6 @@ slug: /js-rest-api-client
 title: "JavaScript REST API kliens és frontend"
 ---
 
-# JavaScript REST API kliens és frontend
-
 Ebben a fejezetben egy **JavaScript kliens osztályt** készítünk a korábban kidolgozott **Product REST API**‑hoz, majd bemutatjuk, hogyan lehet egy egyszerű **HTML + JS frontend** segítségével meghívni a végpontokat.
 
 ---

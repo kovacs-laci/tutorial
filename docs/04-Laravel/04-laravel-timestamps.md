@@ -4,8 +4,6 @@ slug: /laravel/timestamps
 title: "Timestamps és Soft Delete a Laravelben"
 ---
 
-# Timestamps és Soft Delete a Laravelben
-
 Ebben a leckében megismerjük:
 
 - a `created_at` és `updated_at` mezők szerepét

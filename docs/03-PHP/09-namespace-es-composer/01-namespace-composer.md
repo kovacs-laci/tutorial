@@ -4,8 +4,6 @@ slug: /php/namespace-es-composer/namespace-composer
 title: "Namespaces és Composer autoload"
 ---
 
-# Namespaces és Composer autoload
-
 A modern PHP fejlesztés egyik alapköve a **namespace** és a **Composer autoload**.  
 Ezek teszik lehetővé, hogy a kódunk:
 

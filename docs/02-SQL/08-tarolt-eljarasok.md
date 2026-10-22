@@ -4,8 +4,6 @@ slug: /sql/tarolt-eljarasok/tarolt-eljarasok
 title: "Tárolt eljárások MySQL-ben"
 ---
 
-# Tárolt eljárások MySQL-ben
-
 A tárolt eljárás az adatbázisban elmentett, névvel meghívható SQL-program. Ez a lecke a projekt Northwind-scriptjével használt MySQL/MariaDB szintaxist követi.
 
 ## Egyszerű eljárás

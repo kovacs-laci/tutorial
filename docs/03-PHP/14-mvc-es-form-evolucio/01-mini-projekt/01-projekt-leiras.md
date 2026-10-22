@@ -4,9 +4,6 @@ slug: /php/mvc-es-form-evolucio/mini-projekt/projekt-leiras
 title: "Projektleírás"
 ---
 
-# Mini projekt – Iskolai rendszer
-## Projektleírás
-
 Ez a mini projekt egy egyszerű, de jól bővíthető **Iskolai rendszer** (School Management System), amelynek célja, hogy megismerjük egy modern PHP‑alkalmazás felépítését:
 
 - **Objektumorientált programozás**

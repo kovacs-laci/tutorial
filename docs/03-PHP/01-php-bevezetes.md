@@ -4,8 +4,6 @@ slug: /php/bevezetes/php-bevezetes
 title: "Bevezetés"
 ---
 
-# Bevezetés
-
 A PHP egy általános célú programozási nyelv, amelyet elsősorban dinamikus weboldalak és webalkalmazások készítésére használunk. A nyelv jól együttműködik a HTML-lel, adatbázisokkal és a webes protokollokkal, ezért a kisebb oldalaktól az összetett rendszerekig sokféle feladatra alkalmas.
 
 ## Mit jelent a PHP?

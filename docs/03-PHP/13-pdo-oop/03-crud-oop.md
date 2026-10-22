@@ -4,8 +4,6 @@ slug: /php/pdo-oop/crud-oop
 title: "OOP alapú CRUD alkalmazás PDO-val"
 ---
 
-# OOP alapú CRUD alkalmazás PDO-val
-
 Ebben a fejezetben egy teljes CRUD alkalmazást készítünk **objektumorientált szemlélettel**.  
 A cél, hogy megértsük:
 

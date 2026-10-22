@@ -4,8 +4,6 @@ slug: /php/kornyezet-es-elso-program/php-xdebug
 title: "Xdebug – PHP hibakeresés"
 ---
 
-# Xdebug – PHP hibakeresés
-
 Az Xdebug egy PHP‑bővítmény, amely lehetővé teszi a kód futásának lépésenkénti vizsgálatát.  
 A program futása megállítható, a változók értékei megtekinthetők, és követhető, hogyan jut el a kód egy adott eredményhez.
 

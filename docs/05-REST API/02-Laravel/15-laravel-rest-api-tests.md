@@ -4,8 +4,6 @@ slug: /laravel/rest-api-tests
 title: "REST API tesztek"
 ---
 
-# REST API tesztek 
-
 A REST API végpontok automata tesztelése biztosítja, hogy a backend funkciók helyesen működjenek, és a hibák időben kiderüljenek.  
 Fontos, hogy a tesztek **ne módosítsák az éles adatbázist**, ezért külön tesztadatbázist használunk.
 

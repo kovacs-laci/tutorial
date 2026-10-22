@@ -4,8 +4,6 @@ slug: /sql
 title: "Áttekintés"
 ---
 
-# Áttekintés
-
 Ez a tananyag a relációs adatbázisok alapjaitól a többtáblás lekérdezésekig vezet. Minden gyakorlati példa a projekt Northwind-adatbázisára épül: [Northwind telepítőscript](/files/install_northwind.sql).
 
 ## Northwind telepítése és mentése

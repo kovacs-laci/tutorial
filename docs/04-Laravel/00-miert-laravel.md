@@ -4,8 +4,6 @@ slug: /laravel/why-laravel
 title: "Miért Laravel?"
 ---
 
-# Miért Laravel?
-
 A Laravel az egyik legnépszerűbb PHP keretrendszer, amelyet webfejlesztők világszerte használnak modern, robusztus és skálázható alkalmazások készítésére.
 
 ---

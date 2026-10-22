@@ -4,8 +4,6 @@ slug: /sql/osszetett-lekerdezesek/joinok-es-osszegzes
 title: "JOIN-ok, alkérdések és összesítés"
 ---
 
-# JOIN-ok, alkérdések és összesítés
-
 A Northwind ereje a táblák közötti kapcsolatokban van. Először összekapcsoljuk a táblákat, majd az eredményt csoportosítjuk és összesítjük.
 
 ## INNER JOIN

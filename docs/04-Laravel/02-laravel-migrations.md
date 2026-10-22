@@ -4,8 +4,6 @@ slug: /laravel/migrations
 title: "Adatbázis táblák létrehozása migrációval"
 ---
 
-# Adatbázis táblák létrehozása migrációval
-
 A **migrációk** a Laravelben olyan verziókövetett fájlok, amelyek az adatbázis szerkezetének (táblák, oszlopok, indexek) létrehozását és módosítását írják le.
 
 Segítségükkel az adatbázis változtatásai **kód formájában dokumentálhatók és megoszthatók**, így a fejlesztőcsapat minden tagja ugyanazt a struktúrát tudja előállítani.

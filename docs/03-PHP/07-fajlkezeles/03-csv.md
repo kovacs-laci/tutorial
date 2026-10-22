@@ -4,8 +4,6 @@ slug: /php/fajlkezeles/csv
 title: "CSV fájlok kezelése"
 ---
 
-# CSV fájlok kezelése
-
 A CSV (Comma Separated Values) egyszerű, szöveges formátum táblázatos adatok tárolására.  
 PHP-ban könnyen olvasható és írható.
 

@@ -4,8 +4,6 @@ slug: /php/webes-mukodes/validacio
 title: "Űrlapok validálása"
 ---
 
-# Űrlapok validálása
-
 A validáció célja, hogy ellenőrizzük: a felhasználó helyes adatokat adott-e meg.
 
 A validáció lehet:
@@ -17,7 +15,7 @@ Ebben a fejezetben a szerveroldali validációt nézzük.
 
 ---
 
-# Miért van szükség validációra?
+## Miért van szükség validációra?
 
 A böngészőben futó ellenőrzések könnyen megkerülhetők, ezért a szervernek minden beküldött adatot ellenőriznie kell.
 
@@ -36,9 +34,11 @@ A validáció segítségével:
 - ellenőrizhetjük az adatok hosszát;
 - kiszűrhetjük a hibás vagy rosszindulatú adatokat.
 
+A validáció mellett a dinamikusan előállított HTML-ben megjelenített adatokat is escape-elni kell. A [dinamikus weboldal készítése lecke](/docs/php/webes-mukodes/dinamikus-weboldal) példákat mutat erre.
+
 ---
 
-# Kötelező mező ellenőrzése
+## Kötelező mező ellenőrzése
 
 ```php
 if (empty($_POST["name"])) {
@@ -50,7 +50,7 @@ Az `empty()` függvény igaz értéket ad vissza, ha a mező üres.
 
 ---
 
-# A feldolgozás megszakítása hiba esetén
+## A feldolgozás megszakítása hiba esetén
 
 Az alábbi megoldás nem ideális:
 
@@ -79,7 +79,7 @@ A `return` megszakítja az aktuális feldolgozást.
 
 ---
 
-# Szám ellenőrzése
+## Szám ellenőrzése
 
 ```php
 $age = $_POST["age"];
@@ -94,7 +94,7 @@ Az `is_numeric()` ellenőrzi, hogy az érték számmá alakítható-e.
 
 ---
 
-# Minimális és maximális hossz
+## Minimális és maximális hossz
 
 Gyakori igény például jelszavaknál a minimális karakterszám ellenőrzése.
 
@@ -118,7 +118,7 @@ if (mb_strlen($password) > 50) {
 
 ---
 
-# E-mail cím ellenőrzése
+## E-mail cím ellenőrzése
 
 A PHP beépített szűrőket biztosít az e-mail címek ellenőrzéséhez.
 
@@ -146,7 +146,7 @@ valami@
 
 ---
 
-# Több hiba összegyűjtése
+## Több hiba összegyűjtése
 
 Valós alkalmazásokban általában nem az első hibánál állunk meg.
 
@@ -177,7 +177,7 @@ echo "Sikeres beküldés!";
 
 ---
 
-# Visszatérés az űrlaphoz
+## Visszatérés az űrlaphoz
 
 A valóságban a hibák megjelenítése után általában visszatérünk az űrlaphoz.
 
@@ -196,7 +196,7 @@ Az `exit` leállítja a szkript futását.
 
 ---
 
-# Felhasználói adatok biztonságos megjelenítése
+## Felhasználói adatok biztonságos megjelenítése
 
 A validálás önmagában nem elegendő.
 
@@ -218,14 +218,14 @@ akkor a böngésző JavaScript kódként próbálhatja értelmezni.
 
 ---
 
-# htmlspecialchars() használata
+## htmlspecialchars() használata
 
 A `htmlspecialchars()` biztonságosan HTML szöveggé alakítja a speciális karaktereket.
 
 ```php
-$name = $_POST["name"];
+$name = $_POST["name"] ?? "";
 
-echo htmlspecialchars($name);
+echo htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 ```
 
 Beküldött adat:
@@ -244,7 +244,7 @@ A kód ilyenkor nem fut le, csak szövegként jelenik meg.
 
 ---
 
-# Miért fontos az escape-elés?
+## Miért fontos az escape-elés?
 
 A validálás és az escape-elés nem ugyanaz.
 
@@ -261,7 +261,7 @@ azt ellenőrzi, hogy megfelelő adat érkezett-e.
 Az escape-elés:
 
 ```php
-echo htmlspecialchars($_POST["name"]);
+echo htmlspecialchars($_POST["name"] ?? "", ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 ```
 
 pedig azt biztosítja, hogy a megjelenítés során a felhasználó ne tudjon HTML vagy JavaScript kódot futtatni.
@@ -270,7 +270,7 @@ pedig azt biztosítja, hogy a megjelenítés során a felhasználó ne tudjon HT
 
 ---
 
-# Validálás kivételekkel
+## Validálás kivételekkel
 
 Korábban már tanultunk kivételkezelést.
 
@@ -297,7 +297,7 @@ try {
 
 ---
 
-# Több ellenőrzés kivételekkel
+## Több ellenőrzés kivételekkel
 
 ```php
 try {
@@ -326,7 +326,7 @@ Ez különösen akkor hasznos, ha sok egymásra épülő ellenőrzést végzünk
 
 ---
 
-# Komplett példa
+## Komplett példa
 
 ```php
 $errors = [];
@@ -345,13 +345,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if (count($errors) > 0) {
 
     foreach ($errors as $error) {
-        echo "<p>" . htmlspecialchars($error) . "</p>";
+        echo "<p>" . htmlspecialchars($error, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "</p>";
     }
 
     return;
 }
 
-echo "Szia, " . htmlspecialchars($name) . "!";
+echo "Szia, " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "!";
 ```
 
 A példában több korábban tanult technika is megjelenik:
@@ -366,7 +366,7 @@ A példában több korábban tanult technika is megjelenik:
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlófeladatok
 
 1. Készíts űrlapot név és életkor mezővel, majd ellenőrizd, hogy az életkor szám-e.
 2. Készíts űrlapot e-mail mezővel, és validáld az e-mail címet.

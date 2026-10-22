@@ -4,8 +4,6 @@ slug: /php/pdo-lekerdezesek-crud/joinok-es-lekerdezesek
 title: "JOIN-ok és összetettebb lekérdezések"
 ---
 
-# JOIN-ok és összetettebb lekérdezések
-
 A kapcsolódó táblák adatait `JOIN` segítségével kérdezhetjük le egyetlen eredményben.
 
 ```php

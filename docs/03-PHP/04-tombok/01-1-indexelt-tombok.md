@@ -4,8 +4,6 @@ slug: /php/tombok/indexelt-tombok
 title: "Indexelt tömbök"
 ---
 
-# Indexelt tömbök
-
 Az indexelt tömbökben az elemeket **számozott indexek** alapján érjük el.  
 Az első elem indexe mindig **0**.
 

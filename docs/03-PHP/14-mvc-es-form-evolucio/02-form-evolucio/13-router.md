@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/form-evolucio/router
 title: "8.5 Router bővítése osztályokkal és diákokkal"
 ---
 
-# 8.5 Router bővítése osztályokkal és diákokkal
-
 A Router a projekt központi eleme: minden kérés ide fut be, és a `page` paraméter alapján dönti el, melyik controller kezelje azt. A 7.0 fejezetben a Tantárgyak modul már működött, most pedig kibővítjük a Routert az **osztályok** és **diákok** kezelésével, valamint az AJAX/fetch/async végpontokkal.
 
 A cél, hogy a következő URL-ek mind működjenek:

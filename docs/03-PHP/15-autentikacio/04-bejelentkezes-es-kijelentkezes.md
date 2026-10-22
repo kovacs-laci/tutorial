@@ -4,8 +4,6 @@ slug: /php/autentikacio/bejelentkezes-es-kijelentkezes
 title: "Login és Logout példa"
 ---
 
-# Login és Logout MVC mintával (PHP példával)
-
 Ez a fejezet a korábbi regisztrációs példára épül, és bemutatja:
 
 - hogyan történik a **bejelentkezés** (login),

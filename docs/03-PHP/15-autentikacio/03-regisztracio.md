@@ -4,8 +4,6 @@ slug: /php/autentikacio/regisztracio
 title: "Regisztráció példa"
 ---
 
-# Regisztráció MVC mintával (PHP példával, kódmagyarázatokkal)
-
 Ez a fejezet bemutatja, hogyan épül fel egy **regisztrációs folyamat** a klasszikus **MVC tervezési minta** szerint tiszta PHP-ben.
 
 A rendszer:

@@ -4,8 +4,6 @@ slug: /php/jogosultsagkezeles/szerepkorok
 title: "Szerepkörkezelés (RBAC) példa"
 ---
 
-# Szerepkörkezelés (RBAC) MVC mintával – PHP példával
-
 A szerepkörkezelés (RBAC – Role-Based Access Control) célja, hogy a rendszer meghatározza:
 
 - ki milyen funkciókat érhet el,

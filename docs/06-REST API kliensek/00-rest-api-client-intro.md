@@ -5,8 +5,6 @@ title: "REST API kliens – Bevezetés"
 sidebar_label: Bevezető
 ---
 
-# REST API kliens – Bevezetés
-
 A modern webalkalmazások többsége már nem közvetlenül az adatbázissal kommunikál.  
 Az adatok kezelését egy **köztes réteg**, egy **REST API** végzi, amelyhez a különböző kliensek (web, mobil, desktop, más backend rendszerek) **HTTP kéréseken keresztül** kapcsolódnak.
 

@@ -4,8 +4,6 @@ slug: /php/autentikacio/jelszo-visszaallitas
 title: "Jelszó-visszaállítás"
 ---
 
-# Jelszó-visszaállítás
-
 A jelszó-visszaállításnál a rendszer ne árulja el, hogy az e-mail-címhez tartozik-e fiók. A felhasználó minden esetben ugyanazt az általános választ kapja.
 
 ## Biztonságos folyamat

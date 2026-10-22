@@ -4,8 +4,6 @@ slug: /php/jogosultsagkezeles/autentikacio-es-autorizacio
 title: "Autentikáció és autorizáció"
 ---
 
-# Autentikáció és autorizáció
-
 Az autentikáció azt válaszolja meg, hogy ki a felhasználó. Az autorizáció azt, hogy az adott felhasználó mit tehet.
 
 ## Ellenőrzési folyamat

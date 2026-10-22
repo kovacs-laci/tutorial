@@ -32,67 +32,27 @@ A leggyakrabban használt szuperglobális változók:
 
 ## `$_GET`
 
-A `$_GET` tömb az URL paramétereit tartalmazza.
-
-Példa URL:
-
-```text
-page.php?name=Anna
-```
-
-PHP:
-
-```php
-echo $_GET["name"];
-```
-
-Kimenet:
-
-```text
-Anna
-```
-
-A GET adatokat gyakran használjuk:
+A `$_GET` tömb az URL-ben átadott paramétereket tartalmazza. Tipikus felhasználása:
 
 - keresőmezőknél;
 - szűréseknél;
 - lapozásnál;
 - URL-ben átadható adatoknál.
 
+Az űrlapok GET metódussal való beküldését és az érkező adatok feldolgozását a [GET és POST kérések leckében](./02-get-post.md) mutatjuk be.
+
 ---
 
 ## `$_POST`
 
-A `$_POST` az űrlapokból érkező POST adatokat tartalmazza.
-
-```html
-<form method="POST">
-
-    <input
-        type="text"
-        name="message">
-
-    <button type="submit">
-        Küldés
-    </button>
-
-</form>
-```
-
-PHP:
-
-```php
-echo $_POST["message"];
-```
-
-A POST adatokat általában:
+A `$_POST` tömb a POST-kéréssel beküldött űrlapadatokat tartalmazza. Tipikus felhasználása:
 
 - bejelentkezésekhez;
 - regisztrációkhoz;
 - kapcsolatfelvételi űrlapokhoz;
 - adatmentéshez
 
-használjuk.
+használjuk. Az űrlapok felépítését és a POST-adatok ellenőrzését a [GET és POST kérések leckében](./02-get-post.md) találod.
 
 ---
 
@@ -169,17 +129,7 @@ Kimenet:
 - a böngésző azonosítása;
 - a kliens IP-címének lekérdezése.
 
-### Ellenőrzés, hogy POST kérés érkezett-e
-
-```php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    echo "Az űrlapot elküldték.";
-
-}
-```
-
-Ez az egyik leggyakrabban használt PHP-s minta.
+Az űrlap beküldésének és a kérés metódusának ellenőrzésére a [GET és POST kérések leckében](./02-get-post.md) látsz példát.
 
 ---
 
@@ -400,294 +350,9 @@ setcookie(
 
 ## `$_FILES`
 
-A `$_FILES` tömb a feltöltött fájlok adatait tartalmazza.
+A `$_FILES` tömb a feltöltött fájlok adatait tartalmazza. A feltöltés űrlapjának `POST` metódust és `enctype="multipart/form-data"` attribútumot kell használnia.
 
-Akkor jön létre, amikor a felhasználó fájlt tölt fel egy űrlapon keresztül.
-
-### Fájlfeltöltő űrlap
-
-```html
-<form
-    method="POST"
-    enctype="multipart/form-data">
-
-    <input
-        type="file"
-        name="document">
-
-    <button type="submit">
-        Feltöltés
-    </button>
-
-</form>
-```
-
-> Fájlfeltöltés esetén az `enctype="multipart/form-data"` attribútum kötelező.
-
----
-
-### Fájl adatainak kiírása
-
-```php
-print_r($_FILES["document"]);
-```
-
-Példa eredmény:
-
-```php
-Array
-(
-    [name] => jegyzet.pdf
-    [type] => application/pdf
-    [tmp_name] => /tmp/php123
-    [error] => 0
-    [size] => 125000
-)
-```
-
-### Gyakran használt elemek
-
-**Fájlnév**
-
-```php
-$_FILES["document"]["name"]
-```
-
----
-
-**Méret bájtban**
-
-```php
-$_FILES["document"]["size"]
-```
-
----
-
-**Ideiglenes fájl neve**
-
-```php
-$_FILES["document"]["tmp_name"]
-```
-
----
-
-**Hibakód**
-
-```php
-$_FILES["document"]["error"]
-```
-
-A fájlfeltöltésekkel később külön fejezetben részletesen is foglalkozunk.
-
----
-
-### Kép feltöltése és megjelenítése
-
-A feltöltött fájlokat általában először át kell helyezni az ideiglenes helyükről egy végleges mappába.
-
-**Űrlap**
-
-```html
-<form
-    method="POST"
-    enctype="multipart/form-data">
-
-    <input
-        type="file"
-        name="profilePicture">
-
-    <button type="submit">
-        Feltöltés
-    </button>
-
-</form>
-```
-
-> Fájlfeltöltés esetén az `enctype="multipart/form-data"` attribútum kötelező.
-
----
-
-### Sikeres volt a feltöltés?
-
-A PHP a `$_FILES["..."]["error"]` mezőben tárolja a feltöltés eredményét.
-
-```php
-if ($_FILES["profilePicture"]["error"] !== 0) {
-
-    echo "Hiba történt a feltöltés során.";
-
-    return;
-}
-
-echo "A feltöltés sikeres volt.";
-```
-
-A `0` érték azt jelenti, hogy a feltöltés hiba nélkül megtörtént.
-
----
-
-### Fájladatok kiírása
-
-```php
-if ($_FILES["profilePicture"]["error"] !== 0) {
-
-    echo "Hiba történt a feltöltés során.";
-
-    return;
-}
-
-echo "Fájlnév: "
-    . $_FILES["profilePicture"]["name"];
-
-echo "<br>";
-
-echo "Méret: "
-    . $_FILES["profilePicture"]["size"]
-    . " bájt";
-```
-
-A példában csak akkor folytatjuk a feldolgozást, ha a feltöltés sikeres volt.
-
----
-
-### A fájl áthelyezése
-
-A feltöltött fájl először egy ideiglenes mappába kerül. A `move_uploaded_file()` függvénnyel helyezhetjük át egy végleges helyre.
-
-```php
-if ($_FILES["profilePicture"]["error"] !== 0) {
-
-    echo "Hiba történt a feltöltés során.";
-
-    return;
-}
-
-$uploadDirectory = "uploads/";
-
-$fileName = $_FILES["profilePicture"]["name"];
-
-move_uploaded_file(
-    $_FILES["profilePicture"]["tmp_name"],
-    $uploadDirectory . $fileName
-);
-
-echo "A feltöltés sikeres volt.";
-```
-
----
-
-### A feltöltött kép megjelenítése
-
-```php
-if ($_FILES["profilePicture"]["error"] !== 0) {
-
-    echo "Hiba történt a feltöltés során.";
-
-    return;
-}
-
-$uploadDirectory = "uploads/";
-
-$fileName = $_FILES["profilePicture"]["name"];
-
-move_uploaded_file(
-    $_FILES["profilePicture"]["tmp_name"],
-    $uploadDirectory . $fileName
-);
-
-echo "\"{$uploadDirectory}{$fileName}\"";
-```
-
-A példában:
-
-1. ellenőrizzük, hogy a feltöltés sikeres volt-e;
-2. áthelyezzük a fájlt a végleges mappába;
-3. megjelenítjük a feltöltött képet a böngészőben.
-
----
-
-### Fontos biztonsági megjegyzés
-
-A fenti példa oktatási célú.
-
-Valódi alkalmazásokban mindig ellenőrizni kell:
-
-- a fájl méretét;
-- a fájl típusát;
-- a kiterjesztést;
-- a feltöltési hibákat;
-- valamint érdemes egyedi fájlnevet generálni.
-
-Például:
-
-```php
-$fileName = uniqid() . ".jpg";
-```
-
-A biztonságos fájlfeltöltéssel később külön fejezetben foglalkozunk részletesen.
-
----
-
-### Ismétlés: kivételkezelés használata
-
-A korábban tanult kivételkezelés fájlfeltöltésnél is alkalmazható.
-
-```php
-try {
-
-    if ($_FILES["profilePicture"]["error"] !== 0) {
-        throw new Exception(
-            "Hiba történt a feltöltés során."
-        );
-    }
-
-    $uploadDirectory = "uploads/";
-
-    $fileName = $_FILES["profilePicture"]["name"];
-
-    move_uploaded_file(
-        $_FILES["profilePicture"]["tmp_name"],
-        $uploadDirectory . $fileName
-    );
-
-    echo "A feltöltés sikeres volt.";
-
-} catch (Exception $exception) {
-
-    echo $exception->getMessage();
-
-}
-```
-
-Ebben a példában a feltöltési hibát kivételként kezeljük, majd a `catch` ágban jelenítjük meg a hibaüzenetet.
-
-A PHP alkalmazásokban egyszerű validációs feladatoknál gyakran elegendő az early return használata. A kivételkezelés elsősorban összetettebb hibakezelési helyzetekben hasznos.
-
-Egyszerű megoldás (jelenlegi ajánlott minta):
-
-```php
-if ($_FILES["profilePicture"]["error"] !== 0) {
-
-    echo "Hiba történt.";
-
-    return;
-}
-```
-
-és
-
-Kivételes megoldás:
-
-```php
-try {
-
-    ...
-
-} catch (Exception $exception) {
-
-    ...
-}
-```
+A fájl feldolgozásának, ellenőrzésének és áthelyezésének részletes példái a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) találhatók. Röviden: az `$_FILES["kep"]["error"]` jelzi a feltöltés eredményét, az `$_FILES["kep"]["tmp_name"]` az ideiglenes fájl útvonala, az `$_FILES["kep"]["size"]` a méret bájtban. A kliens által küldött fájlnevet és típust nem szabad megbízható adatként kezelni.
 
 ---
 ## Összefoglalás
@@ -706,16 +371,13 @@ try {
 
 ## Gyakorlófeladatok
 
-1. Készíts URL-t, amely egy `name` paramétert ad át, majd írd ki a `$_GET` segítségével.
-2. Készíts POST űrlapot, és jelenítsd meg a beküldött adatot.
-3. Írd ki az aktuális kérés típusát a `$_SERVER["REQUEST_METHOD"]` segítségével.
-4. Írd ki a látogató böngészőjét a `$_SERVER["HTTP_USER_AGENT"]` használatával.
-5. Tárolj egy felhasználónevet sessionben, majd jelenítsd meg egy másik oldalon.
-6. Törölj egy session változót az `unset()` használatával.
-7. Készíts cookie-t, amely eltárolja a kiválasztott témát (`light` vagy `dark`).
-8. Olvasd ki a cookie értékét.
-9. Tölts fel egy fájlt, majd írd ki a nevét és a méretét.
-10. Vizsgáld meg a `$_FILES` tömb tartalmát a `print_r()` segítségével.
+1. Írd ki az aktuális kérés típusát a `$_SERVER["REQUEST_METHOD"]` segítségével.
+2. Írd ki a látogató böngészőjét a `$_SERVER["HTTP_USER_AGENT"]` használatával.
+3. Tárolj egy felhasználónevet sessionben, majd jelenítsd meg egy másik oldalon.
+4. Törölj egy session változót az `unset()` használatával.
+5. Készíts cookie-t, amely eltárolja a kiválasztott témát (`light` vagy `dark`).
+6. Olvasd ki a cookie értékét.
+7. Készíts fájlfeltöltő űrlapot, majd dolgozd fel a feltöltést a [Fájlfeltöltés leckében](../08-fajlkezeles/04-fajlfeltoltes.md) leírtak szerint.
 
 ---
 

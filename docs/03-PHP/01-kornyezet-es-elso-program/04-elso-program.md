@@ -4,8 +4,6 @@ slug: /php/kornyezet-es-elso-program/elso-program
 title: "Az első PHP program"
 ---
 
-# Az első PHP program
-
 Ebben a fejezetben elkészíted az első működő PHP‑oldaladat.  
 A PHP a szerveren fut, és a böngésző csak a generált HTML‑t jeleníti meg.
 

@@ -4,8 +4,6 @@ slug: /laravel/seeders
 title: "Seederek létrehozása"
 ---
 
-# Seederek létrehozása
-
 A **seederek** a Laravelben az adatbázis táblák feltöltésére szolgálnak kezdeti vagy tesztadatokkal.  
 Segítségükkel a fejlesztési környezet gyorsan újratölthető, és a projekt mindig azonos alapadatokkal indulhat.
 

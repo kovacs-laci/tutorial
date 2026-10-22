@@ -4,8 +4,6 @@ slug: /rest-api-client/js/main
 title: A JavaScript belépési pont – main.js 
 ---
 
-# A JavaScript belépési pont – main.js
-
 A `main.js` a teljes HTML+JS REST API kliens **központi vezérlő modulja**.
 
 Ez a fájl:

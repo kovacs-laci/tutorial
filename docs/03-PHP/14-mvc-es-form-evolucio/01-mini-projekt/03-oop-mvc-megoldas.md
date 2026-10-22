@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/mini-projekt/oop-mvc-megoldas
 title: "Megoldás"
 ---
 
-# Mini Project: School System
-
 Ez a mini projekt egy egyszerű, de jól bővíthető **School Management System**, amely modern PHP‑s szemlélettel készül:
 
 - objektumorientált felépítés
@@ -17,7 +15,7 @@ Ez a mini projekt egy egyszerű, de jól bővíthető **School Management System
 
 ---
 
-# Miért csak OOP verziót készítünk?
+## Miért csak OOP verziót készítünk?
 
 A procedurális megoldás:
 
@@ -36,19 +34,19 @@ Ezért a mini projekt **kizárólag OOP + namespace + Composer autoload** megkö
 
 ---
 
-# A rendszer felépítése (áttekintés)
+## A rendszer felépítése (áttekintés)
 
 A projekt három fő rétegre oszlik:
 
-## 1. **Model**
+### 1. **Model**
 Az adatbázissal kommunikál.  
 Minden SQL művelet itt történik.
 
-## 2. **Controller**
+### 2. **Controller**
 A logikai réteg.  
 Döntéseket hoz, adatot kér a modeltől, és átadja a view‑nak.
 
-## 3. **View**
+### 3. **View**
 A megjelenítés.  
 Csak HTML, minimális PHP‑val.
 
@@ -56,7 +54,7 @@ Ez a három réteg együtt alkot egy **mini MVC** rendszert.
 
 ---
 
-# 1. Mappastruktúra
+## 1. Mappastruktúra
 
 ```
 school-project/
@@ -87,7 +85,8 @@ school-project/
 ```
 
 ---
-# 2. public/index.php (egyetlen belépési pont)
+
+## 2. public/index.php (egyetlen belépési pont)
 
 📁 **public/index.php**
 
@@ -146,9 +145,9 @@ Ez a fájl:
 
 ---
 
-# 3. Router osztály
+## 3. Router osztály
 
-# **Felelősség**
+**Felelősség**
 
 A Router a rendszer **útvonalkezelője**.  
 Ő dönti el, hogy:
@@ -162,7 +161,7 @@ minden beérkező URL‑t értelmez, és továbbítja a megfelelő helyre.
 
 ---
 
-# **Miért fontos?**
+**Miért fontos?**
 
 Mert nélküle:
 
@@ -190,7 +189,7 @@ Ez a megközelítés pontosan úgy működik, mint a modern keretrendszerek (Lar
 
 ---
 
-# **Hogyan illeszkedik a rendszerbe?**
+**Hogyan illeszkedik a rendszerbe?**
 
 A router a teljes alkalmazás **első lépése**:
 
@@ -214,7 +213,7 @@ A router tehát a **modell → controller → view** folyamat első láncszeme.
 
 ---
 
-# **Összegzés**
+**Összegzés**
 
 A Router:
 
@@ -258,7 +257,7 @@ A router **nem futtat semmit**, csak visszaadja:
 ---
 
 
-# 4. Database osztály
+## 4. Database osztály
 **Felelősség:**  
 Ez az osztály felelős az adatbázis‑kapcsolat létrehozásáért.  
 Ez az alkalmazás „kapuja” a MySQL felé.
@@ -303,7 +302,7 @@ class Database
 
 ---
 
-# 5. Student modell
+## 5. Student modell
 **Felelősség:**  
 A `Student` osztály az adatbázisban lévő `students` tábla „képviselője”.  
 Ő felelős minden adatkezelési műveletért:
@@ -389,7 +388,7 @@ class Student
 
 ---
 
-# 6. Controller
+## 6. Controller
 **Felelősség:**  
 A controller a „rendező”: eldönti, hogy mi történjen.
 
@@ -466,7 +465,7 @@ class StudentController
 
 ---
 
-# 7. Nézetek (Views)
+## 7. Nézetek (Views)
 **Felelősség:**  
 A view csak megjelenít.  
 Semmi logika, semmi adatkezelés.
@@ -481,7 +480,7 @@ A controller átadja neki az adatot, a view pedig megjeleníti.
 
 ## LayoutView
 
-### **Felelősség**
+**Felelősség**
 A LayoutView a teljes oldal „kerete”.  
 Ő felel a:
 
@@ -493,7 +492,7 @@ A LayoutView a teljes oldal „kerete”.
 
 A LayoutView **nem tudja**, milyen tartalom kerül bele — csak megjeleníti.
 
-### **Miért fontos?**
+**Miért fontos?**
 Mert így:
 
 - a HTML alapstruktúra nem ismétlődik minden view‑ban,
@@ -503,7 +502,7 @@ Mert így:
 
 Ez a megközelítés nagyon hasonlít a Laravel Blade „layout” funkciójára.
 
-### **Hogyan illeszkedik a rendszerbe?**
+**Hogyan illeszkedik a rendszerbe?**
 A LayoutView a **legfelső szintű view**:
 
 - a StudentListView, StudentCreateView, StudentEditView mind **tartalmat** ad neki,
@@ -550,9 +549,9 @@ class LayoutView
 ```
 ---
 
-## StudentListView
+### StudentListView
 
-### **Felelősség**
+**Felelősség**
 A StudentListView feladata:
 
 - a diákok listájának megjelenítése,
@@ -561,7 +560,7 @@ A StudentListView feladata:
 
 Ez a view **csak megjelenít**, semmilyen logikát nem tartalmaz.
 
-### **Miért fontos?**
+**Miért fontos?**
 Mert így:
 
 - a HTML nem keveredik a controller logikájával,
@@ -571,7 +570,7 @@ Mert így:
 
 Látható, hogy a view **nem gondolkodik**, csak kirajzol.
 
-### **Hogyan illeszkedik a rendszerbe?**
+**Hogyan illeszkedik a rendszerbe?**
 A controller:
 
 1. lekéri a diákokat a modelltől,
@@ -617,9 +616,9 @@ class StudentListView
 
 ---
 
-## StudentCreateView
+### StudentCreateView
 
-### **Felelősség**
+**Felelősség**
 A StudentCreateView feladata:
 
 - az „Új diák felvétele” űrlap megjelenítése,
@@ -628,7 +627,7 @@ A StudentCreateView feladata:
 
 Ez a view **nem ment adatot**, nem validál, nem dönt — csak megjelenít.
 
-### **Miért fontos?**
+**Miért fontos?**
 Mert így:
 
 - az űrlap HTML‑je nem keveredik a controller logikájával,
@@ -638,7 +637,7 @@ Mert így:
 
 Látható, hogy az űrlap is csak egy „nézet”.
 
-### **Hogyan illeszkedik a rendszerbe?**
+**Hogyan illeszkedik a rendszerbe?**
 A controller:
 
 - ha GET kérés érkezik → visszaadja a StudentCreateView‑t,
@@ -678,9 +677,9 @@ class StudentCreateView
 
 ---
 
-## StudentEditView
+### StudentEditView
 
-### **Felelősség**
+**Felelősség**
 A StudentEditView feladata:
 
 - a meglévő diák adatainak megjelenítése az űrlapban,
@@ -689,7 +688,7 @@ A StudentEditView feladata:
 
 Ez a view **nem módosít adatot**, csak megjeleníti az űrlapot.
 
-### **Miért fontos?**
+**Miért fontos?**
 Mert így:
 
 - a szerkesztő űrlap HTML‑je nem keveredik a controller logikájával,
@@ -699,7 +698,7 @@ Mert így:
 
 Látható, hogy a view feladata a **prezentáció**, nem a logika.
 
-### **Hogyan illeszkedik a rendszerbe?**
+**Hogyan illeszkedik a rendszerbe?**
 A controller:
 
 1. lekéri a diák adatait a modelltől,
@@ -743,7 +742,7 @@ class StudentEditView
 
 ---
 
-# **Gyakorlófeladatok**
+## **Gyakorlófeladatok**
 
 1. Adj hozzá egy új mezőt: `email`.
 2. Készíts egy `Teacher` (tanár) modellt + controllert + teljes CRUD funkciót.

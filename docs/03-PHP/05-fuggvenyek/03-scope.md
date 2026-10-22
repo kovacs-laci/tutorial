@@ -4,14 +4,12 @@ slug: /php/fuggvenyek/scope
 title: "Változók hatóköre (scope)"
 ---
 
-# Változók hatóköre (scope)
-
 A „scope” azt jelenti, hogy egy változó **hol érhető el a programban**.  
 A PHP-ban a változók hatóköre különösen fontos, mert meghatározza, hogy egy függvény vagy kódrészlet milyen változókat lát.
 
 ---
 
-# Lokális változó
+## Lokális változó
 
 A függvényen belül létrehozott változó **csak ott érhető el**.  
 A böngészőben látható eredeti példa is ezt mutatja 
@@ -34,7 +32,7 @@ example();
 
 ---
 
-# Paraméterek mint lokális változók
+## Paraméterek mint lokális változók
 
 A függvény paraméterei **szintén lokális változók**, és nem látnak rá a külső változókra.
 
@@ -55,7 +53,7 @@ printNumber(10); // a paraméter értéke 10
 
 ---
 
-# Globális változó
+## Globális változó
 
 A függvényen kívül létrehozott változó **nem érhető el automatikusan** a függvényben.  
 
@@ -69,7 +67,7 @@ function showValue() {
 
 ---
 
-# `global` kulcsszó
+## `global` kulcsszó
 
 A böngészőben látható példa szerint a `global` kulcsszóval elérhetővé tehetjük a külső változót a függvényben 
 
@@ -98,7 +96,7 @@ showValue();
 
 ---
 
-# `$GLOBALS` tömb
+## `$GLOBALS` tömb
 
 Alternatív megoldás
 
@@ -125,7 +123,7 @@ printGlobal();
 
 ---
 
-# Statikus változó
+## Statikus változó
 
 A statikus változó **megőrzi az értékét a függvényhívások között**.  
 
@@ -157,12 +155,7 @@ counter(); // 3
 
 ---
 
-Íme a **kiegészített, teljesen beilleszthető** rész, amely pontosan ott folytatja, ahol a leckéd tartalma véget ér — és tartalmazza az `include` / `require`, valamint az `include` / `include_once` közötti különbségek magyarázatát is.  
-A szöveg minden állítása a böngészőben látott eredeti részhez kapcsolódik, különösen az *Include / require és scope* szakaszhoz   [Aktuális oldal](citation-section://1303364753/13).
-
----
-
-# Include / require és scope
+## Include / require és scope
 
 Az include-olt fájlok **nem hoznak létre új scope‑ot**.  
 A változók bekerülnek a globális hatókörbe.   [Aktuális oldal](citation-section://1303364753/13)
@@ -247,7 +240,7 @@ include_once 'header.php'; // másodszor már nem történik semmi
 
 ---
 
-# Anonim függvények és `use()`
+## Anonim függvények és `use()`
 
 Az anonim függvények **nem látják a külső változókat**, hacsak nem adjuk át őket `use()` segítségével.
 
@@ -268,19 +261,20 @@ Hello
 
 ---
 
-# Tipikus hibák
+## Tipikus hibák
 
-:::info Tipikus hibák
+:::info 
+Tipikus hibák
 - „Undefined variable” – rossz scope
 - `global` túlhasználása
 - `$GLOBALS` túlhasználása
 - closure nem látja a külső változót `use()` nélkül
 - statikus változó „bennragad” és nem nullázódik  
-  :::
+:::
 
 ---
 
-# Gyakorlófeladatok
+## Gyakorlófeladatok
 
 **1. Hozz létre egy függvényt, amelyben lokális változót használsz.**
 <details>

@@ -4,8 +4,6 @@ slug: /php/oop-alapok/metodusok
 title: "Láthatóság, bezártság és metódusok"
 ---
 
-# Láthatóság, bezártság és metódusok
-
 Az OOP egyik legfontosabb tulajdonsága a **bezártság** (encapsulation).  
 Ez azt jelenti, hogy az objektum belső működését elrejtjük, és csak meghatározott módon engedjük elérni.
 

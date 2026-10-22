@@ -4,8 +4,6 @@ slug: /laravel/factories
 title: "Factory-k használata"
 ---
 
-# Factory-k használata
-
 A **factory-k** a Laravelben az Eloquent modellekhez tartozó tesztadatok automatikus generálására szolgálnak.  
 Segítségükkel gyorsan előállíthatunk nagy mennyiségű adatot fejlesztési, tesztelési vagy bemutató célokra.
 

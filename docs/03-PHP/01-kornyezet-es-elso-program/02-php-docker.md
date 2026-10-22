@@ -4,8 +4,6 @@ slug: /php/kornyezet-es-elso-program/php-docker
 title: "PHP futtatása Dockerben"
 ---
 
-# PHP futtatása Dockerben
-
 A Docker lehetővé teszi, hogy a PHP különálló, elkülönített környezetben fusson.  
 A PHP futtatásához így nincs szükség a PHP telepítésére a gépen, mert a futtatókörnyezet a konténerben található.
 

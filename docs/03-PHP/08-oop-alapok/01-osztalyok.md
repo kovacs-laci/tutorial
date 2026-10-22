@@ -4,8 +4,6 @@ slug: /php/oop-alapok/osztalyok
 title: "OOP alapok: osztályok és objektumok"
 ---
 
-# OOP alapok: osztályok és objektumok
-
 Az objektumorientált programozás (OOP) célja, hogy a programot **objektumok** köré szervezzük.  
 Egy objektum olyan, mint egy „valós dolog” modellje: van **állapota** (tulajdonságok) és **viselkedése** (metódusok).
 

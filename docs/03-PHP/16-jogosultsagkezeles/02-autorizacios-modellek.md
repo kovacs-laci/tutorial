@@ -4,8 +4,6 @@ slug: /php/jogosultsagkezeles/autorizacios-modellek
 title: "Jogosultságkezelési modellek: RBAC, PBAC, ABAC"
 ---
 
-# Jogosultságkezelési modellek: RBAC, PBAC, ABAC
-
 A jogosultságkezelés célja, hogy a rendszer meghatározza:
 
 - ki férhet hozzá egy adott erőforráshoz,

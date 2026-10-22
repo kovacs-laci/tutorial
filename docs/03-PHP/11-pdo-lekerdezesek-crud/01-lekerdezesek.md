@@ -4,8 +4,6 @@ slug: /php/pdo-lekerdezesek-crud/lekerdezesek
 title: "Lekérdezések és prepared statementek"
 ---
 
-# Lekérdezések és prepared statementek
-
 A PDO egyik legnagyobb előnye a **prepared statement**, amely megakadályozza az SQL injection támadásokat.  
 Ebben a fejezetben minden példában **nevesített paramétereket** használunk.
 

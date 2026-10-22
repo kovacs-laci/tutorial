@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/form-evolucio/view-k
 title: "8.4 ClassView és StudentView"
 ---
 
-# 8.4 ClassView és StudentView
-
 A nézetek (View osztályok) felelősek a HTML megjelenítésért.  
 A projektben minden modul saját View osztályt kapott (pl. SubjectView), ezért az **osztályok** és **diákok** kezeléséhez is külön nézeteket készítünk:
 

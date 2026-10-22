@@ -5,8 +5,6 @@ sidebar_label: Composer init
 slug: /rest-client/composer
 ---
 
-# Composer inicializálása
-
 A REST API kliens egy modern PHP projekt lesz, ezért szükségünk van a **Composerre**, amely:
 
 - kezeli a projekt függőségeit,

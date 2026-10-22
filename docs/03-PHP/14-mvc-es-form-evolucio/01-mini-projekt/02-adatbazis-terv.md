@@ -4,8 +4,6 @@ slug: /php/mvc-es-form-evolucio/mini-projekt/adatbazis-terv
 title: "Adatbázis terv"
 ---
 
-# Mini projekt – Adatbázis terv
-
 Mielőtt bármilyen kódot írnánk, fontos megérteni, hogy **milyen adatokat kezel a rendszer**, és hogyan épül fel az adatbázis.
 
 Ez a fejezet bemutatja a School Management System első verziójának adatbázistervét.

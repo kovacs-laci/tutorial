@@ -5,8 +5,6 @@ sidebar_label: Router
 slug: /rest-client/router
 ---
 
-# Router készítése
-
 A REST API kliensünk több különböző oldalt fog megjeleníteni:
 
 - megyék listája,
