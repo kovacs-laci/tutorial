@@ -1,5 +1,5 @@
 ---
-id: ajax
+id: ajax-miniproject
 slug: /php/webes-mukodes/ajax-miniprojekt
 title: "AJAX miniprojekt"
 ---
