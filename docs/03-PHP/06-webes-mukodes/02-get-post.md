@@ -4,32 +4,55 @@ slug: /php/webes-mukodes/get-post
 title: "GET és POST kérések"
 ---
 
-A PHP-ban az űrlapokból érkező adatokat a **GET** és **POST** HTTP metódusokkal tudjuk fogadni.
+PHP-ban az űrlapokból érkező adatokat a **GET** és **POST** HTTP metódusokkal tudjuk fogadni.
 
 Mindkettő adatot küld a szerver felé, de különböző módon.
-A kapott adatot ellenőrizni kell, és HTML-kimenetbe írás előtt escape-elni kell. Erről és az adatvezérelt oldalak készítéséről a [dinamikus weboldal készítése leckében](./04-dinamikus-weboldal.md) is látsz példát.
+A böngészőből érkező adatot mindig ellenőrizni kell, és HTML-kimenetbe írás előtt escape-elni kell. A GET-et adatlekérésre, például keresésre és szűrésre használjuk; ne indítson adatot módosító műveletet. A POST alkalmas adatküldésre és módosító műveletekre, de önmagában nem teszi biztonságossá vagy titkossá az adatot. Erről és az adatvezérelt oldalak készítéséről a [dinamikus weboldal készítése leckében](./04-dinamikus-weboldal.md) is látsz példát.
 
 ---
 
 ## GET metódus
 
-A GET a címsorban küldi az adatokat:
+### Egyszerű GET űrlap
+
+```html
+<form method="GET">
+    <label for="get-name">Név:</label>
+    <input type="text" id="get-name" name="name">
+    <label for="-id-age">Életkor:</label>
+    <input
+        type="number"
+        id="id-age"
+        name="age"
+        min="16"
+        max="120">
+    <button type="submit">Keresés</button>
+</form>
+```
+
+A GET a címsorban küldi az adatokat. Beküldés után az URL például így nézhet ki:
 
 ```text
 http://localhost/oldal.php?name=Anna&age=17
 ```
 
 Az adatokat a `$_GET` szuperglobális tömb tartalmazza.
+Egy mező tömbként is érkezhet (például `name[]` esetén), ezért ellenőrizzük a várt adattípust.
+A böngésző a GET paramétereket szövegként küldi el, még akkor is, ha az input mező pl. number.
 
 ```php
 $name = $_GET["name"] ?? "";
 $age = $_GET["age"] ?? "";
 
-if (is_string($name) && is_string($age)) {
-    echo htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
-    echo "<br>";
-    echo htmlspecialchars($age, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+if (!is_string($name) || !is_string($age)) {
+    echo "Érvénytelen adatformátum.";
+    return;
 }
+
+echo "Név: " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+echo "<br>";
+echo "Életkor: " . htmlspecialchars($age, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+
 ```
 
 :::info 
@@ -99,21 +122,6 @@ A böngésző ezt már egyszerű szövegként jeleníti meg, így a beágyazott 
 
 :::
 
-### Egyszerű GET űrlap
-
-```html
-<form method="GET" action="process.php">
-    <input type="text" name="name" placeholder="Név">
-    <button type="submit">Küldés</button>
-</form>
-```
-
-Beküldés után az URL például így nézhet ki:
-
-```text
-process.php?name=Anna
-```
-
 ---
 
 ## POST metódus
@@ -127,7 +135,7 @@ Ez nem titkosítás. Érzékeny adatok kezeléséhez HTTPS, szerveroldali valid�
 
 1. A felhasználó kitölti az űrlapot
 2. A böngésző elküldi a POST kérést
-3. A PHP kiolvassa a $_POST adatokat
+3. A PHP kiolvassa a `$_POST` adatokat
 4. A PHP validálja az adatokat
 5. Hibát jelez vagy feldolgozza az adatot
 :::
@@ -136,11 +144,18 @@ Ez nem titkosítás. Érzékeny adatok kezeléséhez HTTPS, szerveroldali valid�
 
 ```html
 <form method="POST" action="process.php">
-    <input type="text" name="name" placeholder="Név">
-    <input type="password" name="password" placeholder="Jelszó">
+    <label for="id-name">Felhasználónév:</label>
+    <input type="text" id="id-name" name="name">
+    <label for="id-password">Jelszó:</label>
+    <input type="password" id="id-password" name="password">
     <button type="submit">Belépés</button>
 </form>
 ```
+Az adatokat a `$_POST` szuperglobális tömb tartalmazza.
+
+**A POST kérés HTTPS nélkül továbbra sem titkosított.**
+
+A POST kérés adatai önmagukban nem titkosítottak. Az adatok biztonságos továbbítását a HTTPS (TLS) biztosítja. A jelszavakat a szerveren soha nem szabad sima szövegként tárolni, helyettük password_hash() segítségével bcrypt vagy Argon2 alapú hash-t tárolunk. A jelszó biztonságos kezelését a bejelentkezésről szóló leckében tárgyaljuk részletesen.
 
 ---
 
@@ -151,31 +166,71 @@ Ez nem titkosítás. Érzékeny adatok kezeléséhez HTTPS, szerveroldali valid�
 | Adat helye | URL-ben | Kérés törzsében |
 | Látható az URL-ben | Igen | Nem |
 | Kérésméret | Az URL hossza korlátozott | A szerver beállításai korlátozzák |
-| Mire jó | Keresés, szűrés | Bejelentkezés, űrlapok |
+| Mire jó | Adatlekérés, keresés, szűrés | Adatküldés, adatot módosító műveletek |
+
+Az érzékeny adatokat ne GET paraméterként küldjük, mert az URL bekerülhet például a böngészési előzményekbe és a szervernaplókba. A POST nem titkosítás: érzékeny adatok továbbításához HTTPS kell, és szerveroldali ellenőrzésre is szükség van.
 
 ---
 
 ## Gyakoribb űrlapelemek
 
 A HTML számos különböző beviteli mezőt biztosít. Ezek ugyanúgy használhatók GET és POST űrlapokban is.
+Az űrlapmezőket címkézzük fel, és a `label` `for` attribútumát kapcsoljuk össze a mező egyedi `id` értékével.
 
 ### Szövegmező
 
 ```html
-<input type="text" name="name">
+<label for="name">Név:</label>
+<input type="text" id="name" name="name" placeholder="Add meg a neved">
 ```
+
+Ugyanezt a mezőt PHP-függvénnyel is előállíthatjuk. Ez a változat közvetlenül kiírja a HTML-t, ezért a függvény hívásakor nem kell külön `echo`-t használnunk. 
+
+```php
+<?php
+
+function renderInputText(
+    string $id,
+    string $name,
+    string $label,
+    string $placeholder = "",
+    string $value = ""
+): void {
+
+    echo <<<HTML
+        <label for="{$id}">{$label}</label>
+        <input type="text" id="{$id}" name="{$name}" placeholder="{$placeholder}" value="{$value}">
+    HTML;
+}
+
+renderInputText(
+    id: "name",
+    name: "name",
+    label: "Név",
+    placeholder: "Add meg a neved"
+);
+```
+
+A név szerinti argumentumok (PHP 8-tól) olvashatóbbá teszik a hívást, mint több azonos típusú érték pozíció szerinti átadása. 
+
+Az ötödik, opcionális `value` paraméterrel kezdőértéket is adhatunk meg, például `value: "Anna"` formában.
+
+A placeholder csak kiegészítő segítség, nem helyettesíti a címkét. A `label` `for` értéke és az `input` `id` értéke egyezzen meg, az `id` pedig legyen egyedi az oldalon.
+
 ---
 
 ### Szövegbox
 ```html
-<textarea name="message"></textarea>
+<label for="message">Üzenet:</label>
+<textarea id="message" name="message"></textarea>
 ```
 ---
 
 ### Jelszómező
 
 ```html
-<input type="password" name="password">
+<label for="password">Jelszó:</label>
+<input type="password" id="password" name="password">
 ```
 
 A beírt karaktereket a böngésző elrejti.
@@ -185,7 +240,8 @@ A beírt karaktereket a böngésző elrejti.
 ### E-mail mező
 
 ```html
-<input type="email" name="email">
+<label for="email">E-mail-cím:</label>
+<input type="email" id="email" name="email">
 ```
 
 A böngésző alapvető e-mail formátum ellenőrzést végez.
@@ -195,7 +251,8 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ### Szám mező
 
 ```html
-<input type="number" name="age">
+<label for="age">Életkor:</label>
+<input type="number" id="age" name="age">
 ```
 
 ---
@@ -203,7 +260,8 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ### Dátum mező
 
 ```html
-<input type="date" name="birth-date">
+<label for="birth-date">Születési dátum:</label>
+<input type="date" id="birth-date" name="birth-date">
 ```
 
 ---
@@ -211,7 +269,8 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ### Színválasztó
 
 ```html
-<input type="color" name="color">
+<label for="color">Szín:</label>
+<input type="color" id="color" name="color">
 ```
 
 ---
@@ -219,23 +278,25 @@ A böngésző alapvető e-mail formátum ellenőrzést végez.
 ### Fájlfeltöltő mező
 
 ```html
-<input type="file" name="profile-pic">
+<label for="profile-pic">Profilkép:</label>
+<input type="file" id="profile-pic" name="profile-pic">
 ```
 Fájlfeltöltéskor az űrlapnak `enctype="multipart/form-data"` attribútumra is szüksége van. A megvalósítást a [Fájlfeltöltés leckében](../07-fajlkezeles/04-fajlfeltoltes.md) mutatjuk be.
 
 ---
 
-## Kötelező mezők
+### Kötelező mezők
 
 A `required` attribútummal megadhatjuk, hogy egy mező kitöltése kötelező.
 
 ```html
 <form method="POST">
 
+    <label for="required-name">Név:</label>
     <input
         type="text"
+        id="required-name"
         name="name"
-        placeholder="Név"
         required>
 
     <button type="submit">Küldés</button>
@@ -249,7 +310,7 @@ Ha a felhasználó nem tölti ki a mezőt, a böngésző figyelmeztetést jelen�
 
 ---
 
-## Lenyíló lista (select)
+### Lenyíló lista (select)
 
 A lenyíló lista előre definiált lehetőségeket kínál a felhasználónak.
 
@@ -280,7 +341,7 @@ if (is_string($city)) {
 
 ---
 
-## Jelölőnégyzetek (checkbox)
+### Jelölőnégyzetek (checkbox)
 
 A checkboxokból egyszerre több elemet is kiválaszthatunk.
 
@@ -289,9 +350,12 @@ A checkboxokból egyszerre több elemet is kiválaszthatunk.
 
     <h3>Kedvenc programozási nyelvek</h3>
 
-    <input type="checkbox" name="languages[]" value="PHP"> PHP<br>
-    <input type="checkbox" name="languages[]" value="JavaScript"> JavaScript<br>
-    <input type="checkbox" name="languages[]" value="Python"> Python<br>
+    <input type="checkbox" id="language-php" name="languages[]" value="PHP">
+    <label for="language-php">PHP</label><br>
+    <input type="checkbox" id="language-js" name="languages[]" value="JavaScript">
+    <label for="language-js">JavaScript</label><br>
+    <input type="checkbox" id="language-python" name="languages[]" value="Python">
+    <label for="language-python">Python</label><br>
 
     <button type="submit">Küldés</button>
 
@@ -314,7 +378,7 @@ A `[]` jelölés miatt több érték tömbként érkezik meg.
 
 ---
 
-## Rádiógombok (radio)
+### Rádiógombok (radio)
 
 A rádiógombok esetén egyszerre csak egy érték választható.
 
@@ -323,9 +387,12 @@ A rádiógombok esetén egyszerre csak egy érték választható.
 
     <h3>Programozási szint</h3>
 
-    <input type="radio" name="level" value="beginner"> Kezdő
-    <input type="radio" name="level" value="advanced"> Haladó
-    <input type="radio" name="level" value="professional"> Profi
+    <input type="radio" id="level-beginner" name="level" value="beginner">
+    <label for="level-beginner">Kezdő</label>
+    <input type="radio" id="level-advanced" name="level" value="advanced">
+    <label for="level-advanced">Haladó</label>
+    <input type="radio" id="level-professional" name="level" value="professional">
+    <label for="level-professional">Profi</label>
 
     <button type="submit">Küldés</button>
 
@@ -364,7 +431,8 @@ Gyakori megoldás, hogy az űrlap és a feldolgozás ugyanabban a fájlban talá
 ```php
 <form method="POST">
 
-    <input type="text" name="name">
+    <label for="self-name">Név:</label>
+    <input type="text" id="self-name" name="name">
 
     <button type="submit">Küldés</button>
 
@@ -412,7 +480,8 @@ Nagyobb projektekben gyakran külön fájl végzi a feldolgozást.
 ```html
 <form method="POST" action="process.php">
 
-    <input type="text" name="name">
+<label for="form-name">Név:</label>
+<input type="text" id="form-name" name="name">
 
     <button type="submit">Küldés</button>
 
@@ -424,9 +493,12 @@ Nagyobb projektekben gyakran külön fájl végzi a feldolgozást.
 ```php
 <?php
 
-$name = $_POST["name"] ?? "";
-if (is_string($name)) {
-    echo "Szia, " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "!";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = $_POST["name"] ?? "";
+
+    if (is_string($name)) {
+        echo "Szia, " . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8") . "!";
+    }
 }
 ```
 
@@ -477,7 +549,7 @@ if (isset($_POST["name"])) {
 }
 ```
 
-Az `isset()` igaz értékkel tér vissza, ha a változó vagy tömbelem létezik.
+Az `isset()` akkor ad igaz értéket, ha a változó vagy tömbelem létezik, és az értéke nem `null`.
 
 ---
 
@@ -494,7 +566,7 @@ var_dump(empty($name)); // true
 
 Az `isset()` azt vizsgálja, hogy létezik-e a változó.
 
-Az `empty()` azt vizsgálja, hogy van-e benne értelmes tartalom.
+Az `empty()` többek között a `""`, `"0"`, `0`, `false`, `null` és a nem létező érték esetén is igazat ad. Ezért nem minden esetben megfelelő annak eldöntésére, hogy egy szöveges mező tartalmaz-e adatot.
 
 ---
 
@@ -503,18 +575,21 @@ Az `empty()` azt vizsgálja, hogy van-e benne értelmes tartalom.
 ```php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    if (empty($_POST["name"])) {
+    $name = $_POST["name"] ?? null;
+
+    if (!is_string($name) || trim($name) === "") {
 
         echo "A név megadása kötelező!";
 
         return;
     }
 
-    echo "Sikeres beküldés.";
+    echo "Sikeres beküldés: "
+        . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 }
 ```
 
-Ez az egyik leggyakoribb PHP-s űrlapfeldolgozási minta.
+Ez ellenőrzi a kérés metódusát, a kapott adat típusát és azt is, hogy a mező ne csak szóközöket tartalmazzon. A részletes szerveroldali ellenőrzést a [validációs leckében](./03-validacio.md) tanuljuk meg.
 
 ---
 ## Összetett példa
@@ -524,20 +599,24 @@ Az alábbi példa több gyakori űrlapelemet is tartalmaz.
 ```html
 <form method="POST" action="process.php">
 
+    <label for="id-name">Név:</label>
     <input
         type="text"
+        id="id-name"
         name="name"
-        placeholder="Név"
         required>
 
+    <label for="id-email">E-mail:</label>
     <input
         type="email"
+        id="id-email"
         name="email"
-        placeholder="E-mail"
         required>
 
+    <label for="-id-age">Életkor:</label>
     <input
         type="number"
+        id="id-age"
         name="age"
         min="1"
         max="120">
@@ -550,14 +629,19 @@ Az alábbi példa több gyakori űrlapelemet is tartalmaz.
 
     <p>Tanfolyam típusa:</p>
 
-    <input type="radio" name="course-type" value="online"> Online
-    <input type="radio" name="course-type" value="szemelyes"> Személyes
+    <input type="radio" id="course-online" name="course-type" value="online">
+    <label for="course-online">Online</label>
+    <input type="radio" id="course-in-person" name="course-type" value="szemelyes">
+    <label for="course-in-person">Személyes</label>
 
     <p>Érdeklődési kör:</p>
 
-    <input type="checkbox" name="interests[]" value="PHP"> PHP
-    <input type="checkbox" name="interests[]" value="Laravel"> Laravel
-    <input type="checkbox" name="interests[]" value="JavaScript"> JavaScript
+    <input type="checkbox" id="interest-php" name="interests[]" value="PHP">
+    <label for="interest-php">PHP</label>
+    <input type="checkbox" id="interest-laravel" name="interests[]" value="Laravel">
+    <label for="interest-laravel">Laravel</label>
+    <input type="checkbox" id="interest-js" name="interests[]" value="JavaScript">
+    <label for="interest-js">JavaScript</label>
 
     <button type="submit">Jelentkezés</button>
 
