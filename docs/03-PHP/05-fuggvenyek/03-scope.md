@@ -158,7 +158,7 @@ counter(); // 3
 ## Include / require és scope
 
 Az include-olt fájlok **nem hoznak létre új scope‑ot**.  
-A változók bekerülnek a globális hatókörbe.   [Aktuális oldal](citation-section://1303364753/13)
+A változók bekerülnek a globális hatókörbe.
 
 ```php
 // file1.php
@@ -266,8 +266,8 @@ Hello
 :::info 
 Tipikus hibák
 - „Undefined variable” – rossz scope
-- `global` túlhasználása
-- `$GLOBALS` túlhasználása
+- `global` túlhasználata
+- `$GLOBALS` túlhasználata
 - closure nem látja a külső változót `use()` nélkül
 - statikus változó „bennragad” és nem nullázódik  
 :::
