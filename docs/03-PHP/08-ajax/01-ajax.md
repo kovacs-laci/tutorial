@@ -86,10 +86,25 @@ A válasz:
 
 ## Az első fetch() kérés
 
+A legegyszerűbb példa egy gombra kattintva betölt egy JSON adatokat tartalmazó PHP-végpontot. Ahhoz, hogy a JavaScript lefusson, az `index.html` oldal alján be kell hívni az `app.js` fájlt.
+
 ```html title="index.html"
-<button id="loadButton">
-    Adatok betöltése
-</button>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX példa</title>
+</head>
+<body>
+
+    <button id="loadButton">
+        Adatok betöltése
+    </button>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
 ```
 
 ```javascript title="app.js"
