@@ -10,6 +10,20 @@ Az AJAX (Asynchronous JavaScript and XML) lehetővé teszi, hogy a böngésző a
 
 A modern webalkalmazások többsége AJAX-kéréseket használ adatok lekérésére, keresésre, szűrésre vagy dinamikus tartalom betöltésére.
 
+### Példák fájljai
+
+A leckében szereplő kódrészletek mindig jelezni fogják, hogy melyik fájlhoz tartoznak. A leggyakoribb szerkezet:
+
+```text
+projekt/
+├─ index.html
+├─ app.js
+├─ ajax.php
+└─ ...
+```
+
+A `fetch()` által küldött URL mindig a böngésző által elérhető fájlhoz kötődik, ezért a példákban a PHP és a JavaScript fájljainak ugyanabban a mappában kell lenniük.
+
 ---
 
 ## Hogyan működik?
@@ -42,7 +56,7 @@ A PHP ilyenkor nem HTML-t, hanem általában JSON adatot küld vissza.
 
 ## JSON válasz készítése PHP-ban
 
-```php
+```php title="ajax.php"
 <?php
 
 header('Content-Type: application/json');
@@ -72,14 +86,14 @@ A válasz:
 
 ## Az első fetch() kérés
 
-```html
+```html title="index.html"
 <button id="loadButton">
     Adatok betöltése
 </button>
 ```
 
-```javascript
-fetch('api.php')
+```javascript title="app.js"
+fetch('ajax.php')
     .then(response => response.json())
     .then(data => {
 
@@ -98,8 +112,8 @@ A `response.json()` a JSON választ JavaScript objektummá alakítja.
 
 A korábban tanult GET paraméterek AJAX-kérésekben is használhatók.
 
-```javascript
-fetch('api.php?country=Germany')
+```javascript title="app.js"
+fetch('ajax.php?country=Germany')
     .then(response => response.json())
     .then(data => {
 
@@ -110,7 +124,7 @@ fetch('api.php?country=Germany')
 
 PHP oldalon:
 
-```php
+```php title="ajax.php"
 $country = $_GET['country'] ?? '';
 ```
 
@@ -122,7 +136,7 @@ A lekért paraméter ugyanúgy működik, mint amikor egy URL-ben szerepel.
 
 Ahelyett, hogy minden művelethez külön PHP-fájlt készítenénk, gyakran egyetlen végpont szolgálja ki a kéréseket.
 
-```php
+```php title="ajax.php"
 <?php
 
 $action = $_GET['action'] ?? '';
@@ -152,8 +166,8 @@ switch ($action) {
 
 Kérés:
 
-```javascript
-fetch('api.php?action=cars')
+```javascript title="app.js"
+fetch('ajax.php?action=cars')
 ```
 
 ---
@@ -162,7 +176,7 @@ fetch('api.php?action=cars')
 
 A CSV-fájlok kezelése leckében az autóadatokat hierarchikus asszociatív tömbbé alakítottuk:
 
-```php
+```php title="get-data.php"
 $cars = [
     'Germany' => [
         'Audi' => [
@@ -186,19 +200,19 @@ $cars = [
 
 Egy ilyen struktúrából egyszerűen kinyerhetők:
 
-```php
+```php title="get-data.php"
 array_keys($cars);
 ```
 
 Az országok.
 
-```php
+```php title="get-data.php"
 array_keys($cars['Germany']);
 ```
 
 A német gyártók.
 
-```php
+```php title="get-data.php"
 $cars['Germany']['Audi'];
 ```
 
@@ -220,7 +234,7 @@ Kisebb példákban a JavaScript közvetlenül a HTML-fájlban is elhelyezhető e
 
 ### PHP végpont
 
-```php title="api.php"
+```php title="ajax.php"
 <?php
 
 header('Content-Type: application/json');
@@ -255,7 +269,7 @@ echo json_encode([
 
 A
 
-```html
+```html title="index.html"
 <script src="app.js"></script>
 ```
 
@@ -265,7 +279,7 @@ sor betölti és futtatja az `app.js` állományt.
 
 ```javascript title="app.js"
 document.getElementById('loadButton').addEventListener('click', () => {
-    fetch('api.php')
+    fetch('ajax.php')
         .then(response => response.json())
         .then(data => {
             document.getElementById('result').innerHTML =
@@ -279,8 +293,8 @@ document.getElementById('loadButton').addEventListener('click', () => {
 1. A böngésző betölti az `index.html` oldalt.
 2. Az oldal alján található `<script src="app.js"></script>` elem betölti az `app.js` fájlt.
 3. Az `app.js` figyeli a gomb kattintását.
-4. Kattintáskor az `app.js` `fetch()` segítségével elküld egy HTTP-kérést az `api.php` fájlnak.
-5. Az `api.php` JSON formátumban visszaküldi az adatot.
+4. Kattintáskor az `app.js` `fetch()` segítségével elküld egy HTTP-kérést az `ajax.php` fájlnak.
+5. Az `ajax.php` JSON formátumban visszaküldi az adatot.
 6. Az `app.js` lecseréli a `result` azonosítójú HTML elem tartalmát.
 
 Kezdeti állapot:
@@ -321,7 +335,7 @@ Gyakori eset, hogy a PHP nem egyetlen értéket, hanem egy tömböt küld vissza
 
 ### PHP végpont
 
-```php title="api.php"
+```php title="ajax.php"
 <?php
 
 header('Content-Type: application/json');
@@ -358,7 +372,7 @@ echo json_encode([
 
 ```javascript title="app.js"
 document.getElementById('loadButton').addEventListener('click', () => {
-    fetch('api.php')
+    fetch('ajax.php')
         .then(response => response.json())
         .then(cars => {
             document.getElementById('result').innerHTML =
@@ -371,7 +385,7 @@ document.getElementById('loadButton').addEventListener('click', () => {
 
 ### Mi történik?
 
-Az `api.php` három autómárkát tartalmazó JSON tömböt küld vissza:
+Az `ajax.php` három autómárkát tartalmazó JSON tömböt küld vissza:
 
 ```json
 [
@@ -394,6 +408,7 @@ Eredmény:
 ```
 
 Ebben a példában a JavaScript a JSON tömb elemeiből HTML listát készít, majd lecseréli a `result` elem tartalmát. Ez a megoldás alapja a később elkészíthető ország → gyártó → modell választóknak, keresési találati listáknak és más dinamikus felületeknek.
+
 ---
 
 ## Mire használható az AJAX?

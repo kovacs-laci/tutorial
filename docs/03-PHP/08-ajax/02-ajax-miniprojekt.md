@@ -24,13 +24,28 @@ A projekt során az országokat már az oldal generálásakor kiírjuk PHP segí
 
 Ez hatékonyabb és egyszerűbb megoldás, mint minden adatot AJAX segítségével lekérni.
 
+### Fájlszerkezet
+
+A projektben a következő fájlok lesznek:
+
+```text
+projekt/
+├─ get-data.php
+├─ ajax.php
+├─ index.php
+├─ app.js
+└─ cars.csv
+```
+
+A `get-data.php` fájl tartalmazza a CSV feldolgozását, az `ajax.php` szolgálja ki a JavaScript kérését, az `index.php` mutatja a felületet, az `app.js` pedig a klienst vezérli.
+
 ---
 
 ## 1. lépés – A CSV fájl beolvasása
 
 A korábbi leckében elkészítettük a `loadCars()` függvényt.
 
-```php
+```php title="get-data.php"
 function loadCars(): array
 {
     $cars = [];
@@ -93,7 +108,7 @@ A függvény egy hierarchikus asszociatív tömböt ad vissza:
 
 Mivel az oldal generálásakor már rendelkezésünkre áll az összes ország, nincs szükség AJAX kérésre.
 
-```php
+```php title="index.php"
 <?php
 
 require 'get-data.php';
@@ -127,7 +142,7 @@ Hozzunk létre egy `ajax.php` fájlt.
 
 Ez a fájl lesz felelős a gyártók és modellek kiszolgálásáért.
 
-```php
+```php title="ajax.php"
 <?php
 
 require 'get-data.php';
@@ -177,7 +192,7 @@ switch ($action) {
 
 ## 4. lépés – A teljes HTML űrlap
 
-```html
+```html title="index.php"
 <select id="country">
 
     <option value="">
@@ -211,7 +226,7 @@ A gyártó és modell lista kezdetben üres.
 
 Amikor a felhasználó országot választ, AJAX kérést küldünk a szervernek.
 
-```javascript
+```javascript title="app.js"
 const countrySelect =
     document.querySelector('#country');
 
@@ -283,7 +298,7 @@ A JavaScript ezután létrehozza a megfelelő `<option>` elemeket.
 
 Ha a felhasználó kiválaszt egy gyártót, akkor a modelleket kérjük le.
 
-```javascript
+```javascript title="app.js"
 const modelSelect =
     document.querySelector('#model');
 
@@ -351,7 +366,7 @@ A JavaScript feltölti a harmadik lenyíló listát.
 
 # Teljes JavaScript kód
 
-```javascript
+```javascript title="app.js"
 const countrySelect =
     document.querySelector('#country');
 
@@ -434,7 +449,7 @@ makeSelect.addEventListener(
 
 ## Teljes index.php példa
 
-```php
+```php title="index.php"
 <?php
 
 require 'get-data.php';
