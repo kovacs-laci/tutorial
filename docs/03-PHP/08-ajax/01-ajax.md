@@ -208,6 +208,194 @@ A böngésző ezekhez az adatokhoz AJAX-kérésekkel is hozzáférhet.
 
 ---
 
+## HTML tartalom frissítése AJAX segítségével
+
+A korábbi példákban a lekért adatokat csak a konzolra írtuk ki. A gyakorlatban azonban az AJAX egyik legfontosabb feladata, hogy a már megjelenített oldal tartalmát módosítsa újratöltés nélkül.
+
+:::note Miért külön fájlban van a JavaScript?
+
+Kisebb példákban a JavaScript közvetlenül a HTML-fájlban is elhelyezhető egy `<script>` elemben. Nagyobb projektekben azonban a JavaScriptet általában külön `.js` fájlokban tároljuk, mert így az alkalmazás áttekinthetőbbé és könnyebben karbantarthatóvá válik.
+
+:::
+
+### PHP végpont
+
+```php title="api.php"
+<?php
+
+header('Content-Type: application/json');
+
+echo json_encode([
+    'name' => 'Audi'
+]);
+```
+
+### HTML oldal
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX példa</title>
+</head>
+<body>
+
+    <button id="loadButton">Adatok betöltése</button>
+
+    <div id="result">
+        Még nincs adat betöltve.
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+```
+
+A
+
+```html
+<script src="app.js"></script>
+```
+
+sor betölti és futtatja az `app.js` állományt.
+
+### JavaScript
+
+```javascript title="app.js"
+document.getElementById('loadButton').addEventListener('click', () => {
+    fetch('api.php')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').innerHTML =
+                `<h3>${data.name}</h3>`;
+        });
+});
+```
+
+### Mi történik?
+
+1. A böngésző betölti az `index.html` oldalt.
+2. Az oldal alján található `<script src="app.js"></script>` elem betölti az `app.js` fájlt.
+3. Az `app.js` figyeli a gomb kattintását.
+4. Kattintáskor az `app.js` `fetch()` segítségével elküld egy HTTP-kérést az `api.php` fájlnak.
+5. Az `api.php` JSON formátumban visszaküldi az adatot.
+6. Az `app.js` lecseréli a `result` azonosítójú HTML elem tartalmát.
+
+Kezdeti állapot:
+
+```html
+<div id="result">
+    Még nincs adat betöltve.
+</div>
+```
+
+Kattintás után:
+
+```html
+<div id="result">
+    <h3>Audi</h3>
+</div>
+```
+
+Az oldal nem töltődik újra, csak a kijelölt HTML-elem tartalma változik meg. Ez az AJAX egyik legfontosabb előnye.
+
+:::tip Mire használják ezt a technikát?
+
+A modern webalkalmazások gyakran így frissítik:
+
+- a keresési találatokat;
+- a terméklistákat;
+- a chat üzeneteket;
+- az értesítéseket;
+- a táblázatok tartalmát.
+
+Ilyenkor a szerver általában JSON adatot küld vissza, a JavaScript pedig abból új HTML-t épít fel és megjeleníti azt.
+
+:::
+
+### Tömb megjelenítése listaként
+
+Gyakori eset, hogy a PHP nem egyetlen értéket, hanem egy tömböt küld vissza.
+
+### PHP végpont
+
+```php title="api.php"
+<?php
+
+header('Content-Type: application/json');
+
+echo json_encode([
+    'Audi',
+    'BMW',
+    'Tesla'
+]);
+```
+
+### HTML oldal
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX példa</title>
+</head>
+<body>
+
+    <button id="loadButton">Autók betöltése</button>
+
+    <div id="result"></div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+```
+
+### JavaScript
+
+```javascript title="app.js"
+document.getElementById('loadButton').addEventListener('click', () => {
+    fetch('api.php')
+        .then(response => response.json())
+        .then(cars => {
+            document.getElementById('result').innerHTML =
+                '<ul>' +
+                cars.map(car => `<li>${car}</li>`).join('') +
+                '</ul>';
+        });
+});
+```
+
+### Mi történik?
+
+Az `api.php` három autómárkát tartalmazó JSON tömböt küld vissza:
+
+```json
+[
+    "Audi",
+    "BMW",
+    "Tesla"
+]
+```
+
+Az `app.js` minden tömbelemből egy `<li>` elemet készít, majd az elkészült lista HTML-kódját a `result` elembe helyezi.
+
+Eredmény:
+
+```html
+<ul>
+    <li>Audi</li>
+    <li>BMW</li>
+    <li>Tesla</li>
+</ul>
+```
+
+Ebben a példában a JavaScript a JSON tömb elemeiből HTML listát készít, majd lecseréli a `result` elem tartalmát. Ez a megoldás alapja a később elkészíthető ország → gyártó → modell választóknak, keresési találati listáknak és más dinamikus felületeknek.
+---
+
 ## Mire használható az AJAX?
 
 Néhány gyakori példa:
