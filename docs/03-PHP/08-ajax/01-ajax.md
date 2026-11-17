@@ -282,13 +282,12 @@ echo json_encode([
 </html>
 ```
 
-A
+Az alábbi sor betölti és futtatja az `app.js` állományt:
 
 ```html title="index.html"
 <script src="app.js"></script>
 ```
 
-sor betölti és futtatja az `app.js` állományt.
 
 ### JavaScript
 
@@ -423,6 +422,97 @@ Eredmény:
 ```
 
 Ebben a példában a JavaScript a JSON tömb elemeiből HTML listát készít, majd lecseréli a `result` elem tartalmát. Ez a megoldás alapja a később elkészíthető ország → gyártó → modell választóknak, keresési találati listáknak és más dinamikus felületeknek.
+
+---
+
+### Lenyíló lista dinamikus feltöltése
+
+A listás példánál sokszor nem `<li>` elemeket, hanem egy `<select>` elemben megjelenő opciókat kell generálni.
+
+### PHP végpont
+
+```php title="ajax.php"
+<?php
+
+header('Content-Type: application/json');
+
+echo json_encode([
+    'Audi',
+    'BMW',
+    'Tesla'
+]);
+```
+
+### HTML oldal
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX példa</title>
+</head>
+<body>
+
+    <button id="loadButton">Autók betöltése</button>
+
+    <select id="carSelect">
+        <option value="">Válassz autót...</option>
+    </select>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+```
+
+### JavaScript
+
+```javascript title="app.js"
+document.getElementById('loadButton').addEventListener('click', () => {
+    fetch('ajax.php')
+        .then(response => response.json())
+        .then(cars => {
+            const select = document.getElementById('carSelect');
+
+            select.innerHTML = '<option value="">Válassz autót...</option>';
+
+            for (const car of cars) {
+                const option = document.createElement('option');
+                option.value = car;
+                option.textContent = car;
+                select.appendChild(option);
+            }
+        });
+});
+```
+
+### Mi történik?
+
+Az `ajax.php` a korábbihoz hasonlóan egy JSON tömböt küld vissza:
+
+```json
+[
+    "Audi",
+    "BMW",
+    "Tesla"
+]
+```
+
+Az `app.js` ezután minden elemhez létrehoz egy `<option>` elemet, és beírja a `select` elembe. A felhasználó ezután a legördülő listából kiválaszthat egy autómárkát.
+
+Eredmény:
+
+```html
+<select id="carSelect">
+    <option value="">Válassz autót...</option>
+    <option value="Audi">Audi</option>
+    <option value="BMW">BMW</option>
+    <option value="Tesla">Tesla</option>
+</select>
+```
+
+Ez a megoldás különösen hasznos lesz országok, gyártók, kategóriák vagy termékek dinamikus feltöltéséhez, amikor a felhasználó a lehetőségekből választ.
 
 ---
 

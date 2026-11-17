@@ -48,30 +48,26 @@ A korábbi leckében elkészítettük a `loadCars()` függvényt.
 ```php title="get-data.php"
 function loadCars(): array
 {
-    $cars = [];
-
     if (!file_exists('cars.csv')) {
         return [];
     }
 
     $file = fopen('cars.csv', 'r');
-
     if ($file === false) {
         return [];
     }
-
+    
+    $cars = [];
     // Fejléc kihagyása
     fgetcsv($file);
 
     while (($row = fgetcsv($file)) !== false) {
-
         $country = $row[0];
         $make = $row[1];
         $model = $row[2];
 
         $cars[$country][$make][] = $model;
     }
-
     fclose($file);
 
     return $cars;
@@ -112,23 +108,18 @@ Mivel az oldal generálásakor már rendelkezésünkre áll az összes ország, 
 <?php
 
 require 'get-data.php';
-
 $cars = loadCars();
-
 ?>
 
 <select id="country">
-
     <option value="">
         Válassz országot
     </option>
 
     <?php foreach (array_keys($cars) as $country): ?>
-
         <option value="<?= $country ?>">
             <?= $country ?>
         </option>
-
     <?php endforeach; ?>
 
 </select>
@@ -193,13 +184,9 @@ switch ($action) {
 ## 4. lépés – A teljes HTML űrlap
 
 ```html title="index.php"
-<select id="country">
 
-    <option value="">
-        Válassz országot
-    </option>
+Adjuk hozzá a gyártók és modellek lenyíló listáit. A gyártó és modell lista kezdetben üres.
 
-</select>
 
 <select id="make">
 
@@ -218,8 +205,6 @@ switch ($action) {
 </select>
 ```
 
-A gyártó és modell lista kezdetben üres.
-
 ---
 
 ## 5. lépés – Gyártók betöltése AJAX segítségével
@@ -228,10 +213,10 @@ Amikor a felhasználó országot választ, AJAX kérést küldünk a szervernek.
 
 ```javascript title="app.js"
 const countrySelect =
-    document.querySelector('#country');
+    document.getElementById('country');
 
 const makeSelect =
-    document.querySelector('#make');
+    document.getElementById('make');
 
 countrySelect.addEventListener(
     'change',
@@ -265,7 +250,7 @@ countrySelect.addEventListener(
 );
 ```
 
-### Mi történik?
+**Mi történik?**
 
 A felhasználó például kiválasztja:
 
@@ -300,7 +285,7 @@ Ha a felhasználó kiválaszt egy gyártót, akkor a modelleket kérjük le.
 
 ```javascript title="app.js"
 const modelSelect =
-    document.querySelector('#model');
+    document.getElementById('model');
 
 makeSelect.addEventListener(
     'change',
@@ -334,7 +319,7 @@ makeSelect.addEventListener(
 );
 ```
 
-### Mi történik?
+**Mi történik?**
 
 A felhasználó kiválasztja:
 
@@ -364,7 +349,7 @@ A JavaScript feltölti a harmadik lenyíló listát.
 
 ---
 
-# Teljes JavaScript kód
+## Teljes JavaScript példa
 
 ```javascript title="app.js"
 const countrySelect =
@@ -508,6 +493,53 @@ $cars = loadCars();
 
 ---
 
+## Teljes ajax.php példa
+
+```php title="ajax.php"
+<?php
+
+require 'get-data.php';
+
+$cars = loadCars();
+
+$action = $_GET['action'] ?? '';
+
+header('Content-Type: application/json');
+
+switch ($action) {
+
+    case 'makes':
+
+        $country = $_GET['country'] ?? '';
+
+        echo json_encode(
+            array_keys(
+                $cars[$country] ?? []
+            )
+        );
+
+        break;
+
+    case 'models':
+
+        $country = $_GET['country'] ?? '';
+
+        $make = $_GET['make'] ?? '';
+
+        echo json_encode(
+            $cars[$country][$make] ?? []
+        );
+
+        break;
+
+    default:
+
+        echo json_encode([]);
+}
+```
+
+---
+
 ## A kész alkalmazás működése
 
 ```text
@@ -563,3 +595,88 @@ A projekt könnyen továbbfejleszthető:
 3. Készíts negyedik lenyíló listát a gyártási év számára.
 4. Alakítsd át a projektet úgy, hogy az adatok MySQL adatbázisból érkezzenek.
 5. Készíts keresőmezőt, amely modellnév alapján szűri az autókat.
+6. **(Haladó feladat)**
+
+   Amikor a felhasználó országot választ, jelenítsd meg az ország zászlaját.
+   
+   Amikor a felhasználó gyártót választ, jelenítsd meg a gyártó logóját.
+   
+   Hozd létre a szükséges képmappákat, majd szerezz be néhány országzászlót és gyártói logót.
+   
+   A JavaScript segítségével jelenítsd meg a kiválasztott országhoz és gyártóhoz tartozó képet.
+   
+   Gondold végig, hogyan lehet a kiválasztott érték alapján dinamikusan meghatározni a betöltendő képfájl nevét.
+
+<details>
+<summary><strong>Megoldás</strong></summary>
+
+**HTML kiegészítés**
+
+Az országválasztó lista után:
+
+```html
+<img
+    id="flag"
+    src=""
+    alt="Ország zászlaja"
+    width="120"
+    style="display:none;"
+>
+```
+
+A gyártóválasztó lista után:
+
+```html
+<img
+    id="logo"
+    src=""
+    alt="Gyártó logója"
+    width="120"
+    style="display:none;"
+>
+```
+
+**JavaScript kiegészítés**
+
+```javascript
+const flagImage = document.getElementById('flag');
+
+const logoImage = document.getElementById('logo');
+```
+
+**Zászló megjelenítése országválasztáskor**
+
+A `countrySelect` eseménykezelő elejére:
+
+```javascript
+if (countrySelect.value) {
+    flagImage.src = `images/flags/flag-${countrySelect.value}.png`;
+    flagImage.alt = `${countrySelect.value} zászlója`;
+    flagImage.style.display = 'inline';
+} else {
+    flagImage.style.display = 'none';
+}
+```
+
+**A logó elrejtése országváltáskor**
+
+```javascript
+logoImage.style.display =
+    'none';
+```
+
+**Logó megjelenítése gyártóválasztáskor**
+
+A `makeSelect` eseménykezelő elejére:
+
+```javascript
+if (makeSelect.value) {
+    logoImage.src = `images/logos/logo-${makeSelect.value}.png`;
+    logoImage.alt = `${makeSelect.value} logója`;
+    logoImage.style.display = 'inline';
+} else {
+    logoImage.style.display = 'none';
+}
+```
+
+</details>
