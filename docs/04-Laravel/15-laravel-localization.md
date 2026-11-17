@@ -55,6 +55,73 @@ Ez létrehozza a Laravel alapértelmezett nyelvi fájljait.
 
 :::
 
+:::tip Fordítási fájlok szervezése
+
+Kisebb projektekben gyakran elegendő egyetlen fájl használata:
+
+```text
+lang/
+├─ hu/
+│  └─ messages.php
+└─ en/
+   └─ messages.php
+```
+
+Nagyobb alkalmazásokban azonban érdemes a fordításokat több fájlba szervezni.
+
+Például az általános feliratok külön fájlokba kerülhetnek:
+
+```text
+lang/
+├─ hu/
+│  ├─ messages.php
+│  ├─ buttons.php
+│  ├─ validation.php
+│  └─ navigation.php
+└─ en/
+   ├─ messages.php
+   ├─ buttons.php
+   ├─ validation.php
+   └─ navigation.php
+```
+
+Ha az alkalmazás több adatmodellt használ, akkor célszerű lehet modellenként külön fordítási fájlokat létrehozni:
+
+```text
+lang/
+├─ hu/
+│  ├─ student.php
+│  ├─ teacher.php
+│  ├─ county.php
+│  └─ city.php
+└─ en/
+   ├─ student.php
+   ├─ teacher.php
+   ├─ county.php
+   └─ city.php
+```
+
+Ebben az esetben az egyes modellek mezőnevei és oszlopfeliratai a hozzájuk tartozó fájlban kapnak helyet:
+
+```php title="lang/hu/student.php"
+return [
+    'name' => 'Név',
+    'email' => 'E-mail',
+    'birth_date' => 'Születési dátum',
+];
+```
+
+Használat:
+
+```php
+{{ __('student.name') }}
+```
+
+Nincs egyetlen kötelező szervezési mód. A lényeg, hogy a fordítási fájlok felosztása kövesse az alkalmazás felépítését, és hosszú távon is könnyen karbantartható maradjon.
+
+:::
+
+
 ---
 
 ## A kiválasztott nyelv tárolása
